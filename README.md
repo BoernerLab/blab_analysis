@@ -15,7 +15,7 @@ Clone or download Visual_FRET into your working directory.
 ```
 https://github.com/BoernerLab/Visual_FRET.git
 ```
-Within Jupyter-Lab or Jupyter-Notebook you can open the .ipynb files and then comple the code.
+Within Jupyter-Lab or Jupyter-Notebook you can open the .ipynb files and then compile the code.
 
 The following packages are required:
 - matplotlib
