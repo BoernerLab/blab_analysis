@@ -1,4 +1,4 @@
-<img style="float: left;" width="100px;" src="docs/images/VisualFretLogo.png">
+<img style="float: left;" width="300px;" src="docs/images/VisualFretLogo.png">
 
 Visual Fret are Jupyternotebooks for visualization and analysis of experimental fluorescence measurements. 
 
