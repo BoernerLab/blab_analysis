@@ -1,6 +1,6 @@
 <img style="float: left;" width="300px;" src="docs/images/VisualFretLogo.png">
 
-## What ist Visual FRET
+## What ist Visual FRET?
 Visual Fret are Jupyternotebooks for visualization and analysis of experimental fluorescence measurements. 
 
 The Jupyternotebook "linearity_errors bars_SI" can be used to study the linearity of a fluorescent dye.
