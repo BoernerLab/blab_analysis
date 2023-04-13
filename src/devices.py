@@ -154,7 +154,7 @@ class Carry:
 
 
 class ID5MeasureFluorescence:
-    def __init__(self, metadata: list, data: list) -> None:
+    def __init__(self, metadata: list, data: list, emission_wavelength) -> None:
         self.section_type = metadata[0]
         self.section_name = metadata[1]
         self.export_version = metadata[2]
@@ -188,6 +188,7 @@ class ID5MeasureFluorescence:
         self.number_of_rows = metadata[30]
         self.time_tags = metadata[31]
         self.data = data
+        self.emission_wavelength = emission_wavelength
 
         @staticmethod
         def create_plate_id_list() -> list:
@@ -240,38 +241,22 @@ class ID5MeasureFluorescence:
                     else:
                         return meas_well
 
-        #ToDo: Print all Metadata as table!
+    def reorganize_data_structure(self):
+        if self.read_type == "Spectrum":
+            pass
+
+        elif self.read_type == "Endpoint":
+            pass
+
+        else:
+            print(f"Current read type = {self.read_type}. If you can read this, implementation not done.")
+
+
+
+
 
     """
-    
-                        if 'Absorbance' in meta:  # if "absorbance" is in meta data list
-                            abs_meta = meta  # write meta data into variable abs_meta (absorbance meta data)
-                            print(
-                                f"Experiment '{abs_meta[1]}': emission wavelength {abs_meta[11]}nm - {abs_meta[12]}nm in steps of {abs_meta[13]}nm")
-                            abs_meta_list = list(filter(None, abs_meta))  # delete empty strings from list abs_meta
-                            meta_list.append(abs_meta_list)  # add the absorbance meta data to big meta data list
-                        elif 'Fluorescence' in meta and meta[16] == "":
-                            fluo_meta = meta  # write meta data into variable fluo_meta (fluorescence meta data)
-                            print(
-                                f"Experiment '{fluo_meta[1]}': emission wavelength {fluo_meta[12]}nm - {fluo_meta[13]}nm in steps of {fluo_meta[14]}nm, {fluo_meta[23]}: {fluo_meta[24]}nm")
-                            fluo_meta_list = list(filter(None, fluo_meta))  # delete empty strings from list fluo_meta
-                            meta_list.append(fluo_meta_list)  # add the fluorescence meta data to big meta data list
-                        elif 'FRET' in meta or meta[16] != "":
-                            fret_meta = meta  # write meta data into variable fret_meta (fluorescence meta data)
-                            fret_meta_list = list(filter(None, fret_meta))  # delete empty strings from list fret_meta
 
-                            wavelength_fret = fret_meta[16].split(' ')
-                            if wavelength_fret[1] == '':
-                                wavelength_fret = fret_meta[20].split(' ')
-                                print(
-                                    f"Experiment '{fret_meta[1]}': emission wavelengths {fret_meta[16]}nm and {wavelength_fret[2]}nm, excitation wavelength: {wavelength_fret[0]}nm")
-                            else:
-                                print(
-                                    f"Experiment '{fret_meta[1]}': emission wavelengths {wavelength_fret[0]}nm and {wavelength_fret[1]}nm, excitation wavelength: {fret_meta[20]}nm")
-                            meta_list.append(fret_meta_list)  # add the fret meta data to big meta data list
-                            ex_wl_data = fret_meta[20]
-                            
-                                                #elif line.startswith("Wavelength"):
                     #    cols = line.split('\t')
                     #    contains_wavelength = True
 
@@ -357,10 +342,11 @@ class ID5MeasureFluorescence:
 
 
 class ID5:
-    def __init__(self, file_path: str):
+    def __init__(self, file_path: str, emission_wavelength= None):
         self.file_path = file_path
         self.measurements = {}
         self.read_id5_data()
+        self.emission_wavelength = emission_wavelength
 
     def read_id5_data(self) -> None:
         number_of_measurements = 0
@@ -396,7 +382,7 @@ class ID5:
                             if read_mode == "Absorbance":
                                 pass
                             elif read_mode == "Fluorescence":
-                                self.measurements[f"Measurement_{iterator}"] = ID5MeasureFluorescence(meta, data)
+                                self.measurements[f"Measurement_{iterator}"] = ID5MeasureFluorescence(meta, data, self.emission_wavelength)
                             elif read_mode == "Luminescence" or "Time Resolved" or "Imaging":
                                 print("Data reading routine is not implemented for these types of experiments")
                             else:
