@@ -177,63 +177,61 @@ class ID5MeasureAbsorbance:
         self.number_of_rows = metadata[20]
         self.time_tags = metadata[21]
         self.data = data
+        self.restructure_data()
 
-        @staticmethod
-        def create_plate_id_list() -> list:
-            letter = ["A", "B", "C", "D", "E", "F", "G", "H"]
-            plate = []
-            for l in letter:
-                for i in range(1, 13):
-                    plate.append(l + str(i))
-            return plate
+    @staticmethod
+    def create_plate_id_list() -> list:
+        letter = ["A", "B", "C", "D", "E", "F", "G", "H"]
+        plate = []
+        for l in letter:
+            for i in range(1, 13):
+                plate.append(l + str(i))
+        return plate
 
-        @staticmethod
-        def get_well(dataframe: pd.DataFrame, wellnumber: str, measurement: str = None) -> pd.DataFrame:
-            """
-            Function to get the desired well of a dataframe
+    def get_well(self, wellnumber: str) -> pd.DataFrame:
+        """
+        Function to get the desired well of a dataframe
 
-            Parameters
-            ----------
+        Parameters
+        ---------
+        wellnumber: str
+            number of the well (eg. "A2")
 
-            dataframe: DataFrame
-                the dataframe or dictionary
-            measurement: str
-                desired measurement (eg. "Measurement1_Emission Cy5")
-            wellnumber: str
-                number of the well (eg. "A2")
+        returns
+        -------
+        DataFrame
+            a dataframe with all data of specified measurement and specified wellnumber.
+            Columns: wavelength, temperature, well, value, (corrected value)
+        """
 
-            returns
-            -------
-            DataFrame
-                a dataframe with all data of specified measurement and specified wellnumber.
-                Columns: wavelength, temperature, well, value, (corrected value)
-            """
+        spec_df = self.working_df[self.working_df["wellnumber"] == wellnumber]
 
-            if isinstance(dataframe, pd.DataFrame):
-                spec_df = dataframe[dataframe["wellnumber"] == wellnumber]
+        if spec_df.empty:
+            print("ERROR: Wellnumber does not exist.")
+        else:
+            return spec_df
 
-                if spec_df.empty:
-                    print("Wellnumber does not exist.")
-                else:
-                    return spec_df
+    def print_meta_data(self):
+        if self.type_read_mode == 'Absorbance':
+            print(f"Experiment '{self.section_name}': emission wavelength {self.start_wavelength} nm - {self.end_wavelength} nm in steps of {self.wavelength_step} nm.")
 
-            else:
-                try:
-                    meas_x = dataframe[measurement]
-                except KeyError:
-                    print("Measurement does not exist.")
-                else:
-                    meas_well = meas_x[(meas_x.loc[:, 'wellnumber'] == wellnumber)]
-                    if meas_well.empty:
-                        print("Wellnumber does not exist.")
-                    else:
-                        return meas_well
-
-        def print_meta_data():
-            if self.type_read_mode == 'Absorbance':
-                print(
-                    f"Experiment '{self.section_name}': emission wavelength {self.start_wavelength}nm - {self.end_wavelength}nm in steps of {self.wavelength_step}nm")
-
+    def restructure_data(self):
+        if self.type_read_mode == "Absorbance":
+            df = pd.DataFrame(self.data[1:], columns=self.data[0])
+            df = df.replace("", np.nan)
+            df = df.dropna(axis=1, how="any")
+            df = df.melt(id_vars=df.columns[:2], value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
+            df.columns = ["wavelength (nm)", "temperature (°C)", "wellnumber", "Abs"]
+            df["Abs"] = df["Abs"].replace('#SAT', np.nan)
+            df["wavelength (nm)"] = df["wavelength (nm)"].astype(float)
+            df["temperature (°C)"] = df["temperature (°C)"].astype(float)
+            df["Abs"] = df["Abs"].astype(float)
+            df_sort = df.sort_values(["temperature (°C)", "wellnumber"], ignore_index=True)
+            self.working_df = df_sort
+            df.empty
+            df_sort.empty
+        else:
+            print(f"Current read type = {self.type_read_mode}. If you can read this, implementation not done or file content faulty.")
 
 class ID5MeasureFluorescence:
     def __init__(self, metadata: list, data: list, emission_wavelength) -> None:
@@ -308,7 +306,7 @@ class ID5MeasureFluorescence:
     def print_meta_data(self):
         if self.type_read_mode == 'Fluorescence' and self.wavelengths is None:
             print(
-                f"Experiment '{self.section_name}': emission wavelength {self.start_wavelength}nm - {self.end_wavelength}nm in steps of {self.wavelength_step}nm, {self.sweep_waves}: {self.sweep_fixed_wavelength}nm")
+                f"Experiment '{self.section_name}': emission wavelength {self.start_wavelength} nm - {self.end_wavelength} nm in steps of {self.wavelength_step}nm, {self.sweep_waves}: {self.sweep_fixed_wavelength}nm")
         elif self.emission_wavelength is not None:
             print_excitation_wavelength = self.excitation_wavelength.split()
             print_emission_wavelength = self.emission_wavelength.split()
@@ -322,12 +320,9 @@ class ID5MeasureFluorescence:
     def restructure_data(self):
         if self.read_type == "Spectrum":
             df = pd.DataFrame(self.data[1:], columns=self.data[0])
-            # df = df.iloc[1:, :]
             df = df.replace("", np.nan)
             df = df.dropna(axis=1, how="any")
-            df = df.melt(id_vars=df.columns[:2],
-                         value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
-            # print(df)
+            df = df.melt(id_vars=df.columns[:2], value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
             df.columns = ["wavelength (nm)", "temperature (°C)", "wellnumber", "RFU"]
             df["RFU"] = df["RFU"].replace('#SAT', np.nan)
             df["wavelength (nm)"] = df["wavelength (nm)"].astype(float)
@@ -338,14 +333,33 @@ class ID5MeasureFluorescence:
             df.empty
             df_sort.empty
 
-
         elif self.read_type == "Endpoint":
-            if self.emission_wavelength is None:
-                self.emission_wavelength = list(
-                    map(int, input("Please enter Emission Wavelength (3) without comma: \n")))
 
-            excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
-            emission_wavelength = f"em_wl {self.emission_wavelength}".split()
+            if self.emission_wavelength is None or self.number_of_wavelength == len(self.excitation_wavelength.split()):
+                self.emission_wavelength = input(f"Please enter Emission Wavelength ({self.number_of_wavelength}) separated by space: \n")
+
+                excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
+                emission_wavelength = f"em_wl {self.emission_wavelength}".split()
+
+                print(excitation_wavelength)
+                print(emission_wavelength)
+
+            else:
+                ex_wl = input(f"Please enter Excitation Wavelength ({self.number_of_wavelength}) separated by space: \n")
+                em_wl = input(f"Please enter Emission Wavelength ({self.number_of_wavelength}) separated by space: \n")
+
+                excitation_wavelength = f"ex_wl {ex_wl}".split()
+                emission_wavelength = f"em_wl {em_wl}".split()
+
+                print(excitation_wavelength)
+                print(emission_wavelength)
+                
+                # if self.emission_wavelength is None:
+                #   self.emission_wavelength = input(f"Please enter Emission Wavelength ({self.number_of_wavelength}) separated by space: \n")
+
+                # excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
+                # emission_wavelength = f"em_wl {self.emission_wavelength}".split()
+
             for i, data_line in enumerate(self.data):
                 del data_line[0]
                 del data_line[len(data_line) - 1]
@@ -356,19 +370,18 @@ class ID5MeasureFluorescence:
             df = df.replace("", np.nan)
             df = df.dropna(axis=1, how="any")
             df = df.melt(id_vars=df.columns[:3],
-                         value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
+                        value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
             df.columns = ["excitation wavelength (nm)", "emission wavelength (nm)", "temperature (°C)", "wellnumber",
-                          "RFU"]
+                        "RFU"]
             df["RFU"] = df["RFU"].replace('#SAT', np.nan)
             df[["excitation wavelength (nm)", "emission wavelength (nm)", "temperature (°C)", "RFU"]] = df[
                 ["excitation wavelength (nm)", "emission wavelength (nm)", "temperature (°C)", "RFU"]].apply(
                 pd.to_numeric)
             df_sort = df.sort_values(["excitation wavelength (nm)", "emission wavelength (nm)", 'wellnumber'],
-                                     ignore_index=True)
+                                    ignore_index=True)
             self.working_df = df_sort
             df.empty
             df_sort.empty
-
 
         else:
             print(f"Current read type = {self.read_type}. If you can read this, implementation not done.")
@@ -389,13 +402,8 @@ class ID5:
 
         ex_wl_data = None
         contains_wavelength = False
-        # input wavelength_fret händisch. BSP 595 660 660
-        # em_wl_values = list(map(int, input("Please enter Emission Wavelengths (3) without comma:\n").split()))
-        # ex_wl_values = list(map(int, input("Please enter Excitation Wavelengths (3) without comma:\n").split()))
 
         with open(self.file_path, 'r', encoding='UTF-8') as file:
-            # print('Using ID5-function to read ID5-files...')
-            # next(file)
             lines = file.readlines()
 
             for line in lines:
@@ -404,24 +412,25 @@ class ID5:
                         line = line.strip('\n')
                         if line.startswith("##BLOCKS="):
                             number_of_measurements = line.split(" ")[1]
+                        elif line.startswith("Group") or line.startswith("Original Filename") or line.startswith("Workflow"):
+                            break
                         elif line.startswith("Plate"):
                             meta = line.split("\t")
                             meta = [None if x == "" else x for x in meta]
                         elif line.startswith("~End"):
                             iterator += 1
                             read_mode = meta[5]
+                            read_type = meta[4]
+                            print(f"{read_type} and {read_mode}")
                             if read_mode == "Absorbance":
-                                pass
-                                # self.measurements[f"Measurement_{iterator}"] = ID5MeasureAbsorbance(meta, data)
+                                self.measurements[f"Measurement_{iterator}"] = ID5MeasureAbsorbance(meta, data)
                             elif read_mode == "Fluorescence":
                                 self.measurements[f"Measurement_{iterator}"] = ID5MeasureFluorescence(meta, data,
-                                                                                                      self.emission_wavelength)
-
+                                                                                                    self.emission_wavelength)
                             elif read_mode == "Luminescence" or "Time Resolved" or "Imaging":
-                                print("Data reading routine is not implemented for these types of experiments")
+                                print("Data reading routine is not implemented for these types of experiments.")
                             else:
-                                print(
-                                    "Unknown type of experiment. Check your file or implement new data reading routine")
+                                print("Unknown type of experiment. Check your file or implement new data reading routine.")
                             data = []
                             meta = []
                         else:
@@ -430,16 +439,15 @@ class ID5:
                                 data.append(hlp)
                 else:
                     break
-        # print(f"\nTo access the data dictionary (measurements and meta data), use the following keys:")
-        # print(''.join(str(key) + '\n' for key in data_dict.keys()))
-        # return data_dict
 
 
 if __name__ == '__main__':
-    test_id5 = ID5("id5_data/id5_test_data_fl.txt", "555 535 666")
-    m1 = test_id5.measurements["Measurement_5"]
-    print(m1)
+    #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt")
+    test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt")
+    #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/220718_FRET.txt")
+
+    #test_id5 = ID5("220718_FRET.txt")
+    m1 = test_id5.measurements["Measurement_1"]
     A1 = m1.get_well("A12")
     print(A1)
-    m1.print_meta_data()
-
+    #m1.print_meta_data()
