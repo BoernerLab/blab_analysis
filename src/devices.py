@@ -250,7 +250,7 @@ class ID5MeasureFluorescence:
         self.start_wavelength = metadata[12]
         self.end_wavelength = metadata[13]
         self.wavelength_step = metadata[14]
-        self.number_of_wavelength = metadata[15]
+        self.number_of_wavelength = pd.to_numeric(metadata[15])
         self.wavelengths = metadata[16]
         self.first_column = metadata[17]
         self.number_of_columns = metadata[18]
@@ -334,31 +334,34 @@ class ID5MeasureFluorescence:
             df_sort.empty
 
         elif self.read_type == "Endpoint":
+            if self.emission_wavelength is None:
+                if self.number_of_wavelength != len(self.excitation_wavelength.split()):
+                    self.excitation_wavelength = input(f"Please enter Excitation Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
+                    self.emission_wavelength = input(f"Please enter Emission Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
+                    excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
+                    emission_wavelength = f"em_wl {self.emission_wavelength}".split()
 
-            if self.emission_wavelength is None or self.number_of_wavelength == len(self.excitation_wavelength.split()):
-                self.emission_wavelength = input(f"Please enter Emission Wavelength ({self.number_of_wavelength}) separated by space: \n")
-
-                excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
-                emission_wavelength = f"em_wl {self.emission_wavelength}".split()
-
-                print(excitation_wavelength)
-                print(emission_wavelength)
+                else:
+                    self.emission_wavelength = input(f"Please enter Emission Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
+                    excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
+                    emission_wavelength = f"em_wl {self.emission_wavelength}".split()
 
             else:
-                ex_wl = input(f"Please enter Excitation Wavelength ({self.number_of_wavelength}) separated by space: \n")
-                em_wl = input(f"Please enter Emission Wavelength ({self.number_of_wavelength}) separated by space: \n")
+                if len(self.emission_wavelength.split()) != len(self.excitation_wavelength.split()):
+                    if self.number_of_wavelength != len(self.excitation_wavelength.split()):
+                        self.excitation_wavelength = input(f"Please re-enter Excitation Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
+                        self.emission_wavelength = input(f"Please re-enter Emission Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
+                        excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
+                        emission_wavelength = f"em_wl {self.emission_wavelength}".split()
 
-                excitation_wavelength = f"ex_wl {ex_wl}".split()
-                emission_wavelength = f"em_wl {em_wl}".split()
+                    else:
+                        self.emission_wavelength = input(f"Please re-enter Emission Wavelength ({len(self.excitation_wavelength.split())}) for measurement {self.section_name} separated by space: \n")
+                        excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
+                        emission_wavelength = f"em_wl {self.emission_wavelength}".split()
 
-                print(excitation_wavelength)
-                print(emission_wavelength)
-                
-                # if self.emission_wavelength is None:
-                #   self.emission_wavelength = input(f"Please enter Emission Wavelength ({self.number_of_wavelength}) separated by space: \n")
-
-                # excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
-                # emission_wavelength = f"em_wl {self.emission_wavelength}".split()
+                else:
+                    excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
+                    emission_wavelength = f"em_wl {self.emission_wavelength}".split()
 
             for i, data_line in enumerate(self.data):
                 del data_line[0]
@@ -419,9 +422,9 @@ class ID5:
                             meta = [None if x == "" else x for x in meta]
                         elif line.startswith("~End"):
                             iterator += 1
-                            read_mode = meta[5]
                             read_type = meta[4]
-                            print(f"{read_type} and {read_mode}")
+                            read_mode = meta[5]
+                            print(f"{meta[1]}: {read_type}, {read_mode}")
                             if read_mode == "Absorbance":
                                 self.measurements[f"Measurement_{iterator}"] = ID5MeasureAbsorbance(meta, data)
                             elif read_mode == "Fluorescence":
@@ -442,12 +445,10 @@ class ID5:
 
 
 if __name__ == '__main__':
-    #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt")
-    test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt")
+    test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt", "1 2 3")
+    #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt", "1 2 3")
     #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/220718_FRET.txt")
-
-    #test_id5 = ID5("220718_FRET.txt")
-    m1 = test_id5.measurements["Measurement_1"]
+    m1 = test_id5.measurements["Measurement_4"]
     A1 = m1.get_well("A12")
-    print(A1)
+    #print(A1)
     #m1.print_meta_data()
