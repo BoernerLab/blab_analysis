@@ -136,9 +136,9 @@ class Carry:
         data_fin.columns = names_line
         data_fin.iloc[:] = data_fin.iloc[:].apply(pd.to_numeric)
         data_fin = data_fin.melt(id_vars=["wavelength (nm)"],
-                                 value_vars=['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2'],
-                                 var_name='sample',
-                                 value_name='value (RFU)')
+                                value_vars=['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2'],
+                                var_name='sample',
+                                value_name='value (RFU)')
 
         dct = dict((item[0], item[1:]) for item in data_list)
         dctdat = dict((item[0], item[1:]) for item in meta_list)
@@ -403,8 +403,8 @@ class ID5:
         data = []
         iterator = 0
 
-        ex_wl_data = None
-        contains_wavelength = False
+        #ex_wl_data = None
+        #contains_wavelength = False
 
         with open(self.file_path, 'r', encoding='UTF-8') as file:
             lines = file.readlines()
@@ -444,11 +444,44 @@ class ID5:
                     break
 
 
+class Genesis:
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+        self.read_genesis_data()
+
+    def read_genesis_data(self):
+        measurements = {}
+
+        df_raw = pd.read_csv(self.file_path, header=0, sep="\t", encoding = 'utf-8')
+        df_raw = df_raw.dropna(axis=1)
+        df_col_sorted = df_raw.sort_index(axis=1) 
+        df_with_means_of_all_measurements = pd.DataFrame(df_col_sorted["Wavelength(nm)"]) # leeres df erstellen für später
+
+        col_list = [c.split(' ')[0] for c in df_col_sorted.columns if c != 'Wavelength(nm)']
+
+        for index, item in enumerate(col_list):
+                if item == 'Wavelength(nm)': 
+                    pass
+                else:
+                    df_measurement_x = df_col_sorted.filter(like = col_list[index], axis=1)
+                    measurement_df_with_meanval = pd.concat([df_col_sorted["Wavelength(nm)"], df_measurement_x.iloc[:,:], df_measurement_x.iloc[:, :].mean(axis=1)], axis=1) 
+                    measurement_df_with_meanval.columns = [f'mean Abs {item}' if x == 0 else x for x in measurement_df_with_meanval.columns]
+                    measurements[f"Measurement_{item}"] = measurement_df_with_meanval
+                    
+                    df_with_means_of_all_measurements = pd.concat([df_with_means_of_all_measurements, measurement_df_with_meanval.iloc[:,-1:]], axis=1)
+                    index += 1
+
+        measurements["Means_all"] = df_with_means_of_all_measurements.iloc[:,~df_with_means_of_all_measurements.columns.duplicated()]
+        measurements["Means_all"] = df_with_means_of_all_measurements.melt(id_vars=['Wavelength(nm)'])
+        measurements["Means_all"] = measurements["Means_all"].rename(columns={"variable": "measurement", "value": "mean Abs"})
+
 if __name__ == '__main__':
-    test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt", "1 2 3")
+    #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt", "1 2 3")
     #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt", "1 2 3")
     #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/220718_FRET.txt")
-    m1 = test_id5.measurements["Measurement_4"]
-    A1 = m1.get_well("A12")
-    #print(A1)
+    
+    test_genesis = Genesis("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-03-06_F_400-600_JM.csv")
+    m1 = test_genesis.measurement["Measurement_F_8_uM"]
+    #A1 = m1.get_well("A12")
+    #print(m1)
     #m1.print_meta_data()
