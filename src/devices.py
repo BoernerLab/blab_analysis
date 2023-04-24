@@ -447,15 +447,15 @@ class ID5:
 class Genesis:
     def __init__(self, file_path: str):
         self.file_path = file_path
+        self.measurements = {}
         self.read_genesis_data()
 
     def read_genesis_data(self):
-        measurements = {}
 
         df_raw = pd.read_csv(self.file_path, header=0, sep="\t", encoding = 'utf-8')
         df_raw = df_raw.dropna(axis=1)
         df_col_sorted = df_raw.sort_index(axis=1) 
-        df_with_means_of_all_measurements = pd.DataFrame(df_col_sorted["Wavelength(nm)"]) # leeres df erstellen für später
+        df_with_means_of_all_measurements = pd.DataFrame(df_col_sorted['Wavelength(nm)']) # leeres df erstellen für später
 
         col_list = [c.split(' ')[0] for c in df_col_sorted.columns if c != 'Wavelength(nm)']
 
@@ -464,16 +464,18 @@ class Genesis:
                     pass
                 else:
                     df_measurement_x = df_col_sorted.filter(like = col_list[index], axis=1)
-                    measurement_df_with_meanval = pd.concat([df_col_sorted["Wavelength(nm)"], df_measurement_x.iloc[:,:], df_measurement_x.iloc[:, :].mean(axis=1)], axis=1) 
+                    measurement_df_with_meanval = pd.concat([df_col_sorted['Wavelength(nm)'], df_measurement_x.iloc[:,:], df_measurement_x.iloc[:, :].mean(axis=1)], axis=1) 
                     measurement_df_with_meanval.columns = [f'mean Abs {item}' if x == 0 else x for x in measurement_df_with_meanval.columns]
-                    measurements[f"Measurement_{item}"] = measurement_df_with_meanval
+                    self.measurements[f"Measurement_{item}"] = measurement_df_with_meanval
                     
                     df_with_means_of_all_measurements = pd.concat([df_with_means_of_all_measurements, measurement_df_with_meanval.iloc[:,-1:]], axis=1)
                     index += 1
 
-        measurements["Means_all"] = df_with_means_of_all_measurements.iloc[:,~df_with_means_of_all_measurements.columns.duplicated()]
-        measurements["Means_all"] = df_with_means_of_all_measurements.melt(id_vars=['Wavelength(nm)'])
-        measurements["Means_all"] = measurements["Means_all"].rename(columns={"variable": "measurement", "value": "mean Abs"})
+        self.measurements['Means_all'] = df_with_means_of_all_measurements.iloc[:,~df_with_means_of_all_measurements.columns.duplicated()]
+        self.measurements['Means_all'] = self.measurements['Means_all'].melt(id_vars=['Wavelength(nm)'])
+        self.measurements['Means_all'] = self.measurements['Means_all'].rename(columns={'Wavelength(nm)': "Wavelength (nm)",'variable': "measurement", 'value': "mean Abs"})
+
+        print(''.join(str(key) + '\n' for key in self.measurements.keys()))
 
 if __name__ == '__main__':
     #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt", "1 2 3")
@@ -481,7 +483,7 @@ if __name__ == '__main__':
     #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/220718_FRET.txt")
     
     test_genesis = Genesis("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-03-06_F_400-600_JM.csv")
-    m1 = test_genesis.measurement["Measurement_F_8_uM"]
+    m1 = test_genesis.measurements['Means_all']
+
     #A1 = m1.get_well("A12")
-    #print(m1)
     #m1.print_meta_data()
