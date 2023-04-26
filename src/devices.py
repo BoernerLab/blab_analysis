@@ -151,7 +151,6 @@ class Carry:
         print(''.join(str(key) + '\n' for key in data_dict.keys()))
         return data_dict
 
-
 class ID5MeasureAbsorbance:
     def __init__(self, metadata: list, data: list) -> None:
         self.section_type = metadata[0]
@@ -389,7 +388,6 @@ class ID5MeasureFluorescence:
         else:
             print(f"Current read type = {self.read_type}. If you can read this, implementation not done.")
 
-
 class ID5:
     def __init__(self, file_path: str, emission_wavelength=None):
         self.file_path = file_path
@@ -443,7 +441,6 @@ class ID5:
                 else:
                     break
 
-
 class Genesis:
     def __init__(self, file_path: str):
         self.file_path = file_path
@@ -473,17 +470,70 @@ class Genesis:
 
         self.measurements['Means_all'] = df_with_means_of_all_measurements.iloc[:,~df_with_means_of_all_measurements.columns.duplicated()]
         self.measurements['Means_all'] = self.measurements['Means_all'].melt(id_vars=['Wavelength(nm)'])
-        self.measurements['Means_all'] = self.measurements['Means_all'].rename(columns={'Wavelength(nm)': "Wavelength (nm)",'variable': "measurement", 'value': "mean Abs"})
+        self.measurements['Means_all'] = self.measurements['Means_all'].rename(columns={'Wavelength(nm)': "wavelength (nm)",'variable': "measurement", 'value': "mean Abs"})
 
+        print(f"\nTo access the data dictionary (measurements), use the following keys:")
         print(''.join(str(key) + '\n' for key in self.measurements.keys()))
 
-if __name__ == '__main__':
-    #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt", "1 2 3")
-    #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt", "1 2 3")
-    #test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/220718_FRET.txt")
-    
-    test_genesis = Genesis("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-03-06_F_400-600_JM.csv")
-    m1 = test_genesis.measurements['Means_all']
+class Nanodrop:
+    def __init__(self, file_path: str, date=None):
+        self.file_path = file_path
+        self.date = date
+        self.measurements = {}
+        self.read_nano_data()
 
-    #A1 = m1.get_well("A12")
-    #m1.print_meta_data()
+    def read_nano_data(self):
+        sample = ""
+        data = []
+        meta_data = []
+
+        with open(self.file_path, "r", encoding='UTF-8') as file:
+
+            lines = file.readlines()
+
+            for line in lines:
+                if not line.isspace():
+                    line = line.strip('\n')
+
+                    if line.startswith(self.date):
+                        meta_data.append(line)
+                    elif line.startswith("//"):
+                        pass
+                    elif line.startswith("Wavelength"):
+                        pass
+                    elif line[0].isdigit():
+                        line_splitted = line.split("\t")
+                        if len(line_splitted)<2:
+                            pass
+                        else:
+                            data.append([sample, float(line_splitted[0]),float(line_splitted[1])])
+                    else:
+                        sample = line
+                        meta_data.append(line)
+
+            df = pd.DataFrame(data, columns = ["sample","wavelength (nm)", "absorbance"])
+
+        UniqueNames = df['sample'].unique()
+        self.measurements = {elem : pd.DataFrame() for elem in UniqueNames}
+        for key in self.measurements.keys():
+            self.measurements[key] = df[:][df['sample'] == key]
+        self.measurements["Metadata"] = meta_data
+
+        print(f"\nTo access the data dictionary (measurements), use the following keys:")
+        print(''.join(str(key) + '\n' for key in self.measurements.keys()))
+
+
+
+if __name__ == '__main__':
+    # test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt", "1 2 3")
+    # test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt", "1 2 3")
+    # test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/220718_FRET.txt")
+    
+    # test_genesis = Genesis("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-03-06_F_400-600_JM.csv")
+    
+    test_nano = Nanodrop("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/nano_test_data.tsv", "2/14/2023")
+
+    
+    # m1 = test_nano.measurements['Means_all']
+    # A1 = m1.get_well("A12")
+    # m1.print_meta_data()
