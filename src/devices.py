@@ -519,7 +519,12 @@ class Nanodrop:
         except ValueError:
             return False
 
-    def read_nano_data(self):
+    def read_nano_data(self) -> pd.DataFrame:
+        """
+        Function for reading Nanodrop .tsv files
+        :return:
+        """
+
         sample = ""
         data = []
 
@@ -547,20 +552,20 @@ class Nanodrop:
 
             return pd.DataFrame(data, columns=["sample", "wavelength (nm)", "Abs", "date_time"])
 
-    def print_samples(self):
+    def print_samples(self) -> None:
         sample_list = self.working_df["sample"].unique()
         print("The following samples are available in your measurement")
         for s in sample_list:
             print(f"{s}")
 
-    def get_sample(self, sample_name):
+    def get_sample(self, sample_name) -> pd.DataFrame:
         if sample_name in self.working_df["sample"].unique():
             sliced_df = self.working_df[self.working_df["sample"] == sample_name]
             return sliced_df
         else:
             print("Sample name not found in dataframe. Please check the sample name")
 
-    def plot_sample(self, sample_name):
+    def plot_sample(self, sample_name: str, color='#e34a33') -> plt.subplots():
         if sample_name in self.working_df["sample"].unique():
             sample_df = self.get_sample(sample_name)
             # set plot size and font size
@@ -571,7 +576,7 @@ class Nanodrop:
             fig, ax = plt.subplots(figsize=(5, 3))
 
             # create a scatter plot
-            ax.scatter(sample_df['wavelength (nm)'], sample_df['Abs'], marker='x', color='#e34a33', linewidth=0.5, s=10)
+            ax.scatter(sample_df['wavelength (nm)'], sample_df['Abs'], marker='x', color=color, linewidth=0.5, s=10)
 
             # set axis labels
             ax.set_xlabel(r'wavelength $\lambda$ (nm)')
@@ -586,6 +591,7 @@ class Nanodrop:
         else:
             print("Sample name not found in dataframe. Please check the sample name")
 
+
 if __name__ == '__main__':
     # test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/id5_test_data_fl.txt", "1 2 3")
     # test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt", "1 2 3")
@@ -597,7 +603,7 @@ if __name__ == '__main__':
     whole_data = test_nano.working_df
     test_nano.print_samples()
     KL_1_2 = test_nano.get_sample("KL 1.2 1")
-    plot_1 = test_nano.plot_sample("KL 2.2 3")
+    plot_1 = test_nano.plot_sample("KL 1.2 3", color="lightblue")
 
     # m1 = test_nano.measurements['Means_all']
     # A1 = m1.get_well("A12")
