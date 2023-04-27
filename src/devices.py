@@ -521,8 +521,10 @@ class Nanodrop:
 
     def read_nano_data(self) -> pd.DataFrame:
         """
-        Function for reading Nanodrop .tsv files
-        :return:
+        Function for reading Nanodrop .tsv files. Reads the spectrum data and creates a dataframe from all samples and
+        returns it.
+        The column names are: "sample", "wavelength (nm)", "Abs", "date_time"
+        :return: Dataframe with all absorption spectra of all samples
         """
 
         sample = ""
@@ -553,12 +555,21 @@ class Nanodrop:
             return pd.DataFrame(data, columns=["sample", "wavelength (nm)", "Abs", "date_time"])
 
     def print_samples(self) -> None:
+        """
+        Prints all sample names of the data.
+        :return: None
+        """
         sample_list = self.working_df["sample"].unique()
         print("The following samples are available in your measurement")
         for s in sample_list:
             print(f"{s}")
 
     def get_sample(self, sample_name) -> pd.DataFrame:
+        """
+        Filters a sample by its name from the whole data and returns it as a dataframe
+        :param sample_name: string --> Name of the sample.
+        :return: Dataframe with an absorption spectra of one sample
+        """
         if sample_name in self.working_df["sample"].unique():
             sliced_df = self.working_df[self.working_df["sample"] == sample_name]
             return sliced_df
@@ -566,6 +577,12 @@ class Nanodrop:
             print("Sample name not found in dataframe. Please check the sample name")
 
     def plot_sample(self, sample_name: str, color='#e34a33') -> plt.subplots():
+        """
+        Generates a plot of an absorption spectrum.
+        :param sample_name: string --> Name of the sample.
+        :param color: color of the data points (optional)
+        :return: matplotlib figure object
+        """
         if sample_name in self.working_df["sample"].unique():
             sample_df = self.get_sample(sample_name)
             # set plot size and font size
