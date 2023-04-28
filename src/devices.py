@@ -63,7 +63,8 @@ class Carry:
                             enumerate(zip(data.filter(like="Temperature"), data.filter(like="Abs")))],
                            ignore_index=True)
 
-        self.data = self.add_names_from_file(new_df)
+
+        self.data = self.add_names_from_file(new_df.dropna())
 
     def parse_data_absorbtion_spectra(self):
         meta = []
