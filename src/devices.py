@@ -10,9 +10,39 @@ from pathlib import Path
 class Carry:
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
+        self.x_mode = None
+        self.x_mode = None
+        self.collection_mode = None
+        self.scan_range_start = None
+        self.scan_range_ende = None
+        self.data_interval = None
+        self.scan_rate = None
+        self.averanging_time = None
+        self.spectral_bandwidth = None
+        self.detector_modul = None
+        self.baseline = None
+        self.experiment_zones = None
+        self.data = None
+        self.read_data()
 
-    @staticmethod
-    def add_column_data(df: pd.DataFrame, coloumn_name: str, values: list) -> pd.DataFrame:
+    def add_names_from_file(self, df):
+        names = []
+        with open(self.file_path, 'r', encoding='UTF-8') as file:
+            firstline = file.readlines()[0]
+            firstline = firstline.strip('\n')
+            meta = firstline.split(',')
+            meta = list(filter(None, meta))
+            for name in meta:
+                names.append(name)
+
+        measure = 1
+        for i, name in enumerate(names):
+            df.loc[df['Measurement'] == measure, "Name"] = name
+            measure += 1
+
+        return df
+
+    def add_column_data(self, coloumn_name: str, values: list) -> None:
         """
         Function to add data like concentration to the measurements.
         :param df: Dataframe to which the data should be appended.
@@ -20,62 +50,22 @@ class Carry:
         :param values: List of values per measurement (cuvette). Example: ["0","1","10","100"]
         :return: Dataframe with appended Date
         """
-        pass
 
-    def parse_metling_curve(self):
-        print('Reading Cary3500-data...')
+        measures = sorted(set(self.data["Measurement"]))
+        for i, value in enumerate(values):
+            self.data.loc[self.data['Measurement'] == measures[i], coloumn_name] = value
+
+    def parse_melting_curve_data(self):
         data = pd.read_csv(self.file_path, header=1)
-        # initialisation of variables
-        data_dict = {}
-        # setting iterator and i to value needed for first loop
-        iterator = 1
-        i = 0
 
-        with open(self.file_path, 'r', encoding='UTF-8') as file:
-            firstline = file.readlines()[0]
-            firstline = firstline.strip('\n')
-            # Here the metadata is loaded in for the very first line only
-            # line.split() creates a list with all elements between the separator
-            meta = firstline.split(',')
-            meta = list(filter(None, meta))
-            # create short elements in list for naming keys in data_dict
-            meta_list = []
-            for element in meta:
-                meta_split = element.split('_')
-                meta_list.append(meta_split)
+        new_df = pd.concat([pd.DataFrame({"Temperature (C)": data[t_col], "Abs": data[abs_col], "Measurement": i + 1})
+                            for i, (t_col, abs_col) in
+                            enumerate(zip(data.filter(like="Temperature"), data.filter(like="Abs")))],
+                           ignore_index=True)
 
-        # if dataframe has even number of columns
-        # for every list element in list called "meta"
+        self.data = self.add_names_from_file(new_df)
 
-        list_of_data = []
-        for number_of_measurement, element in enumerate(meta_list):
-            # key = list element with numbering (iterator), value = every 2 columns
-            measure = data.iloc[:, i:i + 2]
-            measure.columns.values[0:2] = ["Temperature (C)", "Abs"]
-            # measure["name"] = element[0]
-            measure.insert(0, "measure_number", number_of_measurement)
-            measure.insert(1, "name", element[0])
-            measure.insert(2, "wavelength_nm", element[1])
-            measure.insert(3, "temperature_range_celcius", element[2])
-            # measure.assign(name=element[0])
-            # measure.assign(wavelength=element[1])
-            # measure.assign(temperature_range=element[2])
-            # measure["wavelength (nm)"] = element[1]
-            # measure["temperature_range (°C)"] = element[2]
-            measure = measure.dropna()
-            # adding metadata
-            list_of_data.append(measure)
-            # setting i and iterators to value needed in next loop
-            i = i + 2
-            iterator += 1
-
-        df = pd.concat(list_of_data)
-
-        print(
-            f"\nTo access the data dictionary (measurements and meta data), use the following keys: \n{', '.join(str(key) for key in data_dict.keys())}\n")
-        return df
-
-    def parse_data_with_meta(self):
+    def parse_data_absorbtion_spectra(self):
         meta = []
         meta_list = []
         names_line = []
@@ -92,6 +82,7 @@ class Carry:
 
         with open(self.file_path, 'r', encoding='UTF-8') as file:
             lines = file.readlines()
+            print(lines[0])
             for line in lines:
                 if not line.isspace():
                     line = line.strip('\n')
@@ -151,6 +142,18 @@ class Carry:
         print(f"\nTo access the data dictionary (measurements and meta data), use the following keys:")
         print(''.join(str(key) + '\n' for key in data_dict.keys()))
         return data_dict
+
+    def read_data(self):
+        with open(self.file_path, 'r', encoding='UTF-8') as file:
+            lines = file.readlines()
+            print(lines[0])
+            firstline = lines[0]
+            if "CSV Report" in firstline:
+                print("Carrydata with meta")
+                self.parse_data_absorbtion_spectra()
+            else:
+                print("Carrydata without meta")
+                self.parse_melting_curve_data()
 
 
 class ID5MeasureAbsorbance:
@@ -616,12 +619,15 @@ if __name__ == '__main__':
 
     # test_genesis = Genesis("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-03-06_F_400-600_JM.csv")
 
-    test_nano = Nanodrop("nanodrop_data/2023-02-14_concentration_RNA_VS.tsv")
-    whole_data = test_nano.working_df
-    test_nano.print_samples()
-    KL_1_2 = test_nano.get_sample("KL 1.2 1")
-    plot_1 = test_nano.plot_sample("KL 1.2 3", color="lightblue")
+    # test_nano = Nanodrop("nanodrop_data/2023-02-14_concentration_RNA_VS.tsv")
+    # whole_data = test_nano.working_df
+    # test_nano.print_samples()
+    # KL_1_2 = test_nano.get_sample("KL 1.2 1")
+    # plot_1 = test_nano.plot_sample("KL 1.2 3", color="lightblue")
 
+    carry_data = Carry("carry_data/Export Data 2023_03_31_DNA_verdunnt_Schmelzkurve_PL.csv")
+    carry_data.add_column_data("Concentration", [0, 1, 5, 10, 20, 40, 60, 80, 100, 1, 10, 100, 1, 10, 100, 1])
+    print(carry_data.data)
     # m1 = test_nano.measurements['Means_all']
     # A1 = m1.get_well("A12")
     # m1.print_meta_data()
