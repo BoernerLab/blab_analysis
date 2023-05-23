@@ -61,8 +61,7 @@ class Carry:
         new_df = pd.concat([pd.DataFrame({"Temperature (C)": data[t_col], "Abs": data[abs_col], "Measurement": i + 1})
                             for i, (t_col, abs_col) in
                             enumerate(zip(data.filter(like="Temperature"), data.filter(like="Abs")))],
-                            ignore_index=True)
-
+                           ignore_index=True)
 
         self.data = self.add_names_from_file(new_df.dropna())
 
@@ -129,9 +128,9 @@ class Carry:
         data_fin.columns = names_line
         data_fin.iloc[:] = data_fin.iloc[:].apply(pd.to_numeric)
         data_fin = data_fin.melt(id_vars=["wavelength (nm)"],
-                                value_vars=['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2'],
-                                var_name='sample',
-                                value_name='value (RFU)')
+                                 value_vars=['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2'],
+                                 var_name='sample',
+                                 value_name='value (RFU)')
 
         dct = dict((item[0], item[1:]) for item in data_list)
         dctdat = dict((item[0], item[1:]) for item in meta_list)
@@ -155,6 +154,7 @@ class Carry:
             else:
                 print("Carrydata without meta")
                 self.parse_melting_curve_data()
+
 
 class ID5MeasureAbsorbance:
     def __init__(self, metadata: list, data: list) -> None:
@@ -228,7 +228,7 @@ class ID5MeasureAbsorbance:
             df = df.replace("", np.nan)
             df = df.dropna(axis=1, how="any")
             df = df.melt(id_vars=df.columns[:2],
-                        value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
+                         value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
             df.columns = ["wavelength (nm)", "temperature (°C)", "wellnumber", "Abs"]
             df["Abs"] = df["Abs"].replace('#SAT', np.nan)
             df["wavelength (nm)"] = df["wavelength (nm)"].astype(float)
@@ -255,8 +255,9 @@ class ID5MeasureAbsorbance:
 
     #     return correct_matrix
 
+
 class ID5MeasureFluorescence:
-    def __init__(self, metadata: list, data: list, emission_wavelength) -> None:
+    def __init__(self, metadata: list, data: list, wavelength_pairs: dict) -> None:
         self.section_type = metadata[0]
         self.section_name = metadata[1]
         self.export_version = metadata[2]
@@ -290,10 +291,11 @@ class ID5MeasureFluorescence:
         self.number_of_rows = metadata[30]
         self.time_tags = metadata[31]
         self.data = data
-        self.emission_wavelength = emission_wavelength
+        self.wavelength_pairs = wavelength_pairs
+        # self.emission_wavelength = emission_wavelength
         self.restructure_data()
-        #self.correction_matrix()
-        #self.correct_mat = self.correction_matrix(measurement_cy3, measurement_cy5, wellnumber)
+        # self.correction_matrix()
+        # self.correct_mat = self.correction_matrix(measurement_cy3, measurement_cy5, wellnumber)
 
     @staticmethod
     def create_plate_id_list() -> list:
@@ -333,14 +335,9 @@ class ID5MeasureFluorescence:
             print(
                 f"Experiment '{self.section_name}': emission wavelength {self.start_wavelength} nm - {self.end_wavelength} nm in steps of {self.wavelength_step}nm, {self.sweep_waves}: {self.sweep_fixed_wavelength}nm")
         elif self.emission_wavelength is not None:
-            print_excitation_wavelength = self.excitation_wavelength.split()
-            print_emission_wavelength = self.emission_wavelength.split()
             print(
                 f"Experiment '{self.section_name}': \n"
-                f"excitation    emission wavelengths \n"
-                f"{print_excitation_wavelength[0]} nm        {print_emission_wavelength[0]} nm \n"
-                f"{print_excitation_wavelength[1]} nm        {print_emission_wavelength[1]} nm \n"
-                f"{print_excitation_wavelength[2]} nm        {print_emission_wavelength[2]} nm \n")
+                f"{self.wavelength_pairs}")
 
     def restructure_data(self):
         if self.read_type == "Spectrum":
@@ -348,7 +345,7 @@ class ID5MeasureFluorescence:
             df = df.replace("", np.nan)
             df = df.dropna(axis=1, how="any")
             df = df.melt(id_vars=df.columns[:2],
-                        value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
+                         value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
             df.columns = ["wavelength (nm)", "temperature (°C)", "wellnumber", "RFU"]
             df["RFU"] = df["RFU"].replace('#SAT', np.nan)
             df["wavelength (nm)"] = df["wavelength (nm)"].astype(float)
@@ -360,75 +357,86 @@ class ID5MeasureFluorescence:
             df_sort.empty
 
         elif self.read_type == "Endpoint":
-            if self.emission_wavelength is None:
-                if self.number_of_wavelength != len(self.excitation_wavelength.split()):
-                    self.excitation_wavelength = input(
-                        f"Please enter Excitation Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
-                    self.emission_wavelength = input(
-                        f"Please enter Emission Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
-                    excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
-                    emission_wavelength = f"em_wl {self.emission_wavelength}".split()
-
-                else:
-                    self.emission_wavelength = input(
-                        f"Please enter Emission Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
-                    excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
-                    emission_wavelength = f"em_wl {self.emission_wavelength}".split()
-
-            else:
-                if len(self.emission_wavelength.split()) != len(self.excitation_wavelength.split()):
-                    if self.number_of_wavelength != len(self.excitation_wavelength.split()):
-                        self.excitation_wavelength = input(
-                            f"Please re-enter Excitation Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
-                        self.emission_wavelength = input(
-                            f"Please re-enter Emission Wavelength ({self.number_of_wavelength}) for measurement {self.section_name} separated by space: \n")
-                        excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
-                        emission_wavelength = f"em_wl {self.emission_wavelength}".split()
-
-                    else:
-                        self.emission_wavelength = input(
-                            f"Please re-enter Emission Wavelength ({len(self.excitation_wavelength.split())}) for measurement {self.section_name} separated by space: \n")
-                        excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
-                        emission_wavelength = f"em_wl {self.emission_wavelength}".split()
-
-                else:
-                    excitation_wavelength = f"ex_wl {self.excitation_wavelength}".split()
-                    emission_wavelength = f"em_wl {self.emission_wavelength}".split()
 
             for i, data_line in enumerate(self.data):
+                wl_pair = []
                 del data_line[0]
                 del data_line[len(data_line) - 1]
-                data_line.insert(0, excitation_wavelength[i])
-                data_line.insert(1, emission_wavelength[i])
+                if i == 0:
+                    data_line.insert(0, "excitation_wl")
+                    data_line.insert(1, "emission_wl")
+                if i > 0:
+                    wl_pair_key_list = list(self.wavelength_pairs.keys())
+                    wl_pair = self.wavelength_pairs[wl_pair_key_list[i - 1]]
+                    data_line.insert(0, wl_pair[0])
+                    data_line.insert(1, wl_pair[1])
 
             df = pd.DataFrame(self.data[1:], columns=self.data[0])
             df = df.replace("", np.nan)
             df = df.dropna(axis=1, how="any")
             df = df.melt(id_vars=df.columns[:3],
-                        value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
+                         value_vars=list(set(self.create_plate_id_list()).intersection(df.columns)))
             df.columns = ["excitation wavelength (nm)", "emission wavelength (nm)", "temperature (°C)", "wellnumber",
-                        "RFU"]
+                          "RFU"]
             df["RFU"] = df["RFU"].replace('#SAT', np.nan)
             df[["excitation wavelength (nm)", "emission wavelength (nm)", "temperature (°C)", "RFU"]] = df[
                 ["excitation wavelength (nm)", "emission wavelength (nm)", "temperature (°C)", "RFU"]].apply(
                 pd.to_numeric)
             df_sort = df.sort_values(["excitation wavelength (nm)", "emission wavelength (nm)", 'wellnumber'],
-                                    ignore_index=True)
-            self.working_df = df_sort
+                                     ignore_index=True)
+            self._working_df = df_sort
             df.empty
             df_sort.empty
 
         else:
             print(f"Current read type = {self.read_type}. If you can read this, implementation not done.")
+    @property
+    def working_df(self):
+        return self._working_df
+
+    @working_df.setter
+    def working_df(self, new_df):
+        self._working_df = new_df
+
+    def add_new_column(self, value_column_name, dictionary, new_column_name):
+        """
+        Adds a new column to a pandas DataFrame based on a value in a specified column, using a dictionary to map the value to
+        a new value for the new column.
+
+        Parameters:
+        dataframe (pandas.DataFrame): The DataFrame to modify.
+        value_column_name (str): The name of the column to use as the source for the value to map to a new value.
+        dictionary (dict): The dictionary to use to map the value to a new value for the new column.
+        new_column_name (str): The name of the new column to add to the DataFrame.
+
+        Returns:
+        pandas.DataFrame: The modified DataFrame with the new column added.
+        """
+        new_column_values = []
+        current_df = self.working_df
+        for index, row in current_df.iterrows():
+            value = row[value_column_name]
+
+            if value in dictionary:
+                new_value = dictionary[value]
+            else:
+                new_value = None
+
+            new_column_values.append(new_value)
+
+        current_df[new_column_name] = new_column_values
+
+        self.working_df = current_df
+
 
 
 class ID5:
-    def __init__(self, file_path: str, emission_wavelength=None):  
+    def __init__(self, file_path: str, wavelength_pairs: dict = None):
         self.file_path = file_path
         self.measurements = {}
-        self.emission_wavelength = emission_wavelength
-        self.working_df = self.read_id5_data()
-        
+        self.wavelength_pairs = wavelength_pairs
+        self.read_id5_data()
+
     def read_id5_data(self) -> None:
         number_of_measurements = 0
         meta = []
@@ -438,7 +446,7 @@ class ID5:
         # ex_wl_data = None
         # contains_wavelength = False
 
-        with open(self.file_path, 'r', encoding='UTF-8') as file:
+        with open(self.file_path, 'r', encoding='UTF-16') as file:
             lines = file.readlines()
 
             for line in lines:
@@ -460,12 +468,14 @@ class ID5:
                             if read_mode == "Absorbance":
                                 self.measurements[f"Measurement_{iterator}"] = ID5MeasureAbsorbance(meta, data)
                             elif read_mode == "Fluorescence":
-                                self.measurements[f"Measurement_{iterator}"] = ID5MeasureFluorescence(meta, data, self.emission_wavelength)
+                                self.measurements[f"Measurement_{iterator}"] = ID5MeasureFluorescence(meta, data,
+                                                                                                      self.wavelength_pairs)
                             elif read_mode == "Luminescence" or "Time Resolved" or "Imaging":
                                 print("Data reading routine is not implemented for these types of experiments.")
                             else:
-                                print("Unknown type of experiment. Check your file or implement new data reading routine.")
-                            print(f"{meta[1]}: {read_type}, {read_mode}") # print accessible keys of dict
+                                print(
+                                    "Unknown type of experiment. Check your file or implement new data reading routine.")
+                            print(f"Measurement_{iterator} = {meta[1]}: {read_type}, {read_mode}")  # print accessible keys of dict
                             data = []
                             meta = []
                         else:
@@ -475,7 +485,47 @@ class ID5:
                 else:
                     break
 
-    def correction_matrix(self, measurement_cy3: str, measurement_cy5: str, wellnumber: str, ex1 = 'default', ex2 = 'default'):
+    def calculate_blank(self, measurement_name_list: list, well_numbers: list):
+        """
+        Collect all blank values from given well_number list. Calculate mean blank value and substract the blank from
+        values
+        :param measurement_list: List of measurements from which the blank is to be calculated and subtracted.
+        :param well_numbers: list of Welnumbers with blank Measurements (e.g.: ["A1","B1","C1"])
+        :return:
+        """
+        blanks = []
+        for measurement_name in measurement_name_list:
+            current_df = self.measurements[measurement_name].working_df
+            for index, row in current_df.iterrows():
+                value = row["wellnumber"]
+                if value in well_numbers:
+                    #print(row["RFU"])
+                    blanks.append(row["RFU"])
+        print(len(blanks))
+
+        mean_blank = sum(blanks) / len(blanks)
+
+        for measurement_name in measurement_name_list:
+
+            current_df = self.measurements[measurement_name].working_df
+
+            current_df["bg_corrected_RFU"] = current_df["RFU"] - mean_blank
+            self.measurements[measurement_name].working_df = current_df
+
+
+        return mean_blank
+
+    def calculate_correction_matrix(self, measurement_cy3: str, measurement_cy5: str, wellnumber: str, ex1='default',
+                                    ex2='default'):
+        """
+
+        :param measurement_cy3:
+        :param measurement_cy5:
+        :param wellnumber:
+        :param ex1:
+        :param ex2:
+        :return:
+        """
         # gilt nur für objekte der klasse ID5fluo endpoint
 
         cy3 = self.measurements[measurement_cy3]
@@ -484,14 +534,16 @@ class ID5:
         cy5 = self.measurements[measurement_cy5]
         meas_cy5 = cy5.get_well(wellnumber)
 
-        rows = [[f"ex_{ex1}", list(meas_cy3["RFU"])[0], list(meas_cy3["RFU"])[1]], [f"ex_{ex2}", 0.0, list(meas_cy5["RFU"])[0]]]
-        
+        rows = [[f"ex_{ex1}", list(meas_cy3["RFU"])[0], list(meas_cy3["RFU"])[1]],
+                [f"ex_{ex2}", 0.0, list(meas_cy5["RFU"])[0]]]
+
         corrmat_cols = pd.unique(self.measurements[measurement_cy3].workind_df["emission wavelength (nm)"].unique())
         cols = ["Ex/Em", f"em_{corrmat_cols[0]}", f"em_{corrmat_cols[1]}"]
 
         correct_matrix = pd.DataFrame(rows, columns=cols)
 
         return correct_matrix
+
 
 # hier alle anderen functions rein und if statement oder try/except: darf nur fluoklasse sein
 
@@ -518,9 +570,9 @@ class Genesis:
             else:
                 df_measurement_x = df_col_sorted.filter(like=col_list[index], axis=1)
                 measurement_df_with_meanval = pd.concat([df_col_sorted['Wavelength(nm)'], df_measurement_x.iloc[:, :],
-                                                        df_measurement_x.iloc[:, :].mean(axis=1)], axis=1)
+                                                         df_measurement_x.iloc[:, :].mean(axis=1)], axis=1)
                 measurement_df_with_meanval.columns = [f'mean Abs {item}' if x == 0 else x for x in
-                                                    measurement_df_with_meanval.columns]
+                                                       measurement_df_with_meanval.columns]
                 self.measurements[f"Measurement_{item}"] = measurement_df_with_meanval
 
                 df_with_means_of_all_measurements = pd.concat(
@@ -528,13 +580,14 @@ class Genesis:
                 index += 1
 
         self.measurements['Means_all'] = df_with_means_of_all_measurements.iloc[:,
-                                        ~df_with_means_of_all_measurements.columns.duplicated()]
+                                         ~df_with_means_of_all_measurements.columns.duplicated()]
         self.measurements['Means_all'] = self.measurements['Means_all'].melt(id_vars=['Wavelength(nm)'])
         self.measurements['Means_all'] = self.measurements['Means_all'].rename(
             columns={'Wavelength(nm)': "wavelength (nm)", 'variable': "measurement", 'value': "mean Abs"})
 
         print(f"\nTo access the data dictionary (measurements), use the following keys:")
         print(''.join(str(key) + '\n' for key in self.measurements.keys()))
+
 
 class Nanodrop:
     def __init__(self, file_path: str):
@@ -640,38 +693,54 @@ class Nanodrop:
             plt.subplots_adjust(bottom=0.2)
 
             # show plot
-            plt.show()
+            #plt.show()
             return fig
         else:
             print("Sample name not found in dataframe. Please check the sample name")
 
 
 if __name__ == '__main__':
+    wavelength_pairs = {
+        "Dex_Dem": [535, 595],
+        "Dex_Aem": [535, 660],
+        "Aex_Aem": [630, 660]
+    }
 
-
-    test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/220718_FRET_problematic.txt", "1 2 3")
+   # my_id_5_data = ID5("id5_data/2023-04-26_FRET_JM.txt", wavelength_pairs)
+    #print(my_id_5_data.m.keys())
+   # print(my_id_5_data.measurements)
     # test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt", "1 2 3")
     # test_id5 = ID5("id5_data/id5_test_data_fl.txt")
-    m1 = test_id5.measurements['Measurement_1']
-    #self.measurements[measurement_cy3]["emission wavelength (nm)"]
-    print(m1.working_df["emission wavelength (nm)"].unique())
+   # FRET_measurements = []
+   # mesure_names = test_id5.measurements.keys()
+   # for name in mesure_names:
+     #   measurement = test_id5.measurements[name]
+    #    name_1 = measurement.section_name
+     #   if "°" in name_1:
+     #       FRET_measurements.append(name)
 
-    # print(type(test_id5.measurements))
-    # print(m1.working_df)
-    #m2 = m1[m1.working_df['wellnumber'] == "A1"]
+    # print(FRET_measurements)
+    #blank_wells = ["A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"]
+
+   # mean_blank = test_id5.calculate_blank(FRET_measurements, blank_wells)
+    #print(mean_blank)
 
 
-    # cm = test_id5.correction_matrix("Measurement_1", "Measurement_2", "A1", 595, 666)
-    # print(cm)
-    
+    #m1 = test_id5.measurements['Measurement_3']
+   # print(m1.working_df)
+
+
+
+
+    #test_id5.calculate_blank()
 
     # mx = test_id5.correction_matrix(measurements=test_id5.measurements, measurement_cy3='Measurement_1', measurement_cy5='Measurement_3', wellnumber='A2')
-    # print(mx)
+    #print(m1.working_df)
 
-    #A1 = m1.get_well("A12")
-    #print(A1)
-    #cm = m1.correction_matrix("Measurement1_Corr. Matrix Cy3", "Measurement1_Corr. Matrix Cy5", "A2", 595, 666)
-    #print(type(A1))
+    # A1 = m1.get_well("A2")
+    # print(A1)
+    # cm = m1.correction_matrix("Measurement1_Corr. Matrix Cy3", "Measurement1_Corr. Matrix Cy5", "A2", 595, 666)
+    # print(type(A1))
 
     # test_genesis = Genesis("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-03-06_F_400-600_JM.csv")
 
