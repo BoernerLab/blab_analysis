@@ -156,7 +156,6 @@ class Carry:
                 print("Carrydata without meta")
                 self.parse_melting_curve_data()
 
-
 class ID5MeasureAbsorbance:
     def __init__(self, metadata: list, data: list) -> None:
         self.section_type = metadata[0]
@@ -183,6 +182,7 @@ class ID5MeasureAbsorbance:
         self.time_tags = metadata[21]
         self.data = data
         self.restructure_data()
+        self.correction_matrix()
 
     @staticmethod
     def create_plate_id_list() -> list:
@@ -242,6 +242,18 @@ class ID5MeasureAbsorbance:
             print(
                 f"Current read type = {self.type_read_mode}. If you can read this, implementation not done or file content faulty.")
 
+    # def correction_matrix(self, df_CM, measurement_cy3: str, measurement_cy5: str, wellnumber: str, ex1 = 'default', ex2 = 'default'):
+
+    #     meas_cy3 = self.get_well(df_CM=self.measurements, measurement=measurement_cy3, wellnumber=wellnumber)
+    #     meas_cy5 = self.get_well(df_CM=self.measurements, measurement=measurement_cy5, wellnumber=wellnumber)
+
+    #     rows = [[f"ex_{ex1}", list(meas_cy3["value (x)"])[0], list(meas_cy3["value (x)"])[1]], [f"ex_{ex2}", 0.0, list(meas_cy5["value (x)"])[0]]]
+    #     corrmat_cols = pd.unique(self.measurements[measurement_cy3]["emission wavelength (nm)"])
+    #     cols = ["Ex/Em", f"em_{corrmat_cols[0]}", f"em_{corrmat_cols[1]}"]
+
+    #     correct_matrix = pd.DataFrame(rows, columns=cols)
+
+    #     return correct_matrix
 
 class ID5MeasureFluorescence:
     def __init__(self, metadata: list, data: list, emission_wavelength) -> None:
@@ -280,6 +292,8 @@ class ID5MeasureFluorescence:
         self.data = data
         self.emission_wavelength = emission_wavelength
         self.restructure_data()
+        #self.correction_matrix()
+        #self.correct_mat = self.correction_matrix(measurement_cy3, measurement_cy5, wellnumber)
 
     @staticmethod
     def create_plate_id_list() -> list:
@@ -408,17 +422,13 @@ class ID5MeasureFluorescence:
             print(f"Current read type = {self.read_type}. If you can read this, implementation not done.")
 
 
-
 class ID5:
-    def __init__(self, file_path: str, emission_wavelength=None):
+    def __init__(self, file_path: str, emission_wavelength=None):  
         self.file_path = file_path
         self.measurements = {}
         self.emission_wavelength = emission_wavelength
-        self.working_df = self.read_id5_data() 
-        self.correct_matrix = self.correction_matrix()
-
-        #self.well_acquired = self.get_well()
-
+        self.working_df = self.read_id5_data()
+        
     def read_id5_data(self) -> None:
         number_of_measurements = 0
         meta = []
@@ -450,8 +460,7 @@ class ID5:
                             if read_mode == "Absorbance":
                                 self.measurements[f"Measurement_{iterator}"] = ID5MeasureAbsorbance(meta, data)
                             elif read_mode == "Fluorescence":
-                                self.measurements[f"Measurement_{iterator}"] = ID5MeasureFluorescence(meta, data,
-                                                                                                    self.emission_wavelength)
+                                self.measurements[f"Measurement_{iterator}"] = ID5MeasureFluorescence(meta, data, self.emission_wavelength)
                             elif read_mode == "Luminescence" or "Time Resolved" or "Imaging":
                                 print("Data reading routine is not implemented for these types of experiments.")
                             else:
@@ -466,290 +475,25 @@ class ID5:
                 else:
                     break
 
-    def get_well(self, wellnumber: str) -> pd.DataFrame:
-        wellnums_unique = self.working_df["wellnumber"].unique()
-        spec_df = self.working_df[self.working_df["wellnumber"] == wellnumber]
-
-        if spec_df.empty:
-            print("ERROR: Wellnumber does not exist.")
-            print(f"Accessible wellnumbers: {wellnums_unique}")
-        else:
-            return spec_df
-
     def correction_matrix(self, measurement_cy3: str, measurement_cy5: str, wellnumber: str, ex1 = 'default', ex2 = 'default'):
+        # gilt nur für objekte der klasse ID5fluo endpoint
 
-        meas_cy3 = self.get_well(dataframe=self.measurements, measurement=measurement_cy3, wellnumber=wellnumber)
-        meas_cy5 = self.get_well(dataframe=self.measurements, measurement=measurement_cy5, wellnumber=wellnumber)
+        cy3 = self.measurements[measurement_cy3]
+        meas_cy3 = cy3.get_well(wellnumber)
 
-        rows = [[f"ex_{ex1}", list(meas_cy3["value (x)"])[0], list(meas_cy3["value (x)"])[1]], [f"ex_{ex2}", 0.0, list(meas_cy5["value (x)"])[0]]]
-        corrmat_cols = pd.unique(self.measurements[measurement_cy3]["emission wavelength (nm)"])
+        cy5 = self.measurements[measurement_cy5]
+        meas_cy5 = cy5.get_well(wellnumber)
+
+        rows = [[f"ex_{ex1}", list(meas_cy3["RFU"])[0], list(meas_cy3["RFU"])[1]], [f"ex_{ex2}", 0.0, list(meas_cy5["RFU"])[0]]]
+        
+        corrmat_cols = pd.unique(self.measurements[measurement_cy3].workind_df["emission wavelength (nm)"].unique())
         cols = ["Ex/Em", f"em_{corrmat_cols[0]}", f"em_{corrmat_cols[1]}"]
 
-        self.correct_matrix = pd.DataFrame(rows, columns=cols)
+        correct_matrix = pd.DataFrame(rows, columns=cols)
 
-        return self.correct_matrix
+        return correct_matrix
 
-    # def calculate_bleedthrough(dataframe: DataFrame, don_acc_type: str) -> float:
-    #     """
-    #     Function to calculate bleedthrough for the acceptor or the donor.
-        
-    #     parameters
-    #     ----------
-    #     dataframe: DataFrame
-    #             the correction matrix dataframe 
-    #     don_acc_type: str
-    #             either "A" for acceptor or "D" for donor
-
-    #     example use: 
-    #     bleedthrough_acceptor = calculate_bleedthrough(corrMat_cy5, "A")
-
-    #     returns
-    #     -------
-    #     the calculated bleedthrough value
-    #     """
-    #     valid_type = {"A", "D"}
-    #     if don_acc_type not in valid_type:
-    #         print("Type unknown. Must be one of %r (A: acceptor, D: donor)" % valid_type)
-    #     else:
-    #         if don_acc_type == "D":
-    #             print("You chose donor bleedthrough calculations.")
-    #             if dataframe.iloc[0][2] == 0.0 or dataframe.iloc[0][1] == 0.0:
-    #                 print("Division with zero encountered. That is unfortunate. \nBleedthrough of donor set to zero.")
-    #             else:
-    #                 bt_D = dataframe.iloc[0][2] / dataframe.iloc[0][1] # [row][col]
-    #                 print(f"Bleedthrough of donor: {round(bt_D, 4)} ({format(round(bt_D*100, 2),'.2f')}%).")
-    #                 return bt_D
-    #         elif don_acc_type == "A":
-    #             print("You chose acceptor bleedthrough calculations.")
-    #             if dataframe.iloc[1][1] == 0.0 or dataframe.iloc[1][2] == 0.0:
-    #                 print("Division with zero encountered. It is what it is. \nBleedthrough of Acceptor set to zero.")
-    #                 return 0.0
-    #             else:
-    #                 bt_A = dataframe.iloc[1][1] / dataframe.iloc[1][2] # [row][col]
-    #                 print(f"Bleedthrough of Acceptor: {round(bt_A, 4)} ({format(round(bt_A*100,2),'.2f')}%).")
-    #                 return bt_A
-    
-    # def calculate_directExcitation(dataframe: DataFrame, don_acc_type: str):
-    #     """
-    #     Function to calculate direct excitation for the acceptor or the donor.
-        
-    #     parameters
-    #     ----------
-    #     dataframe: DataFrame
-    #             the correction matrix dataframe 
-    #     don_acc_type: str
-    #             either "A" for acceptor or "D" for donor
-
-    #     example use: 
-    #     directExcitation_acceptor = calculate_directExcitation(corrMat_cy5, "A")
-
-    #     returns
-    #     -------
-    #     the calculated direct excitation value
-    #     """
-    #     valid_type = {"A", "D"}
-    #     if don_acc_type not in valid_type:
-    #         print("Type unknown. Must be one of %r (A: Acceptor, D: Donor)" % valid_type)
-    #     else:
-    #         if don_acc_type == "D":
-    #             print(f"You chose donor direct excitation calculations.")
-    #             if dataframe.iloc[1][1] == 0.0 or dataframe.iloc[0][1] == 0.0:
-    #                 print("Divide by zero encountered. It is what it is.")
-    #                 print(f"Direct excitation of donor set to zero.")
-    #                 return 0.0
-    #             else:
-    #                 dE_D = dataframe.iloc[1][1] / dataframe.iloc[0][1] # row, col
-    #                 print(f"Direct Excitation of Donor: {dE_D} ({format(round(dE_D*100,2), '.2f')}%).")
-    #                 return dE_D
-            
-    #         elif don_acc_type == "A":
-    #             print(f"You chose acceptor bleedthrough calculations.")
-    #             if dataframe.iloc[0][2] == 0.0 or dataframe.iloc[1][2] == 0.0:
-    #                 print("Encountered a zero in the calculation. Should it be there?")
-    #                 print(f"Direct Excitation of Acceptor set to zero.")
-    #                 return 0.0
-    #             else:
-    #                 dE_A = dataframe.iloc[0][2] / dataframe.iloc[1][2] # row, col
-    #                 print(f"Direct Excitation of Acceptor: {dE_A} ({format(round(dE_A*100,2), '.2f')}%).")
-    #                 return dE_A
-
-    # def calculate_bt_correction(self, dataframe: DataFrame, measurement: str, wellnumber: str, bt_var, don_acc_type: str) -> float:
-    #     """
-    #     Function to calculate bleedthrough correction for the acceptor or the donor.
-        
-    #     parameters
-    #     ----------
-    #     dataframe: DataFrame
-    #             the dataframe/dictionary, that is generated after reading the ID5-file with the "read_ID5_data" function. 
-    #     measurement: str
-    #             desired measurement (eg. "Measurement5_20 °C")
-    #     wellnumber: str
-    #             number of the well (eg. "A3")
-    #     bt_var: a variable
-    #             the beforehand calculated bleedthrough value variable
-    #     don_acc_type: str
-    #             either "A" for acceptor or "D" for donor
-
-    #     example use: 
-    #     bt_corr_D = calculate_bt_correction(data, "Measurement5_20 °C", "A3", bt_a, "D")
-
-    #     returns
-    #     -------
-    #     the calculated bleedthrough correction value
-
-    #     citation: 
-    #     Börner R, Kowerko D, Hadzic MCAS, König SLB, Ritter M, et al. (2018) 
-    #     Simulations of camera-based single-molecule fluorescence experiments. PLOS ONE 13(4): e0195277. 
-    #     https://doi.org/10.1371/journal.pone.0195277
-    #     """
-    #     valid_type = {"A", "D"}
-    #     if don_acc_type not in valid_type:
-    #         print("Type unknown. Must be one of %r (A: Acceptor, D: Donor)" % valid_type)
-    #     else:
-    #         if don_acc_type == "D":
-    #             print("You chose donor direct excitation calculations. \
-    #                 The input bleedthrough variable (bt_var) must be of bt acceptor.")
-    #             data = self.get_well(dataframe=dataframe, measurement=measurement, wellnumber=wellnumber)
-    #             bt_corr_D = data.iloc[0][3] - bt_var * data.iloc[1][3]
-    #             print(f"I'^[D.em]_[D.ex] = {bt_corr_D}")
-    #             return bt_corr_D
-            
-    #         elif don_acc_type == "A":
-    #             print(f"You chose acceptor bleedthrough calculations. \
-    #                 The input bleedthrough variable (bt_var) must be of bt donor.")
-    #             data = self.get_well(dataframe=dataframe, measurement=measurement, wellnumber=wellnumber)
-    #             bt_corr_A = data.iloc[1][3] - bt_var * data.iloc[0][3]
-    #             print(f"I'^[A.em]_[D.ex] = {bt_corr_A}")
-    #             return bt_corr_A
-
-    # def calculate_dED_correction(self, dataframe: DataFrame, measurement: str, wellnumber: str, dE_var):
-    #     """
-    #     Function to calculate direct Excitation correction for the donor.
-        
-    #     parameters
-    #     ----------
-    #     dataframe: DataFrame
-    #             the dataframe/dictionary, that is generated after reading the ID5-file with the "read_ID5_data" function. 
-    #     measurement: str
-    #             desired measurement (eg. "Measurement5_20 °C")
-    #     wellnumber: str
-    #             number of the well (eg. "A3")
-    #     dE_var: a variable
-    #             the beforehand calculated direct Excitation value variable
-
-    #     example use: 
-    #     dE_correction_donor = calculate_dED_correction(data, "Measurement5_20 °C", "A3", dE_A)
-
-    #     returns
-    #     -------
-    #     the calculated direct Excitation correction value
-
-    #     citation:
-    #     Börner R, Kowerko D, Hadzic MCAS, König SLB, Ritter M, et al. (2018) 
-    #     Simulations of camera-based single-molecule fluorescence experiments. PLOS ONE 13(4): e0195277. 
-    #     https://doi.org/10.1371/journal.pone.0195277
-    #     """
-    #     data = self.get_well(dataframe=dataframe, measurement=measurement, wellnumber=wellnumber)
-    #     dE_corr = data.iloc[0, 3] - dE_var * data.iloc[1, 3]
-    #     print(f"I''_[D.ex]^[D.em] = {dE_corr}")
-    #     return dE_corr
-
-    # def calculate_dEA_correction(dataframe: DataFrame, bt_corr_A, dE_var):
-    #     """
-    #     Function to calculate direct Excitation correction for the acceptor.
-        
-    #     parameters
-    #     ----------
-    #     dataframe: DataFrame
-    #             the correction matrix dataframe of Cy5
-    #     bt_corr_A: a variable
-    #             the beforehand calculated corrected bleedthrough value variable
-    #     dE_var: a variable
-    #             the beforehand calculated direct Excitation value variable
-
-    #     example use: 
-    #     dE_correction_acceptor = calculate_dEA_correction(corrMat_cy5, bt_corr_A, dE_A)
-
-    #     returns
-    #     -------
-
-    #     the calculated direct Excitation correction value
-
-    #     citation:
-    #     Börner R, Kowerko D, Hadzic MCAS, König SLB, Ritter M, et al. (2018) 
-    #     Simulations of camera-based single-molecule fluorescence experiments. PLOS ONE 13(4): e0195277. 
-    #     https://doi.org/10.1371/journal.pone.0195277
-    #     """
-    #     dE_corr = bt_corr_A - dE_var * dataframe.iloc[1, 2]
-    #     print(f"I''_[D.ex]^[A.em] = {dE_corr}")
-    #     return dE_corr
-
-    # def calculate_FRET(dE_corr_A, dE_corr_D):
-    #     '''
-    #     Function to calculate FRET.
-
-    #     parameters
-    #     ----------
-    #     dE_corr_A: a variable
-    #             direct Excitation correction of acceptor
-    #     dE_corr_D: a variable
-    #             direct Excitation correction of donor
-    #     example use: 
-    #     fret_value = calculate_FRET(dE_corr_A, dE_corr_D)
-
-    #     returns 
-    #     -------
-    #     the calculated FRET value
-
-    #     citation:
-    #     Börner R, Kowerko D, Hadzic MCAS, König SLB, Ritter M, et al. (2018) 
-    #     Simulations of camera-based single-molecule fluorescence experiments. PLOS ONE 13(4): e0195277. 
-    #     https://doi.org/10.1371/journal.pone.0195277
-    #     '''
-
-    #     FRET = dE_corr_A / (dE_corr_D + dE_corr_A)
-    #     print(round(FRET, 3))
-    #     return FRET
-
-    # def calculate_bundleFRET(self, dataframe: DataFrame, corrMat_cy5, bt_d, dE_A):
-    #     '''
-    #     Function to calculate FRET in bundle.
-
-    #     parameters
-    #     ----------
-    #     dataframe: DataFrame
-    #             the dataframe with all temperatures (temperatur_data)
-    #     corrMat_cy5: DataFrame
-    #             correction matrix of Cy5
-    #     bt_d: a variable
-    #             the beforehand calculated bleedthrough (donor) value variable
-    #     dE_A: a variable
-    #             the beforehand calculated direct Excitation (acceptor) value variable
-
-    #     example use: 
-    #     fret_bundle = calculate_bundleFRET(temperature_data, bt_d=bt_d, dE_A=dE_A)
-
-    #     returns 
-    #     -------
-    #     the calculated FRET values in a dataframe
-    #     '''
-
-    #     well_list = dataframe["wellnumber"].unique()
-    #     listfret = []
-
-    #     for i in well_list:
-    #             well_i = self.get_well(dataframe=dataframe, wellnumber=i)
-    #             for temp in dataframe["temperature (°C)"].unique():
-    #                 temp_i = well_i[well_i["temperature (°C)"] == temp]
-    #                 btcorrA = temp_i.iloc[1, 3] - (bt_d * temp_i.iloc[0, 3])
-    #                 dEcorrD = temp_i.iloc[0, 3] - (dE_A * temp_i.iloc[1, 3])
-    #                 dEcorrA = btcorrA - (dE_A * corrMat_cy5.iloc[1, 2])
-    #                 fret_value = dEcorrA / (dEcorrD + dEcorrA)
-    #                 liste = [i, temp, dEcorrA, dEcorrD, fret_value]
-    #                 listfret.append(liste)
-    #     fret_df = pd.DataFrame(listfret, columns=["wellnumber", "temperature (°C)", "dE_corr_A", "dE_corr_D", "FRET"])
-    #     return fret_df
-
+# hier alle anderen functions rein und if statement oder try/except: darf nur fluoklasse sein
 
 
 class Genesis:
@@ -774,9 +518,9 @@ class Genesis:
             else:
                 df_measurement_x = df_col_sorted.filter(like=col_list[index], axis=1)
                 measurement_df_with_meanval = pd.concat([df_col_sorted['Wavelength(nm)'], df_measurement_x.iloc[:, :],
-                                                         df_measurement_x.iloc[:, :].mean(axis=1)], axis=1)
+                                                        df_measurement_x.iloc[:, :].mean(axis=1)], axis=1)
                 measurement_df_with_meanval.columns = [f'mean Abs {item}' if x == 0 else x for x in
-                                                       measurement_df_with_meanval.columns]
+                                                    measurement_df_with_meanval.columns]
                 self.measurements[f"Measurement_{item}"] = measurement_df_with_meanval
 
                 df_with_means_of_all_measurements = pd.concat(
@@ -784,7 +528,7 @@ class Genesis:
                 index += 1
 
         self.measurements['Means_all'] = df_with_means_of_all_measurements.iloc[:,
-                                         ~df_with_means_of_all_measurements.columns.duplicated()]
+                                        ~df_with_means_of_all_measurements.columns.duplicated()]
         self.measurements['Means_all'] = self.measurements['Means_all'].melt(id_vars=['Wavelength(nm)'])
         self.measurements['Means_all'] = self.measurements['Means_all'].rename(
             columns={'Wavelength(nm)': "wavelength (nm)", 'variable': "measurement", 'value': "mean Abs"})
@@ -903,16 +647,29 @@ class Nanodrop:
 
 
 if __name__ == '__main__':
+
+
     test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/220718_FRET_problematic.txt", "1 2 3")
     # test_id5 = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/test_dataset_id5_mitAllinklProblems.txt", "1 2 3")
     # test_id5 = ID5("id5_data/id5_test_data_fl.txt")
     m1 = test_id5.measurements['Measurement_1']
+    #self.measurements[measurement_cy3]["emission wavelength (nm)"]
+    print(m1.working_df["emission wavelength (nm)"].unique())
 
-    mx = test_id5.correction_matrix(measurements=test_id5.measurements, measurement_cy3='Measurement_1', measurement_cy5='Measurement_3', wellnumber='A2')
-    print(m1.working_df)
+    # print(type(test_id5.measurements))
+    # print(m1.working_df)
+    #m2 = m1[m1.working_df['wellnumber'] == "A1"]
 
-    # A1 = m1.get_well("A2")
-    # print(A1)
+
+    # cm = test_id5.correction_matrix("Measurement_1", "Measurement_2", "A1", 595, 666)
+    # print(cm)
+    
+
+    # mx = test_id5.correction_matrix(measurements=test_id5.measurements, measurement_cy3='Measurement_1', measurement_cy5='Measurement_3', wellnumber='A2')
+    # print(mx)
+
+    #A1 = m1.get_well("A12")
+    #print(A1)
     #cm = m1.correction_matrix("Measurement1_Corr. Matrix Cy3", "Measurement1_Corr. Matrix Cy5", "A2", 595, 666)
     #print(type(A1))
 
