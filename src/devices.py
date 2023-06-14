@@ -5,6 +5,7 @@ from dateutil.parser import parse
 from scipy import optimize
 from scipy.signal import find_peaks
 from pathlib import Path
+import re 
 
 
 class Carry:
@@ -46,7 +47,7 @@ class Carry:
         """
         Function to add data like concentration to the measurements.
         :param df: Dataframe to which the data should be appended.
-        :param coloumn_name: Name of the column.Example: cK (mM)
+        :param coloumn_name: Name of the column. Example: "cK (mM)"
         :param values: List of values per measurement (cuvette). Example: ["0","1","10","100"]
         :return: Dataframe with appended Date
         """
@@ -61,7 +62,7 @@ class Carry:
         new_df = pd.concat([pd.DataFrame({"Temperature (C)": data[t_col], "Abs": data[abs_col], "Measurement": i + 1})
                             for i, (t_col, abs_col) in
                             enumerate(zip(data.filter(like="Temperature"), data.filter(like="Abs")))],
-                           ignore_index=True)
+                            ignore_index=True)
 
         self.data = self.add_names_from_file(new_df.dropna())
 
@@ -128,9 +129,9 @@ class Carry:
         data_fin.columns = names_line
         data_fin.iloc[:] = data_fin.iloc[:].apply(pd.to_numeric)
         data_fin = data_fin.melt(id_vars=["wavelength (nm)"],
-                                 value_vars=['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2'],
-                                 var_name='sample',
-                                 value_name='value (RFU)')
+                                value_vars=['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2'],
+                                var_name='sample',
+                                value_name='value (RFU)')
 
         dct = dict((item[0], item[1:]) for item in data_list)
         dctdat = dict((item[0], item[1:]) for item in meta_list)
@@ -241,19 +242,6 @@ class ID5MeasureAbsorbance:
         else:
             print(
                 f"Current read type = {self.type_read_mode}. If you can read this, implementation not done or file content faulty.")
-
-    # def correction_matrix(self, df_CM, measurement_cy3: str, measurement_cy5: str, wellnumber: str, ex1 = 'default', ex2 = 'default'):
-
-    #     meas_cy3 = self.get_well(df_CM=self.measurements, measurement=measurement_cy3, wellnumber=wellnumber)
-    #     meas_cy5 = self.get_well(df_CM=self.measurements, measurement=measurement_cy5, wellnumber=wellnumber)
-
-    #     rows = [[f"ex_{ex1}", list(meas_cy3["value (x)"])[0], list(meas_cy3["value (x)"])[1]], [f"ex_{ex2}", 0.0, list(meas_cy5["value (x)"])[0]]]
-    #     corrmat_cols = pd.unique(self.measurements[measurement_cy3]["emission wavelength (nm)"])
-    #     cols = ["Ex/Em", f"em_{corrmat_cols[0]}", f"em_{corrmat_cols[1]}"]
-
-    #     correct_matrix = pd.DataFrame(rows, columns=cols)
-
-    #     return correct_matrix
 
 class ID5MeasureFluorescence:
     def __init__(self, metadata: list, data: list, wavelength_pairs: dict) -> None:
@@ -652,7 +640,6 @@ class ID5:
             self.measurements[measurement_name].working_df = current_df.sort_values(["excitation wavelength (nm)", "emission wavelength (nm)"])
 
 
-
 class Genesis:
     def __init__(self, file_path: str):
         self.file_path = file_path
@@ -724,7 +711,7 @@ class Nanodrop:
 
         sample = ""
         data = []
-
+        date_pattern = re.compile("[0-9]+/[0-9]+/[0-9]{4}.*")
         with open(self.file_path, "r", encoding='UTF-8') as file:
 
             lines = file.readlines()
@@ -734,7 +721,7 @@ class Nanodrop:
                     line = line.strip('\n')
                     if line.startswith("//"):
                         pass
-                    elif self.is_date(line):
+                    elif re.match(date_pattern, line):
                         current_date = line
                     elif line.startswith("Wavelength"):
                         pass
