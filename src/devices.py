@@ -10,7 +10,7 @@ import re
 
 
 class Carry:
-    def __init__(self, file_path: str) -> None:
+    def __init__(self, file_path: str, sample_names: list = None) -> None:
         self.file_path = file_path
         self.x_mode = None
         self.x_mode = None
@@ -25,6 +25,8 @@ class Carry:
         self.baseline = None
         self.experiment_zones = None
         self.data = None
+        self.measurements = {}
+        self.sample_names = sample_names
         self.read_data()
 
     def add_names_from_file(self, df):
@@ -61,8 +63,7 @@ class Carry:
         data = pd.read_csv(self.file_path, header=1)
 
         new_df = pd.concat([pd.DataFrame({"Temperature (C)": data[t_col], "Abs": data[abs_col], "Measurement": i + 1})
-                            for i, (t_col, abs_col) in
-                            enumerate(zip(data.filter(like="Temperature"), data.filter(like="Abs")))],
+                            for i, (t_col, abs_col) in enumerate(zip(data.filter(like="Temperature"), data.filter(like="Abs")))],
                             ignore_index=True)
 
         self.data = self.add_names_from_file(new_df.dropna())
@@ -130,19 +131,19 @@ class Carry:
         data_fin.columns = names_line
         data_fin.iloc[:] = data_fin.iloc[:].apply(pd.to_numeric)
         data_fin = data_fin.melt(id_vars=["wavelength (nm)"],
-                                value_vars=['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2'],
+                                value_vars=self.sample_names, #toDo - nicht fest rein, sonst veränderbar! ['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2']
                                 var_name='sample',
                                 value_name='value (RFU)')
 
         dct = dict((item[0], item[1:]) for item in data_list)
         dctdat = dict((item[0], item[1:]) for item in meta_list)
 
-        data_dict[f"Metadata_Method_{iterator}"] = dctdat
-        data_dict[f"Metadata_Samples_{iterator}"] = dct
-        data_dict[f"Measurement_{iterator}"] = data_fin
+        self.measurements[f"Metadata_Method_{iterator}"] = dctdat
+        self.measurements[f"Metadata_Samples_{iterator}"] = dct
+        self.measurements[f"Measurement_{iterator}"] = data_fin
 
         print(f"\nTo access the data dictionary (measurements and meta data), use the following keys:")
-        print(''.join(str(key) + '\n' for key in data_dict.keys()))
+        print(''.join(str(key) + '\n' for key in self.measurements.keys()))
         return data_dict
 
     def read_data(self):
@@ -156,7 +157,6 @@ class Carry:
             else:
                 print("Carrydata without meta")
                 self.parse_melting_curve_data()
-
 
 class ID5MeasureAbsorbance:
     def __init__(self, metadata: list, data: list) -> None:
@@ -701,8 +701,6 @@ class ID5:
             current_df["FRET"] = current_df["I''^Aem_Dex"] / (current_df["I''^Dem_Dex"] - current_df["I''^Aem_Dex"])
             self.measurements[measurement_name].working_df = current_df
 
-
-
 class Genesis:
     def __init__(self, file_path: str):
         self.file_path = file_path
@@ -742,7 +740,6 @@ class Genesis:
 
         print(f"\nTo access the data dictionary (measurements), use the following keys:")
         print(''.join(str(key) + '\n' for key in self.measurements.keys()))
-
 
 class Nanodrop:
     def __init__(self, file_path: str):
@@ -854,7 +851,7 @@ class Nanodrop:
         else:
             print("Sample name not found in dataframe. Please check the sample name.")
 
-    def plot_all_samples(self) -> plt.subplots(): # col_map = "Paired"
+    def plot_all_samples(self, colormap = "jet") -> plt.subplots(): # col_map = "Paired"
         """
         Generates a plot of all absorption spectra.
         :param color: color of the data points (optional)
@@ -867,22 +864,23 @@ class Nanodrop:
         plt.rcParams['ytick.labelsize'] = 9
 
         sampl_num = len(self.working_df['sample'].unique())
-        colormap = plt.get_cmap('Paired', sampl_num)
 
-        # if not col_map:
-        #     colormap = plt.get_cmap('Paired', sampl_num)
-        #     print("cm = paired")
+        fig, ax = plt.subplots(figsize=(10, 8))
+
+        # if colormap is not None:
+        #     colormap = colormap
+        #     i = 0
+        #     for name, group in self.working_df.groupby('sample'):
+        #         # create a scatter plot
+        #         ax.scatter(group['wavelength (nm)'], group['absorbance'], c = colormap[i], label = name, marker='x', linewidth=0.5, s=10)
+        #         i += 1
         # else:
-        #     colormap = list(map(to_rgba, col_map))
-
-        fig, ax = plt.subplots(figsize=(5, 3))
-
-        iterator = 0
+        colormap = plt.get_cmap('jet', sampl_num)
+        i = 0
         for name, group in self.working_df.groupby('sample'):
-            print(colormap(iterator))
             # create a scatter plot
-            ax.scatter(group['wavelength (nm)'], group['absorbance'], c = colormap(iterator), label = name, marker='x', linewidth=0.5, s=10)
-            iterator += 1
+            ax.plot(group['wavelength (nm)'], group['absorbance'], c = colormap(i), label = name, marker='x', linewidth=0.5)
+            i += 1
 
         # set axis labels
         ax.set_xlabel(r'Wavelength $\lambda$ (nm)')
@@ -905,6 +903,7 @@ if __name__ == '__main__':
     }
 
     my_id_5_data = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-05-30_MgCl2_titration_VS.txt", wavelength_pairs)
+    print(my_id_5_data.measurements["Measurement_1"].working_df)
 
     #test_nano = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-05-30_MgCl2_titration_VS.txt")
     #whole_data = test_nano.working_df
@@ -919,11 +918,8 @@ if __name__ == '__main__':
 
     #plot_all.savefig("nano_plot.png", dpi=300, bbox_inches = 'tight')
     #print(sample1)
-
     
     #print(my_id_5_data.measurements["Measurement_1"].working_df.columns)
-
-    print(my_id_5_data.measurements["Measurement_1"].working_df)
 
     #cm = my_id_5_data.calculate_correction_matrix("Measurement_1", "Measurement_3", "A2")
     # cm_cy3 = my_id_5_data.calculate_correction_matrix("Measurement_1", "Measurement_3", "A5")
