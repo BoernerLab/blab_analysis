@@ -280,7 +280,6 @@ class ID5MeasureFluorescence:
         self.time_tags = metadata[31]
         self.data = data
         self.wavelength_pairs = wavelength_pairs
-        # self.emission_wavelength = emission_wavelength
         self.restructure_data()
         # self.correction_matrix()
         # self.correct_mat = self.correction_matrix(measurement_cy3, measurement_cy5, wellnumber)
@@ -620,14 +619,15 @@ class ID5:
             idd = idd.reset_index(drop=True) 
             idd = idd.drop(columns=['excitation wavelength (nm)', 'emission wavelength (nm)', 'RFU']) 
 
+
             iad = current_df[(current_df["excitation wavelength (nm)"] == list(wavelength_pairs.items())[1][1][0]) & \
                             (current_df["emission wavelength (nm)"] == list(wavelength_pairs.items())[1][1][1])]
             iad = iad.sort_values(by=['wellnumber', 'temperature (°C)']) 
             #iad.columns = [f'Dex_Aem RFU' if x == 'RFU' else x for x in iad.columns] 
             iad.columns = [f'I^Aem_Dex' if x == 'bg corrected RFU' else x for x in iad.columns] 
             #iad.columns = [f'Dex_Aem concentration (mM)' if x == 'concentration (mM)' else x for x in iad.columns]
-            iad = iad.reset_index(drop=True) 
-            iad = iad.drop(columns=['excitation wavelength (nm)', 'emission wavelength (nm)', 'RFU', 'concentration (mM)']) # , 'construct'
+            iad = iad.reset_index(drop=True)
+            iad = iad.loc[:, ['temperature (°C)', 'wellnumber', 'I^Aem_Dex']]
 
             iaa = current_df[(current_df["excitation wavelength (nm)"] == list(wavelength_pairs.items())[2][1][0]) & \
                             (current_df["emission wavelength (nm)"] == list(wavelength_pairs.items())[2][1][1])]
@@ -635,14 +635,14 @@ class ID5:
             #iaa.columns = [f'Aex_Aem RFU' if x == 'RFU' else x for x in iaa.columns] 
             iaa.columns = [f'I^Aem_Aex' if x == 'bg corrected RFU' else x for x in iaa.columns] 
             #iaa.columns = [f'Aex_Aem concentration' if x == 'concentration (mM)' else x for x in iaa.columns]
-            iaa = iaa.reset_index(drop=True) 
-            iaa = iaa.drop(columns=['excitation wavelength (nm)', 'emission wavelength (nm)', 'RFU', 'concentration (mM)'])  #, 'construct'
+            iaa = iaa.reset_index(drop=True)
+            iaa = iaa.loc[:, ['temperature (°C)', 'wellnumber', 'I^Aem_Aex']]
 
             new_df = pd.merge(idd, iad, on=['temperature (°C)', 'wellnumber'])
             new_df = pd.merge(new_df, iaa, on=['temperature (°C)', 'wellnumber'])
             new_df = new_df.iloc[:,[0,1,3,2,4,5]]
             
-            self.measurements[measurement_name].working_df = new_df
+            self.measurements[measurement_name].FRET_df = new_df
 
         # Fret Berechnen
         # spalten = temp, wn, DD, AD, AA, 2xI', 2xI'', FRET (wenn vorher drangeklatscht: conzis + sample/construct -> test damit: doppelte raus)
@@ -656,20 +656,16 @@ class ID5:
         :return: calculated bleedthrough values
 
         """
-        for measurement_name in measurement_name_list:
-            current_df = self.measurements[measurement_name].working_df
-            current_df = current_df.dropna()
-
-            if bt_variable == 0:
-                print(f"Bleedthrough variable is equal to {bt_variable}.")
-                print("Therefore I'^Dem_Dex is equal to I^Dem_Dex. No column will be added to the restructured working dataframe.")
-                # current_df["I'^Dem_Dex"] = current_df["I^Dem_Dex"]
-            else:
-                iad_corr = current_df["I^Aem_Dex"] - (bt_variable * current_df["I^Dem_Dex"])
-                #current_df.insert(5, "I'^Aem_Dex", iad_corr, False) 
+        if bt_variable == 0:
+            print(f"Bleedthrough variable is equal to {bt_variable}.")
+            print("Therefore I'^Dem_Dex is equal to I^Dem_Dex. No I'^Dem_Dex column will be added.")
+        else: 
+            for measurement_name in measurement_name_list:
+                current_df = self.measurements[measurement_name].FRET_df
+                current_df = current_df.dropna()
                 current_df["I'^Aem_Dex"] = current_df["I^Aem_Dex"] - (bt_variable * current_df["I^Dem_Dex"])
                 current_df = current_df.iloc[:,[0,1,2,3,4,6,5]]
-                self.measurements[measurement_name].working_df = current_df
+                self.measurements[measurement_name].FRET_df = current_df
 
     def calculate_de_correction(self, measurement_name_list: list, de_variable: int):
         """
@@ -681,12 +677,16 @@ class ID5:
 
         """
         for measurement_name in measurement_name_list:
-            current_df = self.measurements[measurement_name].working_df
+            current_df = self.measurements[measurement_name].FRET_df
             current_df = current_df.dropna()
-            # current_df["I''^Dem_Dex"] = current_df["I'^Dem_Dex"] - (de_variable * i_DemAex)
+            # current_df["I''^Dem_Dex"] = current_df["I'^Dem_Dex"] - (de_variable * 0)
             current_df["I''^Aem_Dex"] = current_df["I'^Aem_Dex"] - (de_variable * current_df["I^Aem_Aex"])
             current_df = current_df.iloc[:,[0,1,2,3,4,5,7,6]]
-            self.measurements[measurement_name].working_df = current_df
+            self.measurements[measurement_name].FRET_df = current_df
+
+        print("I''^Dem_Dex equals I^Dem_Dex as I^Dem_Aex cannot physically and technically be measured.")
+        print("No I''^Dem_Dex column will be added to the FRET dataframe. Please use I^Dem_Dex.")
+        print("I''^Aem_Dex has been added to the FRET dataframe.")
 
     def calculate_FRET(self, measurement_name_list: list):
         """
@@ -696,10 +696,10 @@ class ID5:
         :return: calculated FRET values
         """
         for measurement_name in measurement_name_list:
-            current_df = self.measurements[measurement_name].working_df
+            current_df = self.measurements[measurement_name].FRET_df
             current_df = current_df.dropna()
-            current_df["FRET"] = current_df["I''^Aem_Dex"] / (current_df["I''^Dem_Dex"] - current_df["I''^Aem_Dex"])
-            self.measurements[measurement_name].working_df = current_df
+            current_df["FRET"] = current_df["I''^Aem_Dex"] / (current_df["I^Dem_Dex"] - current_df["I''^Aem_Dex"])
+            self.measurements[measurement_name].FRET_df = current_df
 
 class Genesis:
     def __init__(self, file_path: str):
