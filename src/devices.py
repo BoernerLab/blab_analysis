@@ -603,15 +603,15 @@ class ID5:
     #                 print(f"Direct Excitation of Acceptor: {round(dE_A, 4)} ({format(round(dE_A*100,2), '.2f')}%). \n")
     #                 return dE_A
 
-    def restructure_working_df(self, measurement_name_list: list, wavelength_pairs: dict = None):
+    def restructure_working_df(self, measurement_name_list: list):
         '''
-        Function to restructure the working df for all measurements.
+        Function to restructure the working df for all measurements. idd = IDem_Dex, iad= IAem_Dex, iaa = IAem_Aex
         '''
         for measurement_name in measurement_name_list:
             current_df = self.measurements[measurement_name].working_df
 
-            idd = current_df[(current_df["excitation wavelength (nm)"] == list(wavelength_pairs.items())[0][1][0]) & \
-                            (current_df["emission wavelength (nm)"] == list(wavelength_pairs.items())[0][1][1])] # list(wavelength_pairs.items())[0] # = ('Dex_Dem', [530, 595])
+            idd = current_df[(current_df["excitation wavelength (nm)"] == list(self.wavelength_pairs.items())[0][1][0]) & \
+                            (current_df["emission wavelength (nm)"] == list(self.wavelength_pairs.items())[0][1][1])] # list(wavelength_pairs.items())[0] # = ('Dex_Dem', [530, 595])
             idd = idd.sort_values(by=['wellnumber', 'temperature (°C)']) 
             #idd.columns = [f'Dem_Dex cons' if x == 'RFU' else x for x in idd.columns] 
             idd.columns = [f'I^Dem_Dex' if x == 'bg corrected RFU' else x for x in idd.columns] 
@@ -620,8 +620,8 @@ class ID5:
             idd = idd.drop(columns=['excitation wavelength (nm)', 'emission wavelength (nm)', 'RFU']) 
 
 
-            iad = current_df[(current_df["excitation wavelength (nm)"] == list(wavelength_pairs.items())[1][1][0]) & \
-                            (current_df["emission wavelength (nm)"] == list(wavelength_pairs.items())[1][1][1])]
+            iad = current_df[(current_df["excitation wavelength (nm)"] == list(self.wavelength_pairs.items())[1][1][0]) & \
+                            (current_df["emission wavelength (nm)"] == list(self.wavelength_pairs.items())[1][1][1])]
             iad = iad.sort_values(by=['wellnumber', 'temperature (°C)']) 
             #iad.columns = [f'Dex_Aem RFU' if x == 'RFU' else x for x in iad.columns] 
             iad.columns = [f'I^Aem_Dex' if x == 'bg corrected RFU' else x for x in iad.columns] 
@@ -629,8 +629,8 @@ class ID5:
             iad = iad.reset_index(drop=True)
             iad = iad.loc[:, ['temperature (°C)', 'wellnumber', 'I^Aem_Dex']]
 
-            iaa = current_df[(current_df["excitation wavelength (nm)"] == list(wavelength_pairs.items())[2][1][0]) & \
-                            (current_df["emission wavelength (nm)"] == list(wavelength_pairs.items())[2][1][1])]
+            iaa = current_df[(current_df["excitation wavelength (nm)"] == list(self.wavelength_pairs.items())[2][1][0]) & \
+                            (current_df["emission wavelength (nm)"] == list(self.wavelength_pairs.items())[2][1][1])]
             iaa = iaa.sort_values(by=['wellnumber', 'temperature (°C)']) 
             #iaa.columns = [f'Aex_Aem RFU' if x == 'RFU' else x for x in iaa.columns] 
             iaa.columns = [f'I^Aem_Aex' if x == 'bg corrected RFU' else x for x in iaa.columns] 
@@ -698,7 +698,7 @@ class ID5:
         for measurement_name in measurement_name_list:
             current_df = self.measurements[measurement_name].FRET_df
             current_df = current_df.dropna()
-            current_df["FRET"] = current_df["I''^Aem_Dex"] / (current_df["I^Dem_Dex"] - current_df["I''^Aem_Dex"])
+            current_df["FRET"] = current_df["I''^Aem_Dex"] / (current_df["I^Dem_Dex"] + current_df["I''^Aem_Dex"])
             self.measurements[measurement_name].FRET_df = current_df
 
 class Genesis:
@@ -902,7 +902,7 @@ if __name__ == '__main__':
         "Aex_Aem": [630, 670]
     }
 
-    my_id_5_data = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-05-30_MgCl2_titration_VS.txt", wavelength_pairs)
+    my_id_5_data = ID5("id5_data/2023-03-15_Praktikum_FRET3_VS.txt", wavelength_pairs)
     print(my_id_5_data.measurements["Measurement_1"].working_df)
 
     #test_nano = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-05-30_MgCl2_titration_VS.txt")
