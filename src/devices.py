@@ -82,6 +82,7 @@ class Carry:
         iterator = 1
         meth_to_samp_lines = False
         name_to_wl_lines = False
+        col_name_1 = ""
 
         with open(self.file_path, 'r', encoding='UTF-8') as file:
             lines = file.readlines()
@@ -89,28 +90,37 @@ class Carry:
             for line in lines:
                 if not line.isspace():
                     line = line.strip('\n')
-
-                    if line.startswith('METHOD'):
+                    if line.startswith("CSV Report") or line.startswith("Worksheet"):
+                        pass
+                    elif line.startswith('METHOD'):
                         meth_to_samp_lines = True
                         continue
                     elif line.startswith('SAMPLES'):
                         meth_to_samp_lines = False
                         pass
-                    if meth_to_samp_lines:
+
+                    elif meth_to_samp_lines:
                         line = line.strip('\n')
                         meta = line.split(',')
                         meta_list.append(meta)
 
-                    if line.startswith('Name'):
+                    elif line.startswith('Name'):
                         names_line = line.split(',')
                         names_line = list(filter(None, names_line))
+                        self.sample_names = names_line[1:]
                         name_to_wl_lines = True
                         continue
                     elif line.startswith(',Wavelength'):
                         cols = line.split(',')
                         name_to_wl_lines = False
+                        col_name_1 = "Wavelength (nm)"
                         pass
-                    if name_to_wl_lines:
+                    elif line.startswith(',Temperature (°C)'):
+                        cols = line.split(',')
+                        name_to_wl_lines = False
+                        col_name_1 = "Temperature (°C)"
+                        pass
+                    elif name_to_wl_lines:
                         line = line.strip('\n')
                         templist = line.split(',')
                         templist[:] = [item for item in templist if item != '']
@@ -121,16 +131,17 @@ class Carry:
                             hlp = line.split(',')
                             data.append(hlp)
 
+
         data_fin = pd.DataFrame(data)
         data_fin = data_fin.iloc[16:, 1:]
         data_fin.columns = cols[1:]
-        data_fin = data_fin[["Wavelength (nm)", "Abs"]]
+        data_fin = data_fin[[col_name_1, "Abs"]]
         data_fin = data_fin.iloc[:, 3:]
-        names_line.insert(1, "wavelength (nm)")
+        names_line.insert(1, col_name_1)
         del names_line[0]
         data_fin.columns = names_line
         data_fin.iloc[:] = data_fin.iloc[:].apply(pd.to_numeric)
-        data_fin = data_fin.melt(id_vars=["wavelength (nm)"],
+        data_fin = data_fin.melt(id_vars=[col_name_1],
                                 value_vars=self.sample_names, #toDo - nicht fest rein, sonst veränderbar! ['KL 1.1', 'KL 1.2', 'TL 2.1', 'TL 2.2']
                                 var_name='sample',
                                 value_name='value (RFU)')
@@ -902,8 +913,8 @@ if __name__ == '__main__':
         "Aex_Aem": [630, 670]
     }
 
-    my_id_5_data = ID5("id5_data/2023-03-15_Praktikum_FRET3_VS.txt", wavelength_pairs)
-    print(my_id_5_data.measurements["Measurement_1"].working_df)
+    #my_id_5_data = ID5("id5_data/2023-03-15_Praktikum_FRET3_VS.txt", wavelength_pairs)
+    #print(my_id_5_data.measurements["Measurement_1"].working_df)
 
     #test_nano = ID5("C:/Users/reuss/Documents/GitHub/Visual_FRET/src/id5_data/2023-05-30_MgCl2_titration_VS.txt")
     #whole_data = test_nano.working_df
@@ -986,7 +997,8 @@ if __name__ == '__main__':
     # KL_1_2 = test_nano.get_sample("KL 1.2 1")
     # plot_1 = test_nano.plot_sample("KL 1.2 3", color="lightblue")
 
-    # carry_data = Carry("carry_data/Export Data 2023_03_31_DNA_verdunnt_Schmelzkurve_PL.csv")
+    carry_data = Carry("carry_data/5_07_2023_Gruppe1.csv")
+    print(carry_data.measurements["Measurement_1"])
     # carry_data.add_column_data("Concentration", [0, 1, 5, 10, 20, 40, 60, 80, 100, 1, 10, 100, 1, 10, 100, 1])
     # print(carry_data.data)
     # m1 = test_nano.measurements['Means_all']
