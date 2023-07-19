@@ -6,7 +6,38 @@ from dateutil.parser import parse
 from scipy import optimize
 from scipy.signal import find_peaks
 from pathlib import Path
-import re 
+from enum import Enum, unique
+from exceptions import InvalidCaryFormatError
+import re
+
+
+@unique
+class CaryCases(Enum):
+    Scan = 'Scan'
+    Thermal = 'Thermal'
+
+
+class Cary:
+    def __init__(self, file_path: str):
+        self.file_path: Path = Path(file_path)
+        self.data: pd.DataFrame = pd.DataFrame()
+        self.hyperparameters: dict = {}
+
+    def read_data(self):
+        with open(self.file_path, 'r', encoding='UTF-8') as file:
+            file_content = file.readlines()
+            device_measurement = file_content[1]
+        try:
+            if CaryCases.Scan.value in device_measurement:
+                pass
+                # self.parse_data_absorbtion_spectra()
+            elif CaryCases.Thermal.value in device_measurement:
+                pass
+                # self.parse_melting_curve_data()
+            else:
+                raise InvalidCaryFormatError
+        except InvalidCaryFormatError as error:
+            raise error
 
 
 class Carry:
@@ -907,6 +938,8 @@ class Nanodrop:
 
 
 if __name__ == '__main__':
+    cary_data = Cary("carry_data/fuer_Mirko/2023_05_22_DNA_Na_PL (1).csv")
+    cary_data.read_data()
     wavelength_pairs = {
         "Dex_Dem": [530, 595],
         "Dex_Aem": [530, 670],
