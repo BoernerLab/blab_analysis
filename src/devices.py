@@ -2,19 +2,36 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import to_rgba
+from more_itertools import split_at
 from dateutil.parser import parse
 from scipy import optimize
 from scipy.signal import find_peaks
 from pathlib import Path
 from enum import Enum, unique
-from exceptions import InvalidCaryFormatError
+from exceptions import InvalidCaryFormatError, InvalidHyperparameterError
+from typing import TextIO
 import re
+
+
+NO_STAGES = 'Number of stages,1'
+STAGE = 'Stage'
 
 
 @unique
 class CaryCases(Enum):
     Scan = 'Scan'
     Thermal = 'Thermal'
+
+
+@unique
+class CaryHyperparameters(Enum):
+    Method = 'METHOD'
+    TempColl = 'Temperature Collection'
+    Derivative = 'Derivative'
+
+    @classmethod
+    def list(cls):
+        return list(map(lambda c: c.value, cls))
 
 
 class Cary:
@@ -27,17 +44,55 @@ class Cary:
         with open(self.file_path, 'r', encoding='UTF-8') as file:
             file_content = file.readlines()
             device_measurement = file_content[1]
-        try:
-            if CaryCases.Scan.value in device_measurement:
-                pass
-                # self.parse_data_absorbtion_spectra()
-            elif CaryCases.Thermal.value in device_measurement:
-                pass
-                # self.parse_melting_curve_data()
+            try:
+                if CaryCases.Scan.value in device_measurement:
+                    self.parse_scan_measurement(file_content)
+                elif CaryCases.Thermal.value in device_measurement:
+                    self.parse_thermal_measurement(file_content)
+                else:
+                    raise InvalidCaryFormatError
+            except InvalidCaryFormatError as error:
+                raise error
+
+    def parse_scan_measurement(self, file_content: list):
+        self._parse_hyperparameters(file_content)
+
+    def parse_thermal_measurement(self, file_content: list):
+        self._parse_hyperparameters(file_content)
+        pass
+
+    def _parse_hyperparameters(self, file_content: list):
+        raw_hyperparameters = [[item.rstrip() for item in sublist]
+                               for sublist in split_at(file_content, lambda i: i == '\n')
+                               if sublist][1:-1]
+        for hyperparameter_block in raw_hyperparameters:
+            if hyperparameter_block[0] in CaryHyperparameters.list():
+                hyperparameter_category = hyperparameter_block.pop(0)
+                self.hyperparameters[hyperparameter_category] = {}
+                for element in hyperparameter_block:
+                    processed_element = element.split(",")
+                    try:
+                        if len(processed_element) == 2:
+                            self.hyperparameters[hyperparameter_category][processed_element[0]] = processed_element[1]
+                        else:
+                            self.hyperparameters[hyperparameter_category].clear()
+                            raise InvalidHyperparameterError
+                    except InvalidHyperparameterError as error:
+                        raise error
+            elif hyperparameter_block[0] == NO_STAGES:
+                hyperparameter_category = hyperparameter_block.pop(0).split(",")[0]
+                self.hyperparameters[hyperparameter_category] = {}
+                for measurement in hyperparameter_block:
+                    col_names = measurement.split(",")
+                    if col_names[0] == STAGE:
+                        for column in col_names:
+                            self.hyperparameters[hyperparameter_category][column] = []
+                    else:
+                        col_names = list(self.hyperparameters[hyperparameter_category].keys())
+                        for column, value in zip(col_names, measurement.split(',')):
+                            self.hyperparameters[hyperparameter_category][column].append(value)
             else:
-                raise InvalidCaryFormatError
-        except InvalidCaryFormatError as error:
-            raise error
+                raise InvalidHyperparameterCategoryError()
 
 
 class Carry:
@@ -938,7 +993,7 @@ class Nanodrop:
 
 
 if __name__ == '__main__':
-    cary_data = Cary("carry_data/fuer_Mirko/2023_05_22_DNA_Na_PL (1).csv")
+    cary_data = Cary("carry_data/fuer_Mirko/5_07_2023_Gruppe1.csv")
     cary_data.read_data()
     wavelength_pairs = {
         "Dex_Dem": [530, 595],
