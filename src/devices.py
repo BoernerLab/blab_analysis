@@ -8,13 +8,40 @@ from scipy import optimize
 from scipy.signal import find_peaks
 from pathlib import Path
 from enum import Enum, unique
-from exceptions import InvalidCaryFormatError, InvalidHyperparameterError
 from typing import TextIO
 import re
 
 
-NO_STAGES = 'Number of stages,1'
+NO_STAGES = re.compile('Number of stages,[0-9]+')
 STAGE = 'Stage'
+
+
+class InvalidCaryFormatError(Exception):
+    def __init__(self):
+        self.message: str = "The format of the Cary file is not valid for parsing. " \
+                            "Please make sure to read the correct file."
+
+    def __str__(self):
+        return f"{self.message}"
+
+
+class InvalidHyperparameterError(Exception):
+    def __init__(self):
+        self.message: str = "The format of the Hyperparameters does not match Key and Value." \
+                            "If this needs to be implemented, reach out to mweber95."
+
+    def __str__(self):
+        return f"{self.message}"
+
+
+class InvalidHyperparameterHeaderError(Exception):
+    def __init__(self):
+        self.message: str = "The first value of a hyperparameter section doesn't match " \
+                            "the implemented options for the 'Cary'." \
+                            "If this needs to be implemented, reach out to mweber95."
+
+    def __str__(self):
+        return f"{self.message}"
 
 
 class EnumToList(Enum):
@@ -111,7 +138,7 @@ class Cary:
         for new_column, column_name in zip(information, [CaryDataframe.Meta.value,
                                                          CaryDataframe.Date.value,
                                                          CaryDataframe.Cell_Number.value]):
-            new_column = np.repeat(np.array(new_column), (self.data.shape[0])/4)
+            new_column = np.repeat(np.array(new_column), (self.data.shape[0])/len(information[0]))
             self.data[column_name] = new_column
 
     def _parse_hyperparameters(self):
@@ -129,12 +156,12 @@ class Cary:
                             raise InvalidHyperparameterError
                     except InvalidHyperparameterError as error:
                         raise error
-            elif hyperparameter_block[0] == NO_STAGES:
+            elif NO_STAGES.match(hyperparameter_block[0]):
                 hyperparameter_category = hyperparameter_block.pop(0).split(",")[0]
                 self.hyperparameters[hyperparameter_category] = {}
                 for measurement in hyperparameter_block:
                     col_names = measurement.split(",")
-                    if col_names[0] == STAGE:
+                    if col_names[0] == STAGE: # regex required
                         for column in col_names:
                             self.hyperparameters[hyperparameter_category][column] = []
                     else:
@@ -142,7 +169,7 @@ class Cary:
                         for column, value in zip(col_names, measurement.split(',')):
                             self.hyperparameters[hyperparameter_category][column].append(value)
             else:
-                raise InvalidHyperparameterCategoryError()
+                raise InvalidHyperparameterHeaderError()
 
 
 class Carry:
@@ -1047,6 +1074,7 @@ if __name__ == '__main__':
     # data = cary_data.data
     # cary_data_2 = Cary("carry_data/fuer_Mirko/2023_05_22_DNA_Na_PL (1).csv")
     # data2 = cary_data_2.data
+    cary_data = Cary("carry_data/fuer_Mirko/2023_07_18_DNA_Entsalzen_PL_2023_07_18_DNA_Entsalzen_PL.csv")
     wavelength_pairs = {
         "Dex_Dem": [530, 595],
         "Dex_Aem": [530, 670],
