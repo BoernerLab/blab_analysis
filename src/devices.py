@@ -17,55 +17,105 @@ NO_STAGES = 'Number of stages,1'
 STAGE = 'Stage'
 
 
-@unique
-class CaryCases(Enum):
-    Scan = 'Scan'
-    Thermal = 'Thermal'
-
-
-@unique
-class CaryHyperparameters(Enum):
-    Method = 'METHOD'
-    TempColl = 'Temperature Collection'
-    Derivative = 'Derivative'
-
+class EnumToList(Enum):
     @classmethod
     def list(cls):
         return list(map(lambda c: c.value, cls))
 
 
+@unique
+class CaryCases(EnumToList):
+    Scan = 'Scan'
+    Thermal = 'Thermal'
+
+
+@unique
+class CaryHyperparameters(EnumToList):
+    Method = 'METHOD'
+    TempColl = 'Temperature Collection'
+    Derivative = 'Derivative'
+
+
+@unique
+class CaryMeasurement(EnumToList):
+    Name = 'Name'
+    CollTime = 'Collection Time'
+    CellNo = 'Cell Number'
+
+
+@unique
+class CaryDataframe(EnumToList):
+    Temperature = 'Temperature (°C)'
+    Wavelength = 'Wavelength (nm)'
+    Absorbance = 'Absorbance'
+    Measurement = 'Measurement'
+    Meta = 'Meta'
+    Date = 'Date'
+    Cell_Number = 'Cell_Number'
+
+
 class Cary:
     def __init__(self, file_path: str):
-        self.file_path: Path = Path(file_path)
-        self.data: pd.DataFrame = pd.DataFrame()
         self.hyperparameters: dict = {}
+        self.data: pd.DataFrame = pd.DataFrame()
 
-    def read_data(self):
+        self.file_path: Path = Path(file_path)
+        self.file_content: list = self._read_data()
+        self.raw_data, self.raw_hyperparameters, self.raw_measurements, self.device_measurement = \
+            self._split_data_to_chunks()
+        self._parse_hyperparameters()
+        self._define_cary_case()
+
+    def _read_data(self):
         with open(self.file_path, 'r', encoding='UTF-8') as file:
             file_content = file.readlines()
-            device_measurement = file_content[1]
-            try:
-                if CaryCases.Scan.value in device_measurement:
-                    self.parse_scan_measurement(file_content)
-                elif CaryCases.Thermal.value in device_measurement:
-                    self.parse_thermal_measurement(file_content)
-                else:
-                    raise InvalidCaryFormatError
-            except InvalidCaryFormatError as error:
-                raise error
+        return file_content
 
-    def parse_scan_measurement(self, file_content: list):
-        self._parse_hyperparameters(file_content)
+    def _split_data_to_chunks(self):
+        device_measurement = self.file_content[1].strip().split(',')[1]
+        raw_data = [[item.rstrip() for item in sublist]
+                    for sublist in split_at(self.file_content, lambda i: i == '\n')
+                    if sublist]
+        raw_hyperparameters = raw_data[1:-1]
+        raw_measurements = raw_data[-1]
+        return raw_data, raw_hyperparameters, raw_measurements, device_measurement
 
-    def parse_thermal_measurement(self, file_content: list):
-        self._parse_hyperparameters(file_content)
-        pass
+    def _define_cary_case(self):
+        try:
+            if self.device_measurement in CaryCases.list():
+                df_data, information = self._parse_measurement()
+                if self.device_measurement == CaryCases.Scan.value:
+                    self._tidy_up_df(df_data, information, CaryDataframe.Wavelength)
+                elif self.device_measurement == CaryCases.Thermal.value:
+                    self._tidy_up_df(df_data, information, CaryDataframe.Temperature)
+            else:
+                raise InvalidCaryFormatError
+        except InvalidCaryFormatError as error:
+            raise error
 
-    def _parse_hyperparameters(self, file_content: list):
-        raw_hyperparameters = [[item.rstrip() for item in sublist]
-                               for sublist in split_at(file_content, lambda i: i == '\n')
-                               if sublist][1:-1]
-        for hyperparameter_block in raw_hyperparameters:
+    def _parse_measurement(self):
+        df_information_raw = [line.split(',')[1:] for line in self.raw_measurements
+                              if line.split(',')[0] in CaryMeasurement.list()]
+        df_information = [list(filter(None, information)) for information in df_information_raw]
+        df_data = [line[1:].split(',') for line in self.raw_measurements if not line.split(',')[0]]
+        dataframe = pd.DataFrame(df_data[1:], columns=df_data[0])
+        return dataframe, df_information
+
+    def _tidy_up_df(self, dataframe: pd.DataFrame, information: list, cary_dataframe: Enum):
+        self.data = pd.concat([pd.DataFrame(np.concatenate((array, np.array([[i+1] * dataframe.shape[0]]).T),axis=1),
+                                            columns=[cary_dataframe.value,
+                                                     CaryDataframe.Absorbance.value,
+                                                     CaryDataframe.Measurement.value])
+                              for i, array in enumerate(list(np.hsplit(np.array(dataframe), dataframe.shape[1]/2)))],
+                              ignore_index=True)
+        for new_column, column_name in zip(information, [CaryDataframe.Meta.value,
+                                                         CaryDataframe.Date.value,
+                                                         CaryDataframe.Cell_Number.value]):
+            new_column = np.repeat(np.array(new_column), (self.data.shape[0])/4)
+            self.data[column_name] = new_column
+
+    def _parse_hyperparameters(self):
+        for hyperparameter_block in self.raw_hyperparameters:
             if hyperparameter_block[0] in CaryHyperparameters.list():
                 hyperparameter_category = hyperparameter_block.pop(0)
                 self.hyperparameters[hyperparameter_category] = {}
@@ -993,8 +1043,10 @@ class Nanodrop:
 
 
 if __name__ == '__main__':
-    cary_data = Cary("carry_data/fuer_Mirko/5_07_2023_Gruppe1.csv")
-    cary_data.read_data()
+    # cary_data = Cary("carry_data/fuer_Mirko/5_07_2023_Gruppe1.csv")
+    # data = cary_data.data
+    # cary_data_2 = Cary("carry_data/fuer_Mirko/2023_05_22_DNA_Na_PL (1).csv")
+    # data2 = cary_data_2.data
     wavelength_pairs = {
         "Dex_Dem": [530, 595],
         "Dex_Aem": [530, 670],
@@ -1085,8 +1137,8 @@ if __name__ == '__main__':
     # KL_1_2 = test_nano.get_sample("KL 1.2 1")
     # plot_1 = test_nano.plot_sample("KL 1.2 3", color="lightblue")
 
-    carry_data = Carry("carry_data/5_07_2023_Gruppe1.csv")
-    print(carry_data.measurements["Measurement_1"])
+    ### carry_data = Carry("carry_data/5_07_2023_Gruppe1.csv")
+    ### print(carry_data.measurements["Measurement_1"])
     # carry_data.add_column_data("Concentration", [0, 1, 5, 10, 20, 40, 60, 80, 100, 1, 10, 100, 1, 10, 100, 1])
     # print(carry_data.data)
     # m1 = test_nano.measurements['Means_all']
