@@ -125,11 +125,12 @@ class Cary:
                               if line.split(',')[0] in CaryMeasurement.list()]
         df_information = [list(filter(None, information)) for information in df_information_raw]
         df_data = [line[1:].split(',') for line in self.raw_measurements if not line.split(',')[0]]
-        dataframe = pd.DataFrame(df_data[1:], columns=df_data[0])
+        df_numeric = [list(map(float, lst)) for lst in df_data[1:]]
+        dataframe = pd.DataFrame(df_numeric, columns=df_data[0])
         return dataframe, df_information
 
     def _tidy_up_df(self, dataframe: pd.DataFrame, information: list, cary_dataframe: Enum):
-        self.data = pd.concat([pd.DataFrame(np.concatenate((array, np.array([[i+1] * dataframe.shape[0]]).T),axis=1),
+        self.data = pd.concat([pd.DataFrame(np.concatenate((array, np.array([[i+1] * dataframe.shape[0]]).T), axis=1),
                                             columns=[cary_dataframe.value,
                                                      CaryDataframe.Absorbance.value,
                                                      CaryDataframe.Measurement.value])
@@ -161,7 +162,7 @@ class Cary:
                 self.hyperparameters[hyperparameter_category] = {}
                 for measurement in hyperparameter_block:
                     col_names = measurement.split(",")
-                    if col_names[0] == STAGE: # regex required
+                    if col_names[0] == STAGE:  # regex required
                         for column in col_names:
                             self.hyperparameters[hyperparameter_category][column] = []
                     else:
