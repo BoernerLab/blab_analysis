@@ -152,6 +152,9 @@ class Cary:
                     try:
                         if len(processed_element) == 2:
                             self.hyperparameters[hyperparameter_category][processed_element[0]] = processed_element[1]
+                        elif len(processed_element) == 3:
+                            for value in processed_element[1:]:
+                                self.hyperparameters[hyperparameter_category][processed_element[0]] = value
                         else:
                             self.hyperparameters[hyperparameter_category].clear()
                             raise InvalidHyperparameterError
@@ -1075,7 +1078,7 @@ if __name__ == '__main__':
     # data = cary_data.data
     # cary_data_2 = Cary("carry_data/fuer_Mirko/2023_05_22_DNA_Na_PL (1).csv")
     # data2 = cary_data_2.data
-    cary_data = Cary("carry_data/fuer_Mirko/2023_07_18_DNA_Entsalzen_PL_2023_07_18_DNA_Entsalzen_PL.csv")
+    cary_data = Cary("carry_data/fuer_Mirko/2023-07-26_RNA_melting_MgCl2.csv")
     wavelength_pairs = {
         "Dex_Dem": [530, 595],
         "Dex_Aem": [530, 670],
