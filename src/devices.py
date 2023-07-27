@@ -153,8 +153,10 @@ class Cary:
                         if len(processed_element) == 2:
                             self.hyperparameters[hyperparameter_category][processed_element[0]] = processed_element[1]
                         elif len(processed_element) == 3:
+                            placeholder = []
                             for value in processed_element[1:]:
-                                self.hyperparameters[hyperparameter_category][processed_element[0]] = value
+                                placeholder.append(value)
+                            self.hyperparameters[hyperparameter_category][processed_element[0]] = placeholder
                         else:
                             self.hyperparameters[hyperparameter_category].clear()
                             raise InvalidHyperparameterError
