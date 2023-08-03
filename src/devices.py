@@ -143,6 +143,10 @@ class Cary:
                                                      CaryDataframe.Measurement.value])
                               for i, array in enumerate(list(np.hsplit(np.array(dataframe), dataframe.shape[1]/2)))],
                               ignore_index=True)
+        self.data[[CaryDataframe.Temperature.value, CaryDataframe.Absorbance.value, CaryDataframe.Measurement.value]] =\
+            self.data[[CaryDataframe.Temperature.value,
+                       CaryDataframe.Absorbance.value,
+                       CaryDataframe.Measurement.value]].apply(pd.to_numeric)
         for new_column, column_name in zip(information, [CaryDataframe.Meta.value,
                                                          CaryDataframe.Date.value,
                                                          CaryDataframe.Cell_Number.value]):
