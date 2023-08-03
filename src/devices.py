@@ -12,7 +12,8 @@ from typing import TextIO
 import re
 
 
-NO_STAGES = re.compile('Number of stages,[0-9]+')
+NO_STAGES_REGEX = re.compile('Number of stages,[0-9]+')
+METADATA_REGEX = re.compile('.*_(\d+[.]\d+){1}nm_(\d+[.]\d+){1}-(\d+[.]\d+){1}C.*')
 STAGE = 'Stage'
 
 
@@ -85,6 +86,7 @@ class Cary:
     def __init__(self, file_path: str):
         self.hyperparameters: dict = {}
         self.data: pd.DataFrame = pd.DataFrame()
+        self.data_meta: pd.DataFrame = pd.DataFrame()
 
         self.file_path: Path = Path(file_path)
         self.file_content: list = self._read_data()
@@ -115,6 +117,7 @@ class Cary:
                     self._tidy_up_df(df_data, information, CaryDataframe.Wavelength)
                 elif self.device_measurement == CaryCases.Thermal.value:
                     self._tidy_up_df(df_data, information, CaryDataframe.Temperature)
+                self._extract_info_to_dataframe()
             else:
                 raise InvalidCaryFormatError
         except InvalidCaryFormatError as error:
@@ -123,10 +126,14 @@ class Cary:
     def _parse_measurement(self):
         df_information_raw = [line.split(',')[1:] for line in self.raw_measurements
                               if line.split(',')[0] in CaryMeasurement.list()]
-        df_information = [list(filter(None, information)) for information in df_information_raw]
         df_data = [line[1:].split(',') for line in self.raw_measurements if not line.split(',')[0]]
-        df_numeric = [list(map(float, lst)) for lst in df_data[1:]]
-        dataframe = pd.DataFrame(df_numeric, columns=df_data[0])
+        # df_numeric = [list(map(float, lst)) for lst in df_data[1:]]
+        dataframe = pd.DataFrame(df_data[1:], columns=df_data[0])
+        dataframe.replace(r'^\s*$', np.nan, regex=True, inplace=True)
+        df_information_filtered = [[values for checker, values in zip(dataframe.any().tolist(), sublist) if checker]
+                                   for sublist in df_information_raw]
+        df_information = [list(filter(None, information)) for information in df_information_filtered]
+        dataframe.dropna(axis=1, how="all", inplace=True)
         return dataframe, df_information
 
     def _tidy_up_df(self, dataframe: pd.DataFrame, information: list, cary_dataframe: Enum):
@@ -141,6 +148,25 @@ class Cary:
                                                          CaryDataframe.Cell_Number.value]):
             new_column = np.repeat(np.array(new_column), (self.data.shape[0])/len(information[0]))
             self.data[column_name] = new_column
+        self.data.dropna(inplace=True)
+
+    def _extract_info_to_dataframe(self):
+        meta_collection = []
+        for measurement_string, measurement_index in zip(self.data['Meta'].tolist(), self.data['Measurement'].tolist()):
+            match = re.match(METADATA_REGEX, measurement_string)
+            if match:
+                procedure = 'Cooling' if float(match.group(2)) >= float(match.group(3)) else 'Heating'
+                meta_collection.append([measurement_index,
+                                        float(match.group(1)),
+                                        float(match.group(2)),
+                                        float(match.group(3)),
+                                        procedure])
+        self.data_meta = pd.DataFrame(meta_collection, columns=['Measurement',
+                                                                'Wavelength (nm)',
+                                                                'Temperature Start (°C)',
+                                                                'Temperature End (°C)',
+                                                                'Ramp Type']).drop_duplicates(keep='first',
+                                                                                              ignore_index=True)
 
     def _parse_hyperparameters(self):
         for hyperparameter_block in self.raw_hyperparameters:
@@ -162,7 +188,7 @@ class Cary:
                             raise InvalidHyperparameterError
                     except InvalidHyperparameterError as error:
                         raise error
-            elif NO_STAGES.match(hyperparameter_block[0]):
+            elif NO_STAGES_REGEX.match(hyperparameter_block[0]):
                 hyperparameter_category = hyperparameter_block.pop(0).split(",")[0]
                 self.hyperparameters[hyperparameter_category] = {}
                 for measurement in hyperparameter_block:
@@ -1080,7 +1106,9 @@ if __name__ == '__main__':
     # data = cary_data.data
     # cary_data_2 = Cary("carry_data/fuer_Mirko/2023_05_22_DNA_Na_PL (1).csv")
     # data2 = cary_data_2.data
-    cary_data = Cary("carry_data/fuer_Mirko/2023-07-26_RNA_melting_MgCl2.csv")
+    # 5_07_2023_Gruppe1.csv
+    # cary_data = Cary("carry_data/fuer_Mirko/5_07_2023_Gruppe1.csv")
+    cary_data = Cary("carry_data/fuer_Mirko/2023_08_01_DNA_K_MOPS_pH65_PL.csv")
     wavelength_pairs = {
         "Dex_Dem": [530, 595],
         "Dex_Aem": [530, 670],
