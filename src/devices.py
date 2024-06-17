@@ -1106,13 +1106,6 @@ class Nanodrop:
 
 
 if __name__ == '__main__':
-    # cary_data = Cary("carry_data/fuer_Mirko/5_07_2023_Gruppe1.csv")
-    # data = cary_data.data
-    # cary_data_2 = Cary("carry_data/fuer_Mirko/2023_05_22_DNA_Na_PL (1).csv")
-    # data2 = cary_data_2.data
-    # 5_07_2023_Gruppe1.csv
-    # cary_data = Cary("carry_data/fuer_Mirko/5_07_2023_Gruppe1.csv")
-    cary_data = Cary("carry_data/fuer_Mirko/2023_08_01_DNA_K_MOPS_pH65_PL.csv")
     wavelength_pairs = {
         "Dex_Dem": [530, 595],
         "Dex_Aem": [530, 670],
@@ -1203,8 +1196,8 @@ if __name__ == '__main__':
     # KL_1_2 = test_nano.get_sample("KL 1.2 1")
     # plot_1 = test_nano.plot_sample("KL 1.2 3", color="lightblue")
 
-    ### carry_data = Carry("carry_data/5_07_2023_Gruppe1.csv")
-    ### print(carry_data.measurements["Measurement_1"])
+    carry_data = Carry("carry_data/5_07_2023_Gruppe1.csv")
+    print(carry_data.measurements["Measurement_1"])
     # carry_data.add_column_data("Concentration", [0, 1, 5, 10, 20, 40, 60, 80, 100, 1, 10, 100, 1, 10, 100, 1])
     # print(carry_data.data)
     # m1 = test_nano.measurements['Means_all']
