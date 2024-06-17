@@ -1,0 +1,1217 @@
+	Measurement	Sample Name	Wavelength (nm)	Temperature Start (°C)	Temperature End (°C)	Run	Ramp Type	gi	file_name	Sample	bg in mM	[Buffer] in mM	Monovalent Ion	Concentration	Concentration Unit	deri_fit_Tm_C	deri_fit_dEd/dT	deri_fit_DTm	direct_melt_Tm_C	direct_melt_DTm	direct_melt_DH_J/mol	direct_melt_DDH	direct_melt_m1	direct_melt_Dm1	direct_melt_n1	direct_melt_Dn1	direct_melt_m2	direct_melt_Dm2	direct_melt_n2	direct_melt_Dn2	direct_melt_DS_J/mol/K	direct_melt_DDS
+0	1	5 mM MgCl2	260.0	90.0	21.0	1	Cooling	1	2023-07-26_RNA_melting_MgCl2.csv																							
+1	2	5 mM MgCl2	260.0	21.0	90.0	1	Heating	2	2023-07-26_RNA_melting_MgCl2.csv																							
+2	3	5 mM MgCl2	260.0	90.0	21.0	2	Cooling	3	2023-07-26_RNA_melting_MgCl2.csv																							
+3	4	5 mM MgCl2	260.0	21.0	90.0	2	Heating	4	2023-07-26_RNA_melting_MgCl2.csv																							
+4	5	1 mM MgCl2	260.0	90.0	21.0	1	Cooling	5	2023-07-26_RNA_melting_MgCl2.csv																							
+5	6	1 mM MgCl2	260.0	21.0	90.0	1	Heating	6	2023-07-26_RNA_melting_MgCl2.csv																							
+6	7	1 mM MgCl2	260.0	90.0	21.0	2	Cooling	7	2023-07-26_RNA_melting_MgCl2.csv																							
+7	8	1 mM MgCl2	260.0	21.0	90.0	2	Heating	8	2023-07-26_RNA_melting_MgCl2.csv																							
+8	9	0.1 mM MgCl2	260.0	90.0	21.0	1	Cooling	9	2023-07-26_RNA_melting_MgCl2.csv																							
+9	10	0.1 mM MgCl2	260.0	21.0	90.0	1	Heating	10	2023-07-26_RNA_melting_MgCl2.csv																							
+10	11	0.1 mM MgCl2	260.0	90.0	21.0	2	Cooling	11	2023-07-26_RNA_melting_MgCl2.csv																							
+11	12	0.1 mM MgCl2	260.0	21.0	90.0	2	Heating	12	2023-07-26_RNA_melting_MgCl2.csv																							
+12	13	0 mM MgCl2	260.0	90.0	21.0	1	Cooling	13	2023-07-26_RNA_melting_MgCl2.csv																							
+13	14	0 mM MgCl2	260.0	21.0	90.0	1	Heating	14	2023-07-26_RNA_melting_MgCl2.csv																							
+14	15	0 mM MgCl2	260.0	90.0	21.0	2	Cooling	15	2023-07-26_RNA_melting_MgCl2.csv																							
+15	16	0 mM MgCl2	260.0	21.0	90.0	2	Heating	16	2023-07-26_RNA_melting_MgCl2.csv																							
+16	17	5 mM MgCl2	400.0	90.0	21.0	1	Cooling	17	2023-07-26_RNA_melting_MgCl2.csv																							
+17	18	5 mM MgCl2	400.0	21.0	90.0	1	Heating	18	2023-07-26_RNA_melting_MgCl2.csv																							
+18	19	5 mM MgCl2	400.0	90.0	21.0	2	Cooling	19	2023-07-26_RNA_melting_MgCl2.csv																							
+19	20	5 mM MgCl2	400.0	21.0	90.0	2	Heating	20	2023-07-26_RNA_melting_MgCl2.csv																							
+20	21	1 mM MgCl2	400.0	90.0	21.0	1	Cooling	21	2023-07-26_RNA_melting_MgCl2.csv																							
+21	22	1 mM MgCl2	400.0	21.0	90.0	1	Heating	22	2023-07-26_RNA_melting_MgCl2.csv																							
+22	23	1 mM MgCl2	400.0	90.0	21.0	2	Cooling	23	2023-07-26_RNA_melting_MgCl2.csv																							
+23	24	1 mM MgCl2	400.0	21.0	90.0	2	Heating	24	2023-07-26_RNA_melting_MgCl2.csv																							
+24	25	0.1 mM MgCl2	400.0	90.0	21.0	1	Cooling	25	2023-07-26_RNA_melting_MgCl2.csv																							
+25	26	0.1 mM MgCl2	400.0	21.0	90.0	1	Heating	26	2023-07-26_RNA_melting_MgCl2.csv																							
+26	27	0.1 mM MgCl2	400.0	90.0	21.0	2	Cooling	27	2023-07-26_RNA_melting_MgCl2.csv																							
+27	28	0.1 mM MgCl2	400.0	21.0	90.0	2	Heating	28	2023-07-26_RNA_melting_MgCl2.csv																							
+28	29	0 mM MgCl2	400.0	90.0	21.0	1	Cooling	29	2023-07-26_RNA_melting_MgCl2.csv																							
+29	30	0 mM MgCl2	400.0	21.0	90.0	1	Heating	30	2023-07-26_RNA_melting_MgCl2.csv																							
+30	31	0 mM MgCl2	400.0	90.0	21.0	2	Cooling	31	2023-07-26_RNA_melting_MgCl2.csv																							
+31	32	0 mM MgCl2	400.0	21.0	90.0	2	Heating	32	2023-07-26_RNA_melting_MgCl2.csv																							
+32	1	5 mM CaCl2	260.0	90.0	21.0	1	Cooling	33	2023-08-04_RNA_melting_VS.csv																							
+33	2	5 mM CaCl2	260.0	21.0	90.0	1	Heating	34	2023-08-04_RNA_melting_VS.csv																							
+34	3	5 mM CaCl2	260.0	90.0	21.0	2	Cooling	35	2023-08-04_RNA_melting_VS.csv																							
+35	4	5 mM CaCl2	260.0	21.0	90.0	2	Heating	36	2023-08-04_RNA_melting_VS.csv																							
+36	5	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	37	2023-08-04_RNA_melting_VS.csv																							
+37	6	10 mM MgCl2	260.0	21.0	90.0	1	Heating	38	2023-08-04_RNA_melting_VS.csv																							
+38	7	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	39	2023-08-04_RNA_melting_VS.csv																							
+39	8	10 mM MgCl2	260.0	21.0	90.0	2	Heating	40	2023-08-04_RNA_melting_VS.csv																							
+40	9	25 mM CaCl2	260.0	90.0	21.0	1	Cooling	41	2023-08-04_RNA_melting_VS.csv																							
+41	10	25 mM CaCl2	260.0	21.0	90.0	1	Heating	42	2023-08-04_RNA_melting_VS.csv																							
+42	11	25 mM CaCl2	260.0	90.0	21.0	2	Cooling	43	2023-08-04_RNA_melting_VS.csv																							
+43	12	25 mM CaCl2	260.0	21.0	90.0	2	Heating	44	2023-08-04_RNA_melting_VS.csv																							
+44	13	25 mM MgCl2	260.0	90.0	21.0	1	Cooling	45	2023-08-04_RNA_melting_VS.csv																							
+45	14	25 mM MgCl2	260.0	21.0	90.0	1	Heating	46	2023-08-04_RNA_melting_VS.csv																							
+46	15	25 mM MgCl2	260.0	90.0	21.0	2	Cooling	47	2023-08-04_RNA_melting_VS.csv																							
+47	16	25 mM MgCl2	260.0	21.0	90.0	2	Heating	48	2023-08-04_RNA_melting_VS.csv																							
+48	17	5 mM CaCl2	400.0	90.0	21.0	1	Cooling	49	2023-08-04_RNA_melting_VS.csv																							
+49	18	5 mM CaCl2	400.0	21.0	90.0	1	Heating	50	2023-08-04_RNA_melting_VS.csv																							
+50	19	5 mM CaCl2	400.0	90.0	21.0	2	Cooling	51	2023-08-04_RNA_melting_VS.csv																							
+51	20	5 mM CaCl2	400.0	21.0	90.0	2	Heating	52	2023-08-04_RNA_melting_VS.csv																							
+52	21	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	53	2023-08-04_RNA_melting_VS.csv																							
+53	22	10 mM MgCl2	400.0	21.0	90.0	1	Heating	54	2023-08-04_RNA_melting_VS.csv																							
+54	23	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	55	2023-08-04_RNA_melting_VS.csv																							
+55	24	10 mM MgCl2	400.0	21.0	90.0	2	Heating	56	2023-08-04_RNA_melting_VS.csv																							
+56	25	25 mM CaCl2	400.0	90.0	21.0	1	Cooling	57	2023-08-04_RNA_melting_VS.csv																							
+57	26	25 mM CaCl2	400.0	21.0	90.0	1	Heating	58	2023-08-04_RNA_melting_VS.csv																							
+58	27	25 mM CaCl2	400.0	90.0	21.0	2	Cooling	59	2023-08-04_RNA_melting_VS.csv																							
+59	28	25 mM CaCl2	400.0	21.0	90.0	2	Heating	60	2023-08-04_RNA_melting_VS.csv																							
+60	29	25 mM MgCl2	400.0	90.0	21.0	1	Cooling	61	2023-08-04_RNA_melting_VS.csv																							
+61	30	25 mM MgCl2	400.0	21.0	90.0	1	Heating	62	2023-08-04_RNA_melting_VS.csv																							
+62	31	25 mM MgCl2	400.0	90.0	21.0	2	Cooling	63	2023-08-04_RNA_melting_VS.csv																							
+63	32	25 mM MgCl2	400.0	21.0	90.0	2	Heating	64	2023-08-04_RNA_melting_VS.csv																							
+64	1	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	65	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+65	2	10 mM MgCl2	260.0	21.0	90.0	1	Heating	66	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+66	3	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	67	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+67	4	10 mM MgCl2	260.0	21.0	90.0	2	Heating	68	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+68	5	5 mM MgCl2	260.0	90.0	21.0	1	Cooling	69	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+69	6	5 mM MgCl2	260.0	21.0	90.0	1	Heating	70	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+70	7	5 mM MgCl2	260.0	90.0	21.0	2	Cooling	71	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+71	8	5 mM MgCl2	260.0	21.0	90.0	2	Heating	72	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+72	9	1 mM MgCl2	260.0	90.0	21.0	1	Cooling	73	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+73	10	1 mM MgCl2	260.0	21.0	90.0	1	Heating	74	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+74	11	1 mM MgCl2	260.0	90.0	21.0	2	Cooling	75	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+75	12	1 mM MgCl2	260.0	21.0	90.0	2	Heating	76	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+76	13	0.1 mM MgCl2	260.0	90.0	21.0	1	Cooling	77	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+77	14	0.1 mM MgCl2	260.0	21.0	90.0	1	Heating	78	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+78	15	0.1 mM MgCl2	260.0	90.0	21.0	2	Cooling	79	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+79	16	0.1 mM MgCl2	260.0	21.0	90.0	2	Heating	80	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+80	17	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	81	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+81	18	10 mM MgCl2	400.0	21.0	90.0	1	Heating	82	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+82	19	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	83	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+83	20	10 mM MgCl2	400.0	21.0	90.0	2	Heating	84	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+84	21	5 mM MgCl2	400.0	90.0	21.0	1	Cooling	85	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+85	22	5 mM MgCl2	400.0	21.0	90.0	1	Heating	86	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+86	23	5 mM MgCl2	400.0	90.0	21.0	2	Cooling	87	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+87	24	5 mM MgCl2	400.0	21.0	90.0	2	Heating	88	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+88	25	1 mM MgCl2	400.0	90.0	21.0	1	Cooling	89	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+89	26	1 mM MgCl2	400.0	21.0	90.0	1	Heating	90	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+90	27	1 mM MgCl2	400.0	90.0	21.0	2	Cooling	91	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+91	28	1 mM MgCl2	400.0	21.0	90.0	2	Heating	92	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+92	29	0.1 mM MgCl2	400.0	90.0	21.0	1	Cooling	93	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+93	30	0.1 mM MgCl2	400.0	21.0	90.0	1	Heating	94	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+94	31	0.1 mM MgCl2	400.0	90.0	21.0	2	Cooling	95	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+95	32	0.1 mM MgCl2	400.0	21.0	90.0	2	Heating	96	2023-08-16_RNA_melting_CaCl2_VS.csv																							
+96	1	500 mM MgCl2	260.0	90.0	21.0	1	Cooling	97	2023-08-16_RNA_melting_VS.csv																							
+97	2	500 mM MgCl2	260.0	21.0	90.0	1	Heating	98	2023-08-16_RNA_melting_VS.csv																							
+98	3	500 mM MgCl2	260.0	90.0	21.0	2	Cooling	99	2023-08-16_RNA_melting_VS.csv																							
+99	4	500 mM MgCl2	260.0	21.0	90.0	2	Heating	100	2023-08-16_RNA_melting_VS.csv																							
+100	5	100 mM MgCl2	260.0	90.0	21.0	1	Cooling	101	2023-08-16_RNA_melting_VS.csv																							
+101	6	100 mM MgCl2	260.0	21.0	90.0	1	Heating	102	2023-08-16_RNA_melting_VS.csv																							
+102	7	100 mM MgCl2	260.0	90.0	21.0	2	Cooling	103	2023-08-16_RNA_melting_VS.csv																							
+103	8	100 mM MgCl2	260.0	21.0	90.0	2	Heating	104	2023-08-16_RNA_melting_VS.csv																							
+104	9	50 mM MgCl2	260.0	90.0	21.0	1	Cooling	105	2023-08-16_RNA_melting_VS.csv																							
+105	10	50 mM MgCl2	260.0	21.0	90.0	1	Heating	106	2023-08-16_RNA_melting_VS.csv																							
+106	11	50 mM MgCl2	260.0	90.0	21.0	2	Cooling	107	2023-08-16_RNA_melting_VS.csv																							
+107	12	50 mM MgCl2	260.0	21.0	90.0	2	Heating	108	2023-08-16_RNA_melting_VS.csv																							
+108	13	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	109	2023-08-16_RNA_melting_VS.csv																							
+109	14	10 mM MgCl2	260.0	21.0	90.0	1	Heating	110	2023-08-16_RNA_melting_VS.csv																							
+110	15	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	111	2023-08-16_RNA_melting_VS.csv																							
+111	16	10 mM MgCl2	260.0	21.0	90.0	2	Heating	112	2023-08-16_RNA_melting_VS.csv																							
+112	17	500 mM MgCl2	400.0	90.0	21.0	1	Cooling	113	2023-08-16_RNA_melting_VS.csv																							
+113	18	500 mM MgCl2	400.0	21.0	90.0	1	Heating	114	2023-08-16_RNA_melting_VS.csv																							
+114	19	500 mM MgCl2	400.0	90.0	21.0	2	Cooling	115	2023-08-16_RNA_melting_VS.csv																							
+115	20	500 mM MgCl2	400.0	21.0	90.0	2	Heating	116	2023-08-16_RNA_melting_VS.csv																							
+116	21	100 mM MgCl2	400.0	90.0	21.0	1	Cooling	117	2023-08-16_RNA_melting_VS.csv																							
+117	22	100 mM MgCl2	400.0	21.0	90.0	1	Heating	118	2023-08-16_RNA_melting_VS.csv																							
+118	23	100 mM MgCl2	400.0	90.0	21.0	2	Cooling	119	2023-08-16_RNA_melting_VS.csv																							
+119	24	100 mM MgCl2	400.0	21.0	90.0	2	Heating	120	2023-08-16_RNA_melting_VS.csv																							
+120	25	50 mM MgCl2	400.0	90.0	21.0	1	Cooling	121	2023-08-16_RNA_melting_VS.csv																							
+121	26	50 mM MgCl2	400.0	21.0	90.0	1	Heating	122	2023-08-16_RNA_melting_VS.csv																							
+122	27	50 mM MgCl2	400.0	90.0	21.0	2	Cooling	123	2023-08-16_RNA_melting_VS.csv																							
+123	28	50 mM MgCl2	400.0	21.0	90.0	2	Heating	124	2023-08-16_RNA_melting_VS.csv																							
+124	29	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	125	2023-08-16_RNA_melting_VS.csv																							
+125	30	10 mM MgCl2	400.0	21.0	90.0	1	Heating	126	2023-08-16_RNA_melting_VS.csv																							
+126	31	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	127	2023-08-16_RNA_melting_VS.csv																							
+127	32	10 mM MgCl2	400.0	21.0	90.0	2	Heating	128	2023-08-16_RNA_melting_VS.csv																							
+128	1	500 mM MgCl2	260.0	90.0	21.0	1	Cooling	129	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+129	2	500 mM MgCl2	260.0	21.0	90.0	1	Heating	130	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+130	3	500 mM MgCl2	260.0	90.0	21.0	2	Cooling	131	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+131	4	500 mM MgCl2	260.0	21.0	90.0	2	Heating	132	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+132	5	100 mM MgCl2	260.0	90.0	21.0	1	Cooling	133	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+133	6	100 mM MgCl2	260.0	21.0	90.0	1	Heating	134	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+134	7	100 mM MgCl2	260.0	90.0	21.0	2	Cooling	135	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+135	8	100 mM MgCl2	260.0	21.0	90.0	2	Heating	136	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+136	9	50 mM MgCl2	260.0	90.0	21.0	1	Cooling	137	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+137	10	50 mM MgCl2	260.0	21.0	90.0	1	Heating	138	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+138	11	50 mM MgCl2	260.0	90.0	21.0	2	Cooling	139	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+139	12	50 mM MgCl2	260.0	21.0	90.0	2	Heating	140	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+140	13	0 mM MgCl2	260.0	90.0	21.0	1	Cooling	141	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+141	14	0 mM MgCl2	260.0	21.0	90.0	1	Heating	142	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+142	15	0 mM MgCl2	260.0	90.0	21.0	2	Cooling	143	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+143	16	0 mM MgCl2	260.0	21.0	90.0	2	Heating	144	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+144	17	500 mM MgCl2	400.0	90.0	21.0	1	Cooling	145	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+145	18	500 mM MgCl2	400.0	21.0	90.0	1	Heating	146	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+146	19	500 mM MgCl2	400.0	90.0	21.0	2	Cooling	147	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+147	20	500 mM MgCl2	400.0	21.0	90.0	2	Heating	148	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+148	21	100 mM MgCl2	400.0	90.0	21.0	1	Cooling	149	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+149	22	100 mM MgCl2	400.0	21.0	90.0	1	Heating	150	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+150	23	100 mM MgCl2	400.0	90.0	21.0	2	Cooling	151	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+151	24	100 mM MgCl2	400.0	21.0	90.0	2	Heating	152	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+152	25	50 mM MgCl2	400.0	90.0	21.0	1	Cooling	153	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+153	26	50 mM MgCl2	400.0	21.0	90.0	1	Heating	154	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+154	27	50 mM MgCl2	400.0	90.0	21.0	2	Cooling	155	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+155	28	50 mM MgCl2	400.0	21.0	90.0	2	Heating	156	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+156	29	0 mM MgCl2	400.0	90.0	21.0	1	Cooling	157	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+157	30	0 mM MgCl2	400.0	21.0	90.0	1	Heating	158	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+158	31	0 mM MgCl2	400.0	90.0	21.0	2	Cooling	159	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+159	32	0 mM MgCl2	400.0	21.0	90.0	2	Heating	160	2023-08-18_RNA_melting_CaCl2_VS.csv																							
+160	1	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	161	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+161	2	10 mM MgCl2	260.0	21.0	90.0	1	Heating	162	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+162	3	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	163	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+163	4	10 mM MgCl2	260.0	21.0	90.0	2	Heating	164	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+164	5	5 mM MgCl2	260.0	90.0	21.0	1	Cooling	165	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+165	6	5 mM MgCl2	260.0	21.0	90.0	1	Heating	166	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+166	7	5 mM MgCl2	260.0	90.0	21.0	2	Cooling	167	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+167	8	5 mM MgCl2	260.0	21.0	90.0	2	Heating	168	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+168	9	1 mM MgCl2	260.0	90.0	21.0	1	Cooling	169	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+169	10	1 mM MgCl2	260.0	21.0	90.0	1	Heating	170	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+170	11	1 mM MgCl2	260.0	90.0	21.0	2	Cooling	171	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+171	12	1 mM MgCl2	260.0	21.0	90.0	2	Heating	172	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+172	13	0.1 mM MgCl2	260.0	90.0	21.0	1	Cooling	173	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+173	14	0.1 mM MgCl2	260.0	21.0	90.0	1	Heating	174	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+174	15	0.1 mM MgCl2	260.0	90.0	21.0	2	Cooling	175	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+175	16	0.1 mM MgCl2	260.0	21.0	90.0	2	Heating	176	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+176	17	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	177	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+177	18	10 mM MgCl2	400.0	21.0	90.0	1	Heating	178	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+178	19	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	179	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+179	20	10 mM MgCl2	400.0	21.0	90.0	2	Heating	180	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+180	21	5 mM MgCl2	400.0	90.0	21.0	1	Cooling	181	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+181	22	5 mM MgCl2	400.0	21.0	90.0	1	Heating	182	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+182	23	5 mM MgCl2	400.0	90.0	21.0	2	Cooling	183	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+183	24	5 mM MgCl2	400.0	21.0	90.0	2	Heating	184	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+184	25	1 mM MgCl2	400.0	90.0	21.0	1	Cooling	185	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+185	26	1 mM MgCl2	400.0	21.0	90.0	1	Heating	186	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+186	27	1 mM MgCl2	400.0	90.0	21.0	2	Cooling	187	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+187	28	1 mM MgCl2	400.0	21.0	90.0	2	Heating	188	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+188	29	0.1 mM MgCl2	400.0	90.0	21.0	1	Cooling	189	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+189	30	0.1 mM MgCl2	400.0	21.0	90.0	1	Heating	190	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+190	31	0.1 mM MgCl2	400.0	90.0	21.0	2	Cooling	191	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+191	32	0.1 mM MgCl2	400.0	21.0	90.0	2	Heating	192	2023-08-21_RNA_melting_MgCl2_NaCl_VS.csv																							
+192	1	10 mM CaCl2	260.0	90.0	21.0	1	Cooling	193	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+193	2	10 mM CaCl2	260.0	21.0	90.0	1	Heating	194	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+194	3	10 mM CaCl2	260.0	90.0	21.0	2	Cooling	195	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+195	4	10 mM CaCl2	260.0	21.0	90.0	2	Heating	196	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+196	5	5 mM CaCl2	260.0	90.0	21.0	1	Cooling	197	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+197	6	5 mM CaCl2	260.0	21.0	90.0	1	Heating	198	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+198	7	5 mM CaCl2	260.0	90.0	21.0	2	Cooling	199	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+199	8	5 mM CaCl2	260.0	21.0	90.0	2	Heating	200	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+200	9	1 mM CaCl2	260.0	90.0	21.0	1	Cooling	201	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+201	10	1 mM CaCl2	260.0	21.0	90.0	1	Heating	202	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+202	11	1 mM CaCl2	260.0	90.0	21.0	2	Cooling	203	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+203	12	1 mM CaCl2	260.0	21.0	90.0	2	Heating	204	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+204	13	0.1 mM CaCl2	260.0	90.0	21.0	1	Cooling	205	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+205	14	0.1 mM CaCl2	260.0	21.0	90.0	1	Heating	206	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+206	15	0.1 mM CaCl2	260.0	90.0	21.0	2	Cooling	207	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+207	16	0.1 mM CaCl2	260.0	21.0	90.0	2	Heating	208	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+208	17	10 mM CaCl2	400.0	90.0	21.0	1	Cooling	209	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+209	18	10 mM CaCl2	400.0	21.0	90.0	1	Heating	210	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+210	19	10 mM CaCl2	400.0	90.0	21.0	2	Cooling	211	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+211	20	10 mM CaCl2	400.0	21.0	90.0	2	Heating	212	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+212	21	5 mM CaCl2	400.0	90.0	21.0	1	Cooling	213	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+213	22	5 mM CaCl2	400.0	21.0	90.0	1	Heating	214	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+214	23	5 mM CaCl2	400.0	90.0	21.0	2	Cooling	215	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+215	24	5 mM CaCl2	400.0	21.0	90.0	2	Heating	216	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+216	25	1 mM CaCl2	400.0	90.0	21.0	1	Cooling	217	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+217	26	1 mM CaCl2	400.0	21.0	90.0	1	Heating	218	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+218	27	1 mM CaCl2	400.0	90.0	21.0	2	Cooling	219	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+219	28	1 mM CaCl2	400.0	21.0	90.0	2	Heating	220	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+220	29	0.1 mM CaCl2	400.0	90.0	21.0	1	Cooling	221	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+221	30	0.1 mM CaCl2	400.0	21.0	90.0	1	Heating	222	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+222	31	0.1 mM CaCl2	400.0	90.0	21.0	2	Cooling	223	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+223	32	0.1 mM CaCl2	400.0	21.0	90.0	2	Heating	224	2023-08-22_RNA_melting_CaCl2_NaCl_VS.csv																							
+224	1	50 mM CaCl2	260.0	90.0	21.0	1	Cooling	225	2023-08-23_RNA_melting_2_VS.csv																							
+225	2	50 mM CaCl2	260.0	21.0	90.0	1	Heating	226	2023-08-23_RNA_melting_2_VS.csv																							
+226	3	50 mM CaCl2	260.0	90.0	21.0	2	Cooling	227	2023-08-23_RNA_melting_2_VS.csv																							
+227	4	50 mM CaCl2	260.0	21.0	90.0	2	Heating	228	2023-08-23_RNA_melting_2_VS.csv																							
+228	5	25 mM CaCl2	260.0	90.0	21.0	1	Cooling	229	2023-08-23_RNA_melting_2_VS.csv																							
+229	6	25 mM CaCl2	260.0	21.0	90.0	1	Heating	230	2023-08-23_RNA_melting_2_VS.csv																							
+230	7	25 mM CaCl2	260.0	90.0	21.0	2	Cooling	231	2023-08-23_RNA_melting_2_VS.csv																							
+231	8	25 mM CaCl2	260.0	21.0	90.0	2	Heating	232	2023-08-23_RNA_melting_2_VS.csv																							
+232	9	50 mM MgCl2	260.0	90.0	21.0	1	Cooling	233	2023-08-23_RNA_melting_2_VS.csv																							
+233	10	50 mM MgCl2	260.0	21.0	90.0	1	Heating	234	2023-08-23_RNA_melting_2_VS.csv																							
+234	11	50 mM MgCl2	260.0	90.0	21.0	2	Cooling	235	2023-08-23_RNA_melting_2_VS.csv																							
+235	12	50 mM MgCl2	260.0	21.0	90.0	2	Heating	236	2023-08-23_RNA_melting_2_VS.csv																							
+236	13	25 mM MgCl2	260.0	90.0	21.0	1	Cooling	237	2023-08-23_RNA_melting_2_VS.csv																							
+237	14	25 mM MgCl2	260.0	21.0	90.0	1	Heating	238	2023-08-23_RNA_melting_2_VS.csv																							
+238	15	25 mM MgCl2	260.0	90.0	21.0	2	Cooling	239	2023-08-23_RNA_melting_2_VS.csv																							
+239	16	25 mM MgCl2	260.0	21.0	90.0	2	Heating	240	2023-08-23_RNA_melting_2_VS.csv																							
+240	17	50 mM CaCl2	400.0	90.0	21.0	1	Cooling	241	2023-08-23_RNA_melting_2_VS.csv																							
+241	18	50 mM CaCl2	400.0	21.0	90.0	1	Heating	242	2023-08-23_RNA_melting_2_VS.csv																							
+242	19	50 mM CaCl2	400.0	90.0	21.0	2	Cooling	243	2023-08-23_RNA_melting_2_VS.csv																							
+243	20	50 mM CaCl2	400.0	21.0	90.0	2	Heating	244	2023-08-23_RNA_melting_2_VS.csv																							
+244	21	25 mM CaCl2	400.0	90.0	21.0	1	Cooling	245	2023-08-23_RNA_melting_2_VS.csv																							
+245	22	25 mM CaCl2	400.0	21.0	90.0	1	Heating	246	2023-08-23_RNA_melting_2_VS.csv																							
+246	23	25 mM CaCl2	400.0	90.0	21.0	2	Cooling	247	2023-08-23_RNA_melting_2_VS.csv																							
+247	24	25 mM CaCl2	400.0	21.0	90.0	2	Heating	248	2023-08-23_RNA_melting_2_VS.csv																							
+248	25	50 mM MgCl2	400.0	90.0	21.0	1	Cooling	249	2023-08-23_RNA_melting_2_VS.csv																							
+249	26	50 mM MgCl2	400.0	21.0	90.0	1	Heating	250	2023-08-23_RNA_melting_2_VS.csv																							
+250	27	50 mM MgCl2	400.0	90.0	21.0	2	Cooling	251	2023-08-23_RNA_melting_2_VS.csv																							
+251	28	50 mM MgCl2	400.0	21.0	90.0	2	Heating	252	2023-08-23_RNA_melting_2_VS.csv																							
+252	29	25 mM MgCl2	400.0	90.0	21.0	1	Cooling	253	2023-08-23_RNA_melting_2_VS.csv																							
+253	30	25 mM MgCl2	400.0	21.0	90.0	1	Heating	254	2023-08-23_RNA_melting_2_VS.csv																							
+254	31	25 mM MgCl2	400.0	90.0	21.0	2	Cooling	255	2023-08-23_RNA_melting_2_VS.csv																							
+255	32	25 mM MgCl2	400.0	21.0	90.0	2	Heating	256	2023-08-23_RNA_melting_2_VS.csv																							
+256	1	500 mM CaCl2	260.0	90.0	21.0	1	Cooling	257	2023-08-23_RNA_melting_NaCl_VS.csv																							
+257	2	500 mM CaCl2	260.0	21.0	90.0	1	Heating	258	2023-08-23_RNA_melting_NaCl_VS.csv																							
+258	3	500 mM CaCl2	260.0	90.0	21.0	2	Cooling	259	2023-08-23_RNA_melting_NaCl_VS.csv																							
+259	4	500 mM CaCl2	260.0	21.0	90.0	2	Heating	260	2023-08-23_RNA_melting_NaCl_VS.csv																							
+260	5	100 mM CaCl2	260.0	90.0	21.0	1	Cooling	261	2023-08-23_RNA_melting_NaCl_VS.csv																							
+261	6	100 mM CaCl2	260.0	21.0	90.0	1	Heating	262	2023-08-23_RNA_melting_NaCl_VS.csv																							
+262	7	100 mM CaCl2	260.0	90.0	21.0	2	Cooling	263	2023-08-23_RNA_melting_NaCl_VS.csv																							
+263	8	100 mM CaCl2	260.0	21.0	90.0	2	Heating	264	2023-08-23_RNA_melting_NaCl_VS.csv																							
+264	9	500 mM MgCl2	260.0	90.0	21.0	1	Cooling	265	2023-08-23_RNA_melting_NaCl_VS.csv																							
+265	10	500 mM MgCl2	260.0	21.0	90.0	1	Heating	266	2023-08-23_RNA_melting_NaCl_VS.csv																							
+266	11	500 mM MgCl2	260.0	90.0	21.0	2	Cooling	267	2023-08-23_RNA_melting_NaCl_VS.csv																							
+267	12	500 mM MgCl2	260.0	21.0	90.0	2	Heating	268	2023-08-23_RNA_melting_NaCl_VS.csv																							
+268	13	100 mM MgCl2	260.0	90.0	21.0	1	Cooling	269	2023-08-23_RNA_melting_NaCl_VS.csv																							
+269	14	100 mM MgCl2	260.0	21.0	90.0	1	Heating	270	2023-08-23_RNA_melting_NaCl_VS.csv																							
+270	15	100 mM MgCl2	260.0	90.0	21.0	2	Cooling	271	2023-08-23_RNA_melting_NaCl_VS.csv																							
+271	16	100 mM MgCl2	260.0	21.0	90.0	2	Heating	272	2023-08-23_RNA_melting_NaCl_VS.csv																							
+272	17	500 mM CaCl2	400.0	90.0	21.0	1	Cooling	273	2023-08-23_RNA_melting_NaCl_VS.csv																							
+273	18	500 mM CaCl2	400.0	21.0	90.0	1	Heating	274	2023-08-23_RNA_melting_NaCl_VS.csv																							
+274	19	500 mM CaCl2	400.0	90.0	21.0	2	Cooling	275	2023-08-23_RNA_melting_NaCl_VS.csv																							
+275	20	500 mM CaCl2	400.0	21.0	90.0	2	Heating	276	2023-08-23_RNA_melting_NaCl_VS.csv																							
+276	21	100 mM CaCl2	400.0	90.0	21.0	1	Cooling	277	2023-08-23_RNA_melting_NaCl_VS.csv																							
+277	22	100 mM CaCl2	400.0	21.0	90.0	1	Heating	278	2023-08-23_RNA_melting_NaCl_VS.csv																							
+278	23	100 mM CaCl2	400.0	90.0	21.0	2	Cooling	279	2023-08-23_RNA_melting_NaCl_VS.csv																							
+279	24	100 mM CaCl2	400.0	21.0	90.0	2	Heating	280	2023-08-23_RNA_melting_NaCl_VS.csv																							
+280	25	500 mM MgCl2	400.0	90.0	21.0	1	Cooling	281	2023-08-23_RNA_melting_NaCl_VS.csv																							
+281	26	500 mM MgCl2	400.0	21.0	90.0	1	Heating	282	2023-08-23_RNA_melting_NaCl_VS.csv																							
+282	27	500 mM MgCl2	400.0	90.0	21.0	2	Cooling	283	2023-08-23_RNA_melting_NaCl_VS.csv																							
+283	28	500 mM MgCl2	400.0	21.0	90.0	2	Heating	284	2023-08-23_RNA_melting_NaCl_VS.csv																							
+284	29	100 mM MgCl2	400.0	90.0	21.0	1	Cooling	285	2023-08-23_RNA_melting_NaCl_VS.csv																							
+285	30	100 mM MgCl2	400.0	21.0	90.0	1	Heating	286	2023-08-23_RNA_melting_NaCl_VS.csv																							
+286	31	100 mM MgCl2	400.0	90.0	21.0	2	Cooling	287	2023-08-23_RNA_melting_NaCl_VS.csv																							
+287	32	100 mM MgCl2	400.0	21.0	90.0	2	Heating	288	2023-08-23_RNA_melting_NaCl_VS.csv																							
+288	1	100 mM KCl	260.0	90.0	21.0	1	Cooling	289	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	100.0	mM																	
+289	2	100 mM KCl	260.0	21.0	90.0	1	Heating	290	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	100.0	mM																	
+290	3	100 mM KCl	260.0	90.0	21.0	2	Cooling	291	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	100.0	mM																	
+291	4	100 mM KCl	260.0	21.0	90.0	2	Heating	292	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	100.0	mM																	
+292	5	50 mM KCl	260.0	90.0	21.0	1	Cooling	293	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	50.0	mM																	
+293	6	50 mM KCl	260.0	21.0	90.0	1	Heating	294	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	50.0	mM																	
+294	7	50 mM KCl	260.0	90.0	21.0	2	Cooling	295	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	50.0	mM																	
+295	8	50 mM KCl	260.0	21.0	90.0	2	Heating	296	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	50.0	mM																	
+296	9	25 mM KCl	260.0	90.0	21.0	1	Cooling	297	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	25.0	mM																	
+297	10	25 mM KCl	260.0	21.0	90.0	1	Heating	298	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	25.0	mM																	
+298	11	25 mM KCl	260.0	90.0	21.0	2	Cooling	299	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	25.0	mM																	
+299	12	25 mM KCl	260.0	21.0	90.0	2	Heating	300	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	25.0	mM																	
+300	13	10 mM KCl	260.0	90.0	21.0	1	Cooling	301	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+301	14	10 mM KCl	260.0	21.0	90.0	1	Heating	302	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+302	15	10 mM KCl	260.0	90.0	21.0	2	Cooling	303	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+303	16	10 mM KCl	260.0	21.0	90.0	2	Heating	304	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+304	17	100 mM KCl	400.0	90.0	21.0	1	Cooling	305	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	100.0	mM																	
+305	18	100 mM KCl	400.0	21.0	90.0	1	Heating	306	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	100.0	mM																	
+306	19	100 mM KCl	400.0	90.0	21.0	2	Cooling	307	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	100.0	mM																	
+307	20	100 mM KCl	400.0	21.0	90.0	2	Heating	308	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	100.0	mM																	
+308	21	50 mM KCl	400.0	90.0	21.0	1	Cooling	309	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	50.0	mM																	
+309	22	50 mM KCl	400.0	21.0	90.0	1	Heating	310	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	50.0	mM																	
+310	23	50 mM KCl	400.0	90.0	21.0	2	Cooling	311	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	50.0	mM																	
+311	24	50 mM KCl	400.0	21.0	90.0	2	Heating	312	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	50.0	mM																	
+312	25	25 mM KCl	400.0	90.0	21.0	1	Cooling	313	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	25.0	mM																	
+313	26	25 mM KCl	400.0	21.0	90.0	1	Heating	314	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	25.0	mM																	
+314	27	25 mM KCl	400.0	90.0	21.0	2	Cooling	315	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	25.0	mM																	
+315	28	25 mM KCl	400.0	21.0	90.0	2	Heating	316	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	25.0	mM																	
+316	29	10 mM KCl	400.0	90.0	21.0	1	Cooling	317	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+317	30	10 mM KCl	400.0	21.0	90.0	1	Heating	318	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+318	31	10 mM KCl	400.0	90.0	21.0	2	Cooling	319	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+319	32	10 mM KCl	400.0	21.0	90.0	2	Heating	320	2023-09-19_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+320	1	500 mM KCl	260.0	90.0	21.0	1	Cooling	321	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	500.0	mM																	
+321	2	500 mM KCl	260.0	21.0	90.0	1	Heating	322	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	500.0	mM																	
+322	3	500 mM KCl	260.0	90.0	21.0	2	Cooling	323	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	500.0	mM																	
+323	4	500 mM KCl	260.0	21.0	90.0	2	Heating	324	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	500.0	mM																	
+324	5	5 mM KCl	260.0	90.0	21.0	1	Cooling	325	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+325	6	5 mM KCl	260.0	21.0	90.0	1	Heating	326	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+326	7	5 mM KCl	260.0	90.0	21.0	2	Cooling	327	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+327	8	5 mM KCl	260.0	21.0	90.0	2	Heating	328	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+328	9	1 mM KCl	260.0	90.0	21.0	1	Cooling	329	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+329	10	1 mM KCl	260.0	21.0	90.0	1	Heating	330	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+330	11	1 mM KCl	260.0	90.0	21.0	2	Cooling	331	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+331	12	1 mM KCl	260.0	21.0	90.0	2	Heating	332	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+332	13	0.1 mM KCl	260.0	90.0	21.0	1	Cooling	333	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	0.1	mM																	
+333	14	0.1 mM KCl	260.0	21.0	90.0	1	Heating	334	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	0.1	mM																	
+334	15	0.1 mM KCl	260.0	90.0	21.0	2	Cooling	335	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	0.1	mM																	
+335	16	0.1 mM KCl	260.0	21.0	90.0	2	Heating	336	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	0.1	mM																	
+336	17	500 mM KCl	400.0	90.0	21.0	1	Cooling	337	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	500.0	mM																	
+337	18	500 mM KCl	400.0	21.0	90.0	1	Heating	338	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	500.0	mM																	
+338	19	500 mM KCl	400.0	90.0	21.0	2	Cooling	339	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	500.0	mM																	
+339	20	500 mM KCl	400.0	21.0	90.0	2	Heating	340	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	500.0	mM																	
+340	21	5 mM KCl	400.0	90.0	21.0	1	Cooling	341	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+341	22	5 mM KCl	400.0	21.0	90.0	1	Heating	342	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+342	23	5 mM KCl	400.0	90.0	21.0	2	Cooling	343	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+343	24	5 mM KCl	400.0	21.0	90.0	2	Heating	344	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+344	25	1 mM KCl	400.0	90.0	21.0	1	Cooling	345	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+345	26	1 mM KCl	400.0	21.0	90.0	1	Heating	346	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+346	27	1 mM KCl	400.0	90.0	21.0	2	Cooling	347	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+347	28	1 mM KCl	400.0	21.0	90.0	2	Heating	348	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+348	29	0.1 mM KCl	400.0	90.0	21.0	1	Cooling	349	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	0.1	mM																	
+349	30	0.1 mM KCl	400.0	21.0	90.0	1	Heating	350	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	0.1	mM																	
+350	31	0.1 mM KCl	400.0	90.0	21.0	2	Cooling	351	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	0.1	mM																	
+351	32	0.1 mM KCl	400.0	21.0	90.0	2	Heating	352	2023-09-20_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	0.1	mM																	
+352	1	4.15 mM KCl	260.0	90.0	21.0	1	Cooling	353	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+353	2	4.15 mM KCl	260.0	21.0	90.0	1	Heating	354	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+354	3	4.15 mM KCl	260.0	90.0	21.0	2	Cooling	355	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+355	4	4.15 mM KCl	260.0	21.0	90.0	2	Heating	356	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+356	5	1.66 mM KCl	260.0	90.0	21.0	1	Cooling	357	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+357	6	1.66 mM KCl	260.0	21.0	90.0	1	Heating	358	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+358	7	1.66 mM KCl	260.0	90.0	21.0	2	Cooling	359	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+359	8	1.66 mM KCl	260.0	21.0	90.0	2	Heating	360	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+360	9	0.8 mM KCl	260.0	90.0	21.0	1	Cooling	361	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+361	10	0.8 mM KCl	260.0	21.0	90.0	1	Heating	362	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+362	11	0.8 mM KCl	260.0	90.0	21.0	2	Cooling	363	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+363	12	0.8 mM KCl	260.0	21.0	90.0	2	Heating	364	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+364	13	0.08 mM KCl	260.0	90.0	21.0	1	Cooling	365	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+365	14	0.08 mM KCl	260.0	21.0	90.0	1	Heating	366	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+366	15	0.08 mM KCl	260.0	90.0	21.0	2	Cooling	367	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+367	16	0.08 mM KCl	260.0	21.0	90.0	2	Heating	368	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+368	17	4.15 mM KCl	400.0	90.0	21.0	1	Cooling	369	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+369	18	4.15 mM KCl	400.0	21.0	90.0	1	Heating	370	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+370	19	4.15 mM KCl	400.0	90.0	21.0	2	Cooling	371	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+371	20	4.15 mM KCl	400.0	21.0	90.0	2	Heating	372	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+372	21	1.66 mM KCl	400.0	90.0	21.0	1	Cooling	373	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+373	22	1.66 mM KCl	400.0	21.0	90.0	1	Heating	374	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+374	23	1.66 mM KCl	400.0	90.0	21.0	2	Cooling	375	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+375	24	1.66 mM KCl	400.0	21.0	90.0	2	Heating	376	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+376	25	0.8 mM KCl	400.0	90.0	21.0	1	Cooling	377	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+377	26	0.8 mM KCl	400.0	21.0	90.0	1	Heating	378	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+378	27	0.8 mM KCl	400.0	90.0	21.0	2	Cooling	379	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+379	28	0.8 mM KCl	400.0	21.0	90.0	2	Heating	380	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+380	29	0.08 mM KCl	400.0	90.0	21.0	1	Cooling	381	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+381	30	0.08 mM KCl	400.0	21.0	90.0	1	Heating	382	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+382	31	0.08 mM KCl	400.0	90.0	21.0	2	Cooling	383	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+383	32	0.08 mM KCl	400.0	21.0	90.0	2	Heating	384	2023-09-21_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+384	1	516 mM NaCl	260.0	90.0	21.0	1	Cooling	385	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM	347.13999923701255	0.002842247985781741	0.11999999999989086	344.94183785387634	1.9700928392670138	-153735.29069412078	13572.768797875193	0.0021121038330154823	3.3825445501328294e-05	-0.4580735211596991	0.01078179404038881	0.002404191363912966	0.00013698829478594107	-0.5440910023254414	0.05022278652345326	-445.68467440950394	41.89346549960122
+385	2	516 mM NaCl	260.0	21.0	90.0	1	Heating	386	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM	349.4099999999497	0.00306022657477258	0.09999999999990905	344.6641757156078	0.9164081416431731	-221785.02547990813	35473.84089621286	0.0023025170649948975	6.77960145067926e-05	-0.5252695861550479	0.022368988897410368	0.0027364334358807372	7.054135360950982e-05	-0.6667213747834076	0.025795961815537165	-643.4815136195333	104.63382949334346
+386	3	516 mM NaCl	260.0	90.0	21.0	2	Cooling	387	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM	350.63999923700936	0.002930632379981446	0.14999999999986358	340.3625125224653	1.7412639601645414	-148366.70630702903	10250.481960597735	0.0021701049923725556	3.544876945538099e-05	-0.4737877159409466	0.011278429950107274	0.002727257208619125	6.653595473697745e-05	-0.6559046915856191	0.024395945863909668	-435.90789481328744	32.346431415711905
+387	4	516 mM NaCl	260.0	21.0	90.0	2	Heating	388	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM	356.4699999999433	0.003191252658805589	0.7699999999992997	340.9354955828644	2.407948031967429	-126433.88547056164	5019.442049434737	0.0022034125170993556	6.21396704246805e-05	-0.4890104946140104	0.01953142817779567	0.0030268570204815474	8.87008041934732e-05	-0.7642091136429892	0.03274429793692895	-370.84400746953577	17.3417412501448
+388	5	116 mM NaCl	260.0	90.0	21.0	1	Cooling	389	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM	349.56999923701034	0.007496017035911745	0.4399999999995998	332.10549169751846	2.954535751475425	-88557.47555390521	7653.530009724404	0.004995945243177992	0.00017351842558345127	-1.0688484847255295	0.05205449851963484	0.006819392798186961	0.00027559417222440557	-1.629103009656032	0.10326994410520587	-266.654655727775	25.41773904497154
+389	6	116 mM NaCl	260.0	21.0	90.0	1	Heating	390	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM	344.0699999999546	0.008106639859241972	0.0	332.61319394648683	3.332423377919399	-98525.16602112427	6410.287384186817	0.005498705175689984	0.0002461227806800273	-1.2354377775917116	0.07480390093775038	0.007848969554105878	0.000249203168700926	-2.001493741271644	0.09274518387239948	-296.2154472951416	22.24025625046054
+390	7	116 mM NaCl	260.0	90.0	21.0	2	Cooling	391	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM	340.9499992370182	0.007863922431912564	0.0	329.6341889515719	1.1804015113199953	-141426.37960262786	9751.146141224712	0.005862556993578548	7.83420235871345e-05	-1.3214355684475276	0.024354443115471098	0.0075143348010816265	6.83128917077337e-05	-1.8575508966576835	0.024786003530695655	-429.04038580599257	31.11808909649966
+391	8	116 mM NaCl	260.0	21.0	90.0	2	Heating	392	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM	346.2299999999526	0.008479493890164103	0.009999999999990905	334.85360593465873	5.4723926690035976	-79165.78834390332	4352.556450665554	0.005539154410571196	0.00040758163932663765	-1.231085468732674	0.12170516456425434	0.008334578208747773	0.00046654793615999327	-2.1402909207617764	0.17715904223910528	-236.4191005885457	16.86209884996886
+392	9	66 mM NaCl	260.0	90.0	21.0	1	Cooling	393	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM	339.6099992370194	0.007508235943048594	0.10999999999989996	325.4542395530184	0.7033596214653581	-189231.07856337112	13812.10215393337	0.0059249892585503325	4.7849790070008665e-05	-1.3407210464239074	0.014995327054502239	0.007304833987068872	2.2281640067898713e-05	-1.7896833207927703	0.007934322677434083	-581.4368214200026	43.696039590956595
+393	10	66 mM NaCl	260.0	21.0	90.0	1	Heating	394	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM	345.85999999995295	0.008072671144776156	1.0699999999990268	327.06717116082154	2.4093526532642784	-108796.4379998685	6570.059210321519	0.0059654876543041475	0.000256622262011938	-1.363350860471881	0.07819463687587974	0.008048202070412859	0.00010528047316982745	-2.0555460181416882	0.03872007657443813	-332.6424893508264	22.538221272604385
+394	11	66 mM NaCl	260.0	90.0	21.0	2	Cooling	395	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM	339.6899992370193	0.007854712029776495	0.06999999999993634	323.8570996340567	1.1301544997722157	-170099.66950354943	12537.747883214228	0.006242107074731191	0.00011143903187008341	-1.4224316053174118	0.03454487653900133	0.007726940204028487	2.7020019115087692e-05	-1.9110094998299187	0.009642023500211873	-525.2306331890024	40.546709217024386
+395	12	66 mM NaCl	260.0	21.0	90.0	2	Heating	396	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM	346.909999999952	0.008308168135406649	0.839999999999236	332.7830720791601	3.1806115085576123	-118131.5210124866	17679.471500165164	0.005806904065720806	0.0004231850213823587	-1.3029322115345965	0.1320157964750895	0.007720523296510255	0.0004468623949024234	-1.9136221751809344	0.16272121353907237	-354.98055918056525	56.51888070657346
+396	13	41 mM NaCl	260.0	90.0	21.0	1	Cooling	397	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM	331.84999923702645	0.006087522802620935	0.06999999999993634	323.20724024947447	4.154405724703136	-96535.78630938592	13075.318940893985	0.004113750374263813	0.0002185186202266689	-0.8208514813635323	0.06466993839566361	0.005620961678943791	0.0002908416636489975	-1.2844389549552533	0.10521234875368927	-298.68076666498155	44.294057325991425
+397	14	41 mM NaCl	260.0	21.0	90.0	1	Heating	398	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM	339.8899999999584	0.006535643960436891	0.31999999999970896	319.9399016381228	4.8966062039429845	-260181.74363625434	26508.386310418115	0.007640278327848392	0.004577642936439895	-1.9416885321618187	1.4452215339418817	0.0065463346508916765	2.409868349444765e-05	-1.6173060781163644	0.008271616337409408	-813.2206777088415	95.30042226664493
+398	15	41 mM NaCl	260.0	90.0	21.0	2	Cooling	399	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM	336.99999923702177	0.006303610765169584	2.009999999998172	321.7323812494118	0.681552741805122	-212781.6512552574	16090.318771908898	0.005101759812543639	5.372253905305723e-05	-1.1075768997720585	0.016737857974842712	0.006221516029069162	2.002241761308223e-05	-1.4693051281510683	0.006957205322877359	-661.362249049796	51.41251857161465
+399	16	41 mM NaCl	260.0	21.0	90.0	2	Heating	400	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM	342.7499999999558	0.006730557674965793	0.0	320.5477726804889	3.6748155191460006	-112082.5301737689	5864.632741639489	0.00557424149364868	0.0005639517252037391	-1.2588810813924285	0.16999785349451493	0.006868324394057049	9.689261764529533e-05	-1.7040252524699657	0.034691376267005275	-349.659363521733	22.304214867374263
+400	17	516 mM NaCl	400.0	90.0	21.0	1	Cooling	401	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM																	
+401	18	516 mM NaCl	400.0	21.0	90.0	1	Heating	402	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM																	
+402	19	516 mM NaCl	400.0	90.0	21.0	2	Cooling	403	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM																	
+403	20	516 mM NaCl	400.0	21.0	90.0	2	Heating	404	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM																	
+404	21	116 mM NaCl	400.0	90.0	21.0	1	Cooling	405	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM																	
+405	22	116 mM NaCl	400.0	21.0	90.0	1	Heating	406	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM																	
+406	23	116 mM NaCl	400.0	90.0	21.0	2	Cooling	407	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM																	
+407	24	116 mM NaCl	400.0	21.0	90.0	2	Heating	408	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM																	
+408	25	66 mM NaCl	400.0	90.0	21.0	1	Cooling	409	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM																	
+409	26	66 mM NaCl	400.0	21.0	90.0	1	Heating	410	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM																	
+410	27	66 mM NaCl	400.0	90.0	21.0	2	Cooling	411	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM																	
+411	28	66 mM NaCl	400.0	21.0	90.0	2	Heating	412	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM																	
+412	29	41 mM NaCl	400.0	90.0	21.0	1	Cooling	413	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM																	
+413	30	41 mM NaCl	400.0	21.0	90.0	1	Heating	414	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM																	
+414	31	41 mM NaCl	400.0	90.0	21.0	2	Cooling	415	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM																	
+415	32	41 mM NaCl	400.0	21.0	90.0	2	Heating	416	2023-09-21_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM																	
+416	1	26 mM NaCl	260.0	90.0	21.0	1	Cooling	417	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM	333.04999923702536	0.007343723479440605	0.09999999999990905	320.5373311350701	0.9054956582982753	-218454.09963923928	17763.364534171473	0.0059965845694592715	9.862464543312754e-05	-1.3651792860312684	0.03058294495315259	0.007233367096526196	2.0935255983590403e-05	-1.767117651361366	0.007251878905772056	-681.524672541763	57.34271918061209
+417	2	26 mM NaCl	260.0	21.0	90.0	1	Heating	418	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM	336.29999999996164	0.007603259964428874	0.5499999999994998	319.2689519857754	3.6648285901219375	-141051.7136992362	12720.19351777444	0.006431545522384753	0.0007324610027663365	-1.508181336531815	0.22312273343723138	0.007744736353039138	8.441093361314574e-05	-1.9544371947518664	0.029755124689795145	-441.79589910615726	44.912916431837004
+418	3	26 mM NaCl	260.0	90.0	21.0	2	Cooling	419	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM	333.5599992370249	0.007706211507089308	0.06999999999993634	321.1390656258856	0.8339775975639091	-186730.706486358	12660.384294415906	0.0061768687014870285	9.792664735771864e-05	-1.402384748197203	0.030332979533217275	0.007596553146803137	2.759306817035096e-05	-1.863561996083539	0.009631559682654351	-581.4636911969219	40.93339426348312
+419	4	26 mM NaCl	260.0	21.0	90.0	2	Heating	420	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM	335.4399999999624	0.007930448884465183	0.03999999999996362	319.3618736860683	4.304073338949534	-130415.93808281423	10718.522821469323	0.006782625139083295	0.0009348041873184664	-1.5973625205069122	0.28371451966518135	0.008165927255176415	0.00011089226088870105	-2.0733242551808755	0.039260932341990344	-408.36414371432664	39.06587815575359
+420	5	21 mM NaCl	260.0	90.0	21.0	1	Cooling	421	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM	326.99999923703086	0.004195147486116042	0.009999999999990905	324.2710708354442	0.21311201125542417	-254543.27876051754	13368.424223951424	0.0033048110551930935	2.5298621649278092e-05	-0.6489222744009362	0.007876351178861395	0.0036879042323883166	1.7018709965719388e-05	-0.7640479773461547	0.005837142061534609	-784.9706669938774	41.741962570690994
+421	6	21 mM NaCl	260.0	21.0	90.0	1	Heating	422	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM	331.12999999996634	0.00441563207778363	0.16999999999984539	325.33640069742245	0.5423340019486094	-233331.31719969993	22178.640439815965	0.0033201497110338634	3.86913162804654e-05	-0.6616091228560963	0.012076113945301312	0.004012753345603203	4.6855373135563325e-05	-0.8785044197044083	0.016151865963396565	-717.2001555912847	69.36697652650568
+422	7	21 mM NaCl	260.0	90.0	21.0	2	Cooling	423	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM	327.4099992370305	0.004390254973902569	0.01999999999998181	323.295859654781	0.2742317030914414	-249539.2434047765	16511.192792344173	0.003425186250252199	3.259597322811824e-05	-0.6715911020540913	0.010151771965462722	0.003966964643258385	1.987539650106934e-05	-0.8385015551569854	0.006818308352822103	-771.8603129382398	51.72618473483323
+423	8	21 mM NaCl	260.0	21.0	90.0	2	Heating	424	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM	334.4899999999633	0.00448647294400976	0.25999999999976353	324.2346609150368	0.6078481726763945	-242717.00734789463	24920.129513237283	0.0034740216092372152	3.6977320529943775e-05	-0.6950051525019756	0.011566139853096935	0.004263667614160172	3.939059369345876e-05	-0.945351197011706	0.013552176320445952	-748.5843945952982	78.26169817247103
+424	9	17 mM NaCl	260.0	90.0	21.0	1	Cooling	425	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM	318.98999923703815	0.001915166547026406	0.029999999999972715	322.3313142349522	0.7022851298386021	-126015.87712412694	5618.09119843107	0.0013533937898482118	4.701849661487321e-05	-0.09707298179614542	0.013999347331411158	0.0010650854006032575	1.2014017213105741e-05	0.013454176153034353	0.004284139015115673	-390.9513955329579	18.28134683094511
+425	10	17 mM NaCl	260.0	21.0	90.0	1	Heating	426	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM	321.8599999999748	0.0019876888441002823	0.03999999999996362	324.189527914152	0.2027361745357473	-217383.55155368542	8680.3231538752	0.0015769518051866182	1.030302176952116e-05	-0.16792528208967258	0.003129409317415615	0.0013869516100391238	8.071820916594097e-06	-0.09796505869602172	0.0027812997641361433	-670.5446439073453	27.194792091405954
+426	11	17 mM NaCl	260.0	90.0	21.0	2	Cooling	427	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM	318.76999923703835	0.001969770496309985	0.06999999999993634	321.8005164711564	0.2885802867396699	-162329.9247209592	5832.539544081896	0.0015056253898777967	2.0319924322606444e-05	-0.13154115366239516	0.006095815660523296	0.0012622718965876313	9.541486887674044e-06	-0.04104443754100368	0.003308048758415937	-504.44271035068135	18.577073249086787
+427	12	17 mM NaCl	260.0	21.0	90.0	2	Heating	428	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM	322.3799999999743	0.0020500707920313686	0.029999999999972715	325.0189493891696	0.1675665694609226	-194412.6028716167	5909.466926046144	0.0016046109964353969	9.336264426187284e-06	-0.1656280953209921	0.0028288103192404815	0.0013837847360216443	8.369333052609677e-06	-0.08371176155810865	0.002895380534485785	-598.157748146653	18.49030088612983
+428	13	8.3 mM NaCl	260.0	90.0	21.0	1	Cooling	429	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM	323.58999923703396	0.0035065892876127583	0.009999999999990905	319.84295138243556	0.25989476215983287	-209128.60619624384	10734.699698281433	0.0027179631023629028	1.7649992719722964e-05	-0.44978241484867115	0.005357072637131519	0.0030899655626078545	1.0836741583645595e-05	-0.5593695320732374	0.0037381289087747567	-653.8477877731599	34.09370525891261
+429	14	8.3 mM NaCl	260.0	21.0	90.0	1	Heating	430	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM	327.6699999999695	0.0036311404717743736	0.08999999999991815	321.5437943938823	0.5324663594539875	-228429.06820551018	25514.594976890927	0.0028314949076013616	3.4904067728734964e-05	-0.4914575866236447	0.010769337237659148	0.0033729840646151556	2.0987209390859754e-05	-0.6588699760948431	0.007252973502463138	-710.4135492215124	80.52671749414527
+430	15	8.3 mM NaCl	260.0	90.0	21.0	2	Cooling	431	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM	324.7299992370329	0.003629278942433351	0.03999999999996362	318.3766191111724	0.3122161764121696	-218284.53641319866	13772.02210932824	0.0028168281520848503	2.036656354086684e-05	-0.467522633608689	0.006190276611832502	0.003314564998476215	1.0940870549363472e-05	-0.6180823651801448	0.003764589598404419	-685.6173579033357	43.92936572522275
+431	16	8.3 mM NaCl	260.0	21.0	90.0	2	Heating	432	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM	328.6599999999686	0.003774451973412264	0.07999999999992724	321.1458684243115	0.5228270221475908	-159637.74212865136	10294.610827735612	0.00278237171168067	2.499042149881064e-05	-0.4633685665101924	0.007576965780545882	0.0034635402063719887	2.7323512887300944e-05	-0.6716361674386073	0.00955999386433756	-497.0879523124713	32.86513350887495
+432	17	26 mM NaCl	400.0	90.0	21.0	1	Cooling	433	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM																	
+433	18	26 mM NaCl	400.0	21.0	90.0	1	Heating	434	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM																	
+434	19	26 mM NaCl	400.0	90.0	21.0	2	Cooling	435	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM																	
+435	20	26 mM NaCl	400.0	21.0	90.0	2	Heating	436	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM																	
+436	21	21 mM NaCl	400.0	90.0	21.0	1	Cooling	437	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM																	
+437	22	21 mM NaCl	400.0	21.0	90.0	1	Heating	438	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM																	
+438	23	21 mM NaCl	400.0	90.0	21.0	2	Cooling	439	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM																	
+439	24	21 mM NaCl	400.0	21.0	90.0	2	Heating	440	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM																	
+440	25	17 mM NaCl	400.0	90.0	21.0	1	Cooling	441	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM																	
+441	26	17 mM NaCl	400.0	21.0	90.0	1	Heating	442	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM																	
+442	27	17 mM NaCl	400.0	90.0	21.0	2	Cooling	443	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM																	
+443	28	17 mM NaCl	400.0	21.0	90.0	2	Heating	444	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM																	
+444	29	8.3 mM NaCl	400.0	90.0	21.0	1	Cooling	445	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM																	
+445	30	8.3 mM NaCl	400.0	21.0	90.0	1	Heating	446	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM																	
+446	31	8.3 mM NaCl	400.0	90.0	21.0	2	Cooling	447	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM																	
+447	32	8.3 mM NaCl	400.0	21.0	90.0	2	Heating	448	2023-09-24_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM																	
+448	1	4.15 mM NaCl	260.0	90.0	21.0	1	Cooling	449	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	4.15	mM	323.9699992370336	0.003620344707742607	0.049999999999954525	317.2425299635361	0.4167389402657683	-231149.95576366622	20138.160547621228	0.0027997650204286827	2.422204840160368e-05	-0.48081305406168023	0.007374379417671637	0.003348980392169248	1.1690045128085235e-05	-0.6488510835648387	0.004010848795792652	-728.6222178036301	64.43589326081971
+449	2	4.15 mM NaCl	260.0	21.0	90.0	1	Heating	450	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	4.15	mM	328.219999999969	0.0038106108001185715	0.07999999999992724	322.7414407668223	0.31419993567134386	-169503.2181072126	7340.26021021245	0.0027551346434255197	1.7799152748491116e-05	-0.4744778891480698	0.00539918889271152	0.0033650943920691826	2.2073321987326816e-05	-0.6574232483714048	0.007709250449522793	-525.1981824970445	23.254768360503856
+450	3	4.15 mM NaCl	260.0	90.0	21.0	2	Cooling	451	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	4.15	mM	324.04999923703355	0.003595454790541075	0.06999999999993634	317.5846816306631	0.4302850849098433	-206036.50060426537	17011.46603005921	0.002773280134730095	2.7144532405157e-05	-0.4710797065762327	0.00824509730310986	0.0033062842594704773	1.373620424394806e-05	-0.6331149345726421	0.0047331070477082135	-648.7608267072424	54.44411880536902
+451	4	4.15 mM NaCl	260.0	21.0	90.0	2	Heating	452	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	4.15	mM	328.2999999999689	0.0037645252176457195	0.06999999999993634	323.3850343525971	1.5654518071907597	-87823.94873909898	14387.916404300184	0.0023603602919322867	0.00020232665778158537	-0.3548807649001634	0.0597801007368784	0.0031485456945699263	0.00013590772023403663	-0.5750554243248722	0.05042723070319435	-271.5770348337818	45.80625443576058
+452	5	1.66 mM NaCl	260.0	90.0	21.0	1	Cooling	453	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	1.66	mM	313.7399992370429	0.0015375687758761442	0.009999999999990905	321.38190032645855	0.9711127276713019	-155905.67146174138	10825.598675342888	0.0013238959525185658	2.5290159271783144e-05	-0.08048464977248607	0.007487117031867631	0.0008076694664986463	1.2235707986421476e-05	0.09006142841303616	0.004205703288848778	-485.11030429334375	35.15037858289938
+453	6	1.66 mM NaCl	260.0	21.0	90.0	1	Heating	454	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	1.66	mM	316.38999999997975	0.0016062293064974984	0.01999999999998181	321.88215255701766	0.813954429014578	-143733.60753919816	11776.752172004426	0.0013156325659240688	2.7832182735063342e-05	-0.08158670894338697	0.008219555006370746	0.0009578958548005886	1.597650412652569e-05	0.04099507170927086	0.005520811759970361	-446.5410908849239	37.716338648247095
+454	7	1.66 mM NaCl	260.0	90.0	21.0	2	Cooling	455	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	1.66	mM	314.0099992370427	0.0016116153853854105	0.15999999999985448	320.77416807959327	1.1042370049226138	-159196.9350149139	12668.511628230312	0.0013730322086250475	2.9735452983769644e-05	-0.08237270799455927	0.008804949643299094	0.0008605447757600704	1.3170535472958255e-05	0.08679094023178312	0.00452175685075431	-496.2897603881014	41.2019871361201
+455	8	1.66 mM NaCl	260.0	21.0	90.0	2	Heating	456	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	1.66	mM	316.93999999997925	0.0016629448890553146	0.009999999999990905	322.6768483185238	0.4472961772331145	-197273.05409614902	13275.384438870364	0.00140583198833055	1.3401876428486601e-05	-0.09561075872523359	0.004008212682978725	0.0010135531200812155	8.513022263634005e-06	0.036415583185039194	0.0029101543250030426	-611.3641407003423	41.98889803376464
+456	9	0.8 mM NaCl	260.0	90.0	21.0	1	Cooling	457	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.8	mM	306.7499992370493	0.001144525792065822	0.06999999999993634	303.6341372681194	2.7473449291091323	-106155.39768407782	7191.025332720686	-0.0001493410672179058	0.00043993059810723496	0.3487246846651675	0.1267256837245752	0.00021877954828309053	2.5541741045116236e-05	0.26819970558386236	0.008873562738861073	-349.6161486952271	26.846590964095352
+457	10	0.8 mM NaCl	260.0	21.0	90.0	1	Heating	458	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.8	mM	308.91999999998654	0.00118285750955862	0.01999999999998181	309.15747023705245	0.41376643958942955	-185618.60068709083	6804.565894020417	0.0005736133688990523	3.777086114211451e-05	0.1396553486907384	0.01112199735638437	0.0005568198455516693	4.612849355252675e-06	0.15562104953699366	0.001556598011040544	-600.4014735428007	22.81359033195753
+458	11	0.8 mM NaCl	260.0	90.0	21.0	2	Cooling	459	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.8	mM	306.9199992370491	0.0011781012857931688	0.05999999999994543	305.5463613600456	1.6925625653194913	-125034.81596156789	6665.546629099353	0.000272551487862028	0.00021198367163096732	0.23938553626472248	0.06148673703335495	0.00034667355945503897	1.4180923069225502e-05	0.23809006430658103	0.004868835719774549	-409.2171656210007	24.082015743741685
+459	12	0.8 mM NaCl	260.0	21.0	90.0	2	Heating	460	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.8	mM	308.66999999998677	0.001171650220895269	0.07999999999992724	328.0225609325443	6.239480589262067	-78534.65464185581	15007.946474426353	0.0012007007962383201	0.00012812389931240813	-0.03496354893358366	0.03788337984393678	0.0006199326017732617	0.00015175092234651059	0.14258435334356692	0.057321029731074294	-239.41845468978565	50.30688507601731
+460	13	0.08 mM NaCl	260.0	90.0	21.0	1	Cooling	461	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.08	mM	309.6099992370467	0.0009245783779453649	0.049999999999954525	315.71583413647545	0.6285062337113744	-156074.0797933634	9464.035217219682	0.0006707752083414923	2.9819491713325188e-05	0.11101299838681032	0.008760126820795428	0.00029494998518180584	1.380898444145138e-05	0.23717428294955822	0.004657089139223077	-494.3498643970349	30.960554181144538
+461	14	0.08 mM NaCl	260.0	21.0	90.0	1	Heating	462	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.08	mM	316.62999999997953	0.0009043686842143056	0.029999999999972715	328.359060256424	0.5421574518341434	-152606.28815175945	10721.830929307856	0.0007519872907774392	1.4032480436948588e-05	0.08499770984255635	0.004178441776916714	0.00023413514111067247	1.883663951521086e-05	0.26035802472955055	0.00649341448486881	-464.75430899511434	33.42012531230861
+462	15	0.08 mM NaCl	260.0	90.0	21.0	2	Cooling	463	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.08	mM	314.93999923704183	0.001006659350626173	0.03999999999996362	323.1405937019033	0.6511100397448687	-141714.89821176697	6434.2298989434	0.000765383964080145	2.6994222083261465e-05	0.08907042254135433	0.00804317266388803	0.00022758530615910952	1.4005928153466718e-05	0.2704611645780712	0.004845065496378267	-438.5549230701072	20.795212806141187
+463	16	0.08 mM NaCl	260.0	21.0	90.0	2	Heating	464	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.08	mM	323.0499999999737	0.0011608321897668226	0.07999999999992724	327.5883054994459	0.14793789328510526	-284140.27573642717	10081.003319684745	0.0008760552579626981	5.5911532246564265e-06	0.053453620625300395	0.0017141886067970585	0.0003078764835503027	7.390004455678184e-06	0.24593136040717373	0.0025229913119505384	-867.3700219646815	31.165093631372397
+464	17	4.15 mM NaCl	400.0	90.0	21.0	1	Cooling	465	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	4.15	mM																	
+465	18	4.15 mM NaCl	400.0	21.0	90.0	1	Heating	466	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	4.15	mM																	
+466	19	4.15 mM NaCl	400.0	90.0	21.0	2	Cooling	467	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	4.15	mM																	
+467	20	4.15 mM NaCl	400.0	21.0	90.0	2	Heating	468	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	4.15	mM																	
+468	21	1.66 mM NaCl	400.0	90.0	21.0	1	Cooling	469	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	1.66	mM																	
+469	22	1.66 mM NaCl	400.0	21.0	90.0	1	Heating	470	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	1.66	mM																	
+470	23	1.66 mM NaCl	400.0	90.0	21.0	2	Cooling	471	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	1.66	mM																	
+471	24	1.66 mM NaCl	400.0	21.0	90.0	2	Heating	472	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	1.66	mM																	
+472	25	0.8 mM NaCl	400.0	90.0	21.0	1	Cooling	473	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.8	mM																	
+473	26	0.8 mM NaCl	400.0	21.0	90.0	1	Heating	474	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.8	mM																	
+474	27	0.8 mM NaCl	400.0	90.0	21.0	2	Cooling	475	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.8	mM																	
+475	28	0.8 mM NaCl	400.0	21.0	90.0	2	Heating	476	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.8	mM																	
+476	29	0.08 mM NaCl	400.0	90.0	21.0	1	Cooling	477	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.08	mM																	
+477	30	0.08 mM NaCl	400.0	21.0	90.0	1	Heating	478	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.08	mM																	
+478	31	0.08 mM NaCl	400.0	90.0	21.0	2	Cooling	479	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.08	mM																	
+479	32	0.08 mM NaCl	400.0	21.0	90.0	2	Heating	480	2023-11-01_RNA_melting_HEPES_NaCl.csv	RNA	0.0	0.0	Na(I)	0.08	mM																	
+480	1	10 mM EDTA	260.0	90.0	21.0	1	Cooling	481	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+481	2	10 mM EDTA	260.0	21.0	90.0	1	Heating	482	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+482	3	10 mM EDTA	260.0	90.0	21.0	2	Cooling	483	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+483	4	10 mM EDTA	260.0	21.0	90.0	2	Heating	484	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+484	5	5 mM EDTA	260.0	90.0	21.0	1	Cooling	485	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+485	6	5 mM EDTA	260.0	21.0	90.0	1	Heating	486	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+486	7	5 mM EDTA	260.0	90.0	21.0	2	Cooling	487	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+487	8	5 mM EDTA	260.0	21.0	90.0	2	Heating	488	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+488	9	1 mM EDTA	260.0	90.0	21.0	1	Cooling	489	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+489	10	1 mM EDTA	260.0	21.0	90.0	1	Heating	490	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+490	11	1 mM EDTA	260.0	90.0	21.0	2	Cooling	491	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+491	12	1 mM EDTA	260.0	21.0	90.0	2	Heating	492	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+492	13	0 mM EDTA	260.0	90.0	21.0	1	Cooling	493	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	0.0	mM																	
+493	14	0 mM EDTA	260.0	21.0	90.0	1	Heating	494	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	0.0	mM																	
+494	15	0 mM EDTA	260.0	90.0	21.0	2	Cooling	495	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	0.0	mM																	
+495	16	0 mM EDTA	260.0	21.0	90.0	2	Heating	496	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	0.0	mM																	
+496	17	10 mM EDTA	400.0	90.0	21.0	1	Cooling	497	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+497	18	10 mM EDTA	400.0	21.0	90.0	1	Heating	498	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+498	19	10 mM EDTA	400.0	90.0	21.0	2	Cooling	499	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+499	20	10 mM EDTA	400.0	21.0	90.0	2	Heating	500	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	10.0	mM																	
+500	21	5 mM EDTA	400.0	90.0	21.0	1	Cooling	501	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+501	22	5 mM EDTA	400.0	21.0	90.0	1	Heating	502	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+502	23	5 mM EDTA	400.0	90.0	21.0	2	Cooling	503	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+503	24	5 mM EDTA	400.0	21.0	90.0	2	Heating	504	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	5.0	mM																	
+504	25	1 mM EDTA	400.0	90.0	21.0	1	Cooling	505	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+505	26	1 mM EDTA	400.0	21.0	90.0	1	Heating	506	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+506	27	1 mM EDTA	400.0	90.0	21.0	2	Cooling	507	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+507	28	1 mM EDTA	400.0	21.0	90.0	2	Heating	508	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	1.0	mM																	
+508	29	0 mM EDTA	400.0	90.0	21.0	1	Cooling	509	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	0.0	mM																	
+509	30	0 mM EDTA	400.0	21.0	90.0	1	Heating	510	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	0.0	mM																	
+510	31	0 mM EDTA	400.0	90.0	21.0	2	Cooling	511	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	0.0	mM																	
+511	32	0 mM EDTA	400.0	21.0	90.0	2	Heating	512	2023-11-08_RNA_melting_EDTA_HEPES_KCl.csv	RNA	16.0	20.0	K(I)	0.0	mM																	
+512	1	1 mM EDTA1	260.0	90.0	21.0	1	Cooling	513	2023-11-09_RNA_melting_H2O.csv																							
+513	2	1 mM EDTA1	260.0	21.0	90.0	1	Heating	514	2023-11-09_RNA_melting_H2O.csv																							
+514	3	1 mM EDTA1	260.0	90.0	21.0	2	Cooling	515	2023-11-09_RNA_melting_H2O.csv																							
+515	4	1 mM EDTA1	260.0	21.0	90.0	2	Heating	516	2023-11-09_RNA_melting_H2O.csv																							
+516	5	1 mM EDTA2	260.0	90.0	21.0	1	Cooling	517	2023-11-09_RNA_melting_H2O.csv																							
+517	6	1 mM EDTA2	260.0	21.0	90.0	1	Heating	518	2023-11-09_RNA_melting_H2O.csv																							
+518	7	1 mM EDTA2	260.0	90.0	21.0	2	Cooling	519	2023-11-09_RNA_melting_H2O.csv																							
+519	8	1 mM EDTA2	260.0	21.0	90.0	2	Heating	520	2023-11-09_RNA_melting_H2O.csv																							
+520	9	0 mM EDTA1	260.0	90.0	21.0	1	Cooling	521	2023-11-09_RNA_melting_H2O.csv																							
+521	10	0 mM EDTA1	260.0	21.0	90.0	1	Heating	522	2023-11-09_RNA_melting_H2O.csv																							
+522	11	0 mM EDTA1	260.0	90.0	21.0	2	Cooling	523	2023-11-09_RNA_melting_H2O.csv																							
+523	12	0 mM EDTA1	260.0	21.0	90.0	2	Heating	524	2023-11-09_RNA_melting_H2O.csv																							
+524	13	0 mM EDTA2	260.0	90.0	21.0	1	Cooling	525	2023-11-09_RNA_melting_H2O.csv																							
+525	14	0 mM EDTA2	260.0	21.0	90.0	1	Heating	526	2023-11-09_RNA_melting_H2O.csv																							
+526	15	0 mM EDTA2	260.0	90.0	21.0	2	Cooling	527	2023-11-09_RNA_melting_H2O.csv																							
+527	16	0 mM EDTA2	260.0	21.0	90.0	2	Heating	528	2023-11-09_RNA_melting_H2O.csv																							
+528	17	1 mM EDTA1	400.0	90.0	21.0	1	Cooling	529	2023-11-09_RNA_melting_H2O.csv																							
+529	18	1 mM EDTA1	400.0	21.0	90.0	1	Heating	530	2023-11-09_RNA_melting_H2O.csv																							
+530	19	1 mM EDTA1	400.0	90.0	21.0	2	Cooling	531	2023-11-09_RNA_melting_H2O.csv																							
+531	20	1 mM EDTA1	400.0	21.0	90.0	2	Heating	532	2023-11-09_RNA_melting_H2O.csv																							
+532	21	1 mM EDTA2	400.0	90.0	21.0	1	Cooling	533	2023-11-09_RNA_melting_H2O.csv																							
+533	22	1 mM EDTA2	400.0	21.0	90.0	1	Heating	534	2023-11-09_RNA_melting_H2O.csv																							
+534	23	1 mM EDTA2	400.0	90.0	21.0	2	Cooling	535	2023-11-09_RNA_melting_H2O.csv																							
+535	24	1 mM EDTA2	400.0	21.0	90.0	2	Heating	536	2023-11-09_RNA_melting_H2O.csv																							
+536	25	0 mM EDTA1	400.0	90.0	21.0	1	Cooling	537	2023-11-09_RNA_melting_H2O.csv																							
+537	26	0 mM EDTA1	400.0	21.0	90.0	1	Heating	538	2023-11-09_RNA_melting_H2O.csv																							
+538	27	0 mM EDTA1	400.0	90.0	21.0	2	Cooling	539	2023-11-09_RNA_melting_H2O.csv																							
+539	28	0 mM EDTA1	400.0	21.0	90.0	2	Heating	540	2023-11-09_RNA_melting_H2O.csv																							
+540	29	0 mM EDTA2	400.0	90.0	21.0	1	Cooling	541	2023-11-09_RNA_melting_H2O.csv																							
+541	30	0 mM EDTA2	400.0	21.0	90.0	1	Heating	542	2023-11-09_RNA_melting_H2O.csv																							
+542	31	0 mM EDTA2	400.0	90.0	21.0	2	Cooling	543	2023-11-09_RNA_melting_H2O.csv																							
+543	32	0 mM EDTA2	400.0	21.0	90.0	2	Heating	544	2023-11-09_RNA_melting_H2O.csv																							
+544	1	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	545	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+545	2	10 mM MgCl2	260.0	21.0	90.0	1	Heating	546	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+546	3	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	547	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+547	4	10 mM MgCl2	260.0	21.0	90.0	2	Heating	548	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+548	5	5 mM MgCl2	260.0	90.0	21.0	1	Cooling	549	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+549	6	5 mM MgCl2	260.0	21.0	90.0	1	Heating	550	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+550	7	5 mM MgCl2	260.0	90.0	21.0	2	Cooling	551	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+551	8	5 mM MgCl2	260.0	21.0	90.0	2	Heating	552	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+552	9	1 mM MgCl2	260.0	90.0	21.0	1	Cooling	553	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+553	10	1 mM MgCl2	260.0	21.0	90.0	1	Heating	554	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+554	11	1 mM MgCl2	260.0	90.0	21.0	2	Cooling	555	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+555	12	1 mM MgCl2	260.0	21.0	90.0	2	Heating	556	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+556	13	0.1 mM MgCl2	260.0	90.0	21.0	1	Cooling	557	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+557	14	0.1 mM MgCl2	260.0	21.0	90.0	1	Heating	558	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+558	15	0.1 mM MgCl2	260.0	90.0	21.0	2	Cooling	559	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+559	16	0.1 mM MgCl2	260.0	21.0	90.0	2	Heating	560	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+560	17	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	561	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+561	18	10 mM MgCl2	400.0	21.0	90.0	1	Heating	562	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+562	19	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	563	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+563	20	10 mM MgCl2	400.0	21.0	90.0	2	Heating	564	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+564	21	5 mM MgCl2	400.0	90.0	21.0	1	Cooling	565	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+565	22	5 mM MgCl2	400.0	21.0	90.0	1	Heating	566	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+566	23	5 mM MgCl2	400.0	90.0	21.0	2	Cooling	567	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+567	24	5 mM MgCl2	400.0	21.0	90.0	2	Heating	568	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+568	25	1 mM MgCl2	400.0	90.0	21.0	1	Cooling	569	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+569	26	1 mM MgCl2	400.0	21.0	90.0	1	Heating	570	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+570	27	1 mM MgCl2	400.0	90.0	21.0	2	Cooling	571	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+571	28	1 mM MgCl2	400.0	21.0	90.0	2	Heating	572	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+572	29	0.1 mM MgCl2	400.0	90.0	21.0	1	Cooling	573	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+573	30	0.1 mM MgCl2	400.0	21.0	90.0	1	Heating	574	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+574	31	0.1 mM MgCl2	400.0	90.0	21.0	2	Cooling	575	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+575	32	0.1 mM MgCl2	400.0	21.0	90.0	2	Heating	576	2023-11-09_RNA_melting_MgCl2_KCl.csv																							
+576	1	500 mM MgCl2	260.0	90.0	21.0	1	Cooling	577	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+577	2	500 mM MgCl2	260.0	21.0	90.0	1	Heating	578	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+578	3	500 mM MgCl2	260.0	90.0	21.0	2	Cooling	579	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+579	4	500 mM MgCl2	260.0	21.0	90.0	2	Heating	580	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+580	5	50 mM MgCl2	260.0	90.0	21.0	1	Cooling	581	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+581	6	50 mM MgCl2	260.0	21.0	90.0	1	Heating	582	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+582	7	50 mM MgCl2	260.0	90.0	21.0	2	Cooling	583	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+583	8	50 mM MgCl2	260.0	21.0	90.0	2	Heating	584	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+584	9	25 mM MgCl2	260.0	90.0	21.0	1	Cooling	585	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+585	10	25 mM MgCl2	260.0	21.0	90.0	1	Heating	586	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+586	11	25 mM MgCl2	260.0	90.0	21.0	2	Cooling	587	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+587	12	25 mM MgCl2	260.0	21.0	90.0	2	Heating	588	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+588	13	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	589	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+589	14	10 mM MgCl2	260.0	21.0	90.0	1	Heating	590	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+590	15	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	591	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+591	16	10 mM MgCl2	260.0	21.0	90.0	2	Heating	592	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+592	17	500 mM MgCl2	400.0	90.0	21.0	1	Cooling	593	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+593	18	500 mM MgCl2	400.0	21.0	90.0	1	Heating	594	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+594	19	500 mM MgCl2	400.0	90.0	21.0	2	Cooling	595	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+595	20	500 mM MgCl2	400.0	21.0	90.0	2	Heating	596	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+596	21	50 mM MgCl2	400.0	90.0	21.0	1	Cooling	597	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+597	22	50 mM MgCl2	400.0	21.0	90.0	1	Heating	598	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+598	23	50 mM MgCl2	400.0	90.0	21.0	2	Cooling	599	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+599	24	50 mM MgCl2	400.0	21.0	90.0	2	Heating	600	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+600	25	25 mM MgCl2	400.0	90.0	21.0	1	Cooling	601	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+601	26	25 mM MgCl2	400.0	21.0	90.0	1	Heating	602	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+602	27	25 mM MgCl2	400.0	90.0	21.0	2	Cooling	603	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+603	28	25 mM MgCl2	400.0	21.0	90.0	2	Heating	604	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+604	29	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	605	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+605	30	10 mM MgCl2	400.0	21.0	90.0	1	Heating	606	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+606	31	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	607	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+607	32	10 mM MgCl2	400.0	21.0	90.0	2	Heating	608	2023-11-10_RNA_melting_MgCl2_KCl.csv																							
+608	1	500 mM MgCl2	260.0	90.0	21.0	1	Cooling	609	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+609	2	500 mM MgCl2	260.0	21.0	90.0	1	Heating	610	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+610	3	500 mM MgCl2	260.0	90.0	21.0	2	Cooling	611	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+611	4	500 mM MgCl2	260.0	21.0	90.0	2	Heating	612	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+612	5	50 mM MgCl2	260.0	90.0	21.0	1	Cooling	613	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+613	6	50 mM MgCl2	260.0	21.0	90.0	1	Heating	614	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+614	7	50 mM MgCl2	260.0	90.0	21.0	2	Cooling	615	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+615	8	50 mM MgCl2	260.0	21.0	90.0	2	Heating	616	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+616	9	25 mM MgCl2	260.0	90.0	21.0	1	Cooling	617	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+617	10	25 mM MgCl2	260.0	21.0	90.0	1	Heating	618	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+618	11	25 mM MgCl2	260.0	90.0	21.0	2	Cooling	619	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+619	12	25 mM MgCl2	260.0	21.0	90.0	2	Heating	620	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+620	13	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	621	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+621	14	10 mM MgCl2	260.0	21.0	90.0	1	Heating	622	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+622	15	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	623	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+623	16	10 mM MgCl2	260.0	21.0	90.0	2	Heating	624	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+624	17	500 mM MgCl2	400.0	90.0	21.0	1	Cooling	625	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+625	18	500 mM MgCl2	400.0	21.0	90.0	1	Heating	626	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+626	19	500 mM MgCl2	400.0	90.0	21.0	2	Cooling	627	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+627	20	500 mM MgCl2	400.0	21.0	90.0	2	Heating	628	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+628	21	50 mM MgCl2	400.0	90.0	21.0	1	Cooling	629	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+629	22	50 mM MgCl2	400.0	21.0	90.0	1	Heating	630	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+630	23	50 mM MgCl2	400.0	90.0	21.0	2	Cooling	631	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+631	24	50 mM MgCl2	400.0	21.0	90.0	2	Heating	632	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+632	25	25 mM MgCl2	400.0	90.0	21.0	1	Cooling	633	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+633	26	25 mM MgCl2	400.0	21.0	90.0	1	Heating	634	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+634	27	25 mM MgCl2	400.0	90.0	21.0	2	Cooling	635	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+635	28	25 mM MgCl2	400.0	21.0	90.0	2	Heating	636	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+636	29	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	637	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+637	30	10 mM MgCl2	400.0	21.0	90.0	1	Heating	638	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+638	31	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	639	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+639	32	10 mM MgCl2	400.0	21.0	90.0	2	Heating	640	2023-11-15_RNA_melting_MgCl2_KCl.csv																							
+640	1	10_mM_MgCl2	260.0	90.0	21.0	1	Cooling	641	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+641	2	10 mM MgCl2	260.0	21.0	90.0	1	Heating	642	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+642	3	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	643	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+643	4	10 mM MgCl2	260.0	21.0	90.0	2	Heating	644	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+644	5	5 mM MgCl2	260.0	90.0	21.0	1	Cooling	645	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+645	6	5 mM MgCl2	260.0	21.0	90.0	1	Heating	646	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+646	7	5 mM MgCl2	260.0	90.0	21.0	2	Cooling	647	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+647	8	5 mM MgCl2	260.0	21.0	90.0	2	Heating	648	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+648	9	1 mM MgCl2	260.0	90.0	21.0	1	Cooling	649	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+649	10	1 mM MgCl2	260.0	21.0	90.0	1	Heating	650	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+650	11	1 mM MgCl2	260.0	90.0	21.0	2	Cooling	651	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+651	12	1 mM MgCl2	260.0	21.0	90.0	2	Heating	652	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+652	13	0.1 mM MgCl2	260.0	90.0	21.0	1	Cooling	653	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+653	14	0.1 mM MgCl2	260.0	21.0	90.0	1	Heating	654	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+654	15	0.1 mM MgCl2	260.0	90.0	21.0	2	Cooling	655	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+655	16	0.1 mM MgCl2	260.0	21.0	90.0	2	Heating	656	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+656	17	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	657	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+657	18	10 mM MgCl2	400.0	21.0	90.0	1	Heating	658	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+658	19	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	659	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+659	20	10 mM MgCl2	400.0	21.0	90.0	2	Heating	660	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+660	21	5 mM MgCl2	400.0	90.0	21.0	1	Cooling	661	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+661	22	5 mM MgCl2	400.0	21.0	90.0	1	Heating	662	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+662	23	5 mM MgCl2	400.0	90.0	21.0	2	Cooling	663	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+663	24	5 mM MgCl2	400.0	21.0	90.0	2	Heating	664	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+664	25	1 mM MgCl2	400.0	90.0	21.0	1	Cooling	665	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+665	26	1 mM MgCl2	400.0	21.0	90.0	1	Heating	666	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+666	27	1 mM MgCl2	400.0	90.0	21.0	2	Cooling	667	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+667	28	1 mM MgCl2	400.0	21.0	90.0	2	Heating	668	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+668	29	0.1 mM MgCl2	400.0	90.0	21.0	1	Cooling	669	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+669	30	0.1 mM MgCl2	400.0	21.0	90.0	1	Heating	670	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+670	31	0.1 mM MgCl2	400.0	90.0	21.0	2	Cooling	671	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+671	32	0.1 mM MgCl2	400.0	21.0	90.0	2	Heating	672	2023-11-17_RNA_melting_MgCl2_NaCl.csv																							
+672	1	500 mM MgCl2	260.0	90.0	21.0	1	Cooling	673	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+673	2	500 mM MgCl2	260.0	21.0	90.0	1	Heating	674	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+674	3	500 mM MgCl2	260.0	90.0	21.0	2	Cooling	675	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+675	4	500 mM MgCl2	260.0	21.0	90.0	2	Heating	676	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+676	5	100 mM MgCl2	260.0	90.0	21.0	1	Cooling	677	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+677	6	100 mM MgCl2	260.0	21.0	90.0	1	Heating	678	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+678	7	100 mM MgCl2	260.0	90.0	21.0	2	Cooling	679	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+679	8	100 mM MgCl2	260.0	21.0	90.0	2	Heating	680	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+680	9	25 mM MgCl2	260.0	90.0	21.0	1	Cooling	681	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+681	10	25 mM MgCl2	260.0	21.0	90.0	1	Heating	682	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+682	11	25 mM MgCl2	260.0	90.0	21.0	2	Cooling	683	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+683	12	25 mM MgCl2	260.0	21.0	90.0	2	Heating	684	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+684	13	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	685	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+685	14	10 mM MgCl2	260.0	21.0	90.0	1	Heating	686	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+686	15	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	687	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+687	16	10 mM MgCl2	260.0	21.0	90.0	2	Heating	688	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+688	17	500 mM MgCl2	400.0	90.0	21.0	1	Cooling	689	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+689	18	500 mM MgCl2	400.0	21.0	90.0	1	Heating	690	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+690	19	500 mM MgCl2	400.0	90.0	21.0	2	Cooling	691	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+691	20	500 mM MgCl2	400.0	21.0	90.0	2	Heating	692	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+692	21	100 mM MgCl2	400.0	90.0	21.0	1	Cooling	693	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+693	22	100 mM MgCl2	400.0	21.0	90.0	1	Heating	694	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+694	23	100 mM MgCl2	400.0	90.0	21.0	2	Cooling	695	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+695	24	100 mM MgCl2	400.0	21.0	90.0	2	Heating	696	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+696	25	25 mM MgCl2	400.0	90.0	21.0	1	Cooling	697	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+697	26	25 mM MgCl2	400.0	21.0	90.0	1	Heating	698	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+698	27	25 mM MgCl2	400.0	90.0	21.0	2	Cooling	699	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+699	28	25 mM MgCl2	400.0	21.0	90.0	2	Heating	700	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+700	29	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	701	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+701	30	10 mM MgCl2	400.0	21.0	90.0	1	Heating	702	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+702	31	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	703	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+703	32	10 mM MgCl2	400.0	21.0	90.0	2	Heating	704	2023-11-20_RNA_melting_MgCl2_NaCl.csv																							
+704	1	50 mM MgCl2	260.0	90.0	21.0	1	Cooling	705	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+705	2	50 mM MgCl2	260.0	21.0	90.0	1	Heating	706	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+706	3	50 mM MgCl2	260.0	90.0	21.0	2	Cooling	707	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+707	4	50 mM MgCl2	260.0	21.0	90.0	2	Heating	708	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+708	5	10 mM CaCl2	260.0	90.0	21.0	1	Cooling	709	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+709	6	10 mM CaCl2	260.0	21.0	90.0	1	Heating	710	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+710	7	10 mM CaCl2	260.0	90.0	21.0	2	Cooling	711	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+711	8	10 mM CaCl2	260.0	21.0	90.0	2	Heating	712	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+712	9	1 mM CaCl2	260.0	90.0	21.0	1	Cooling	713	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+713	10	1 mM CaCl2	260.0	21.0	90.0	1	Heating	714	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+714	11	1 mM CaCl2	260.0	90.0	21.0	2	Cooling	715	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+715	12	1 mM CaCl2	260.0	21.0	90.0	2	Heating	716	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+716	13	0.1 mM CaCl2	260.0	90.0	21.0	1	Cooling	717	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+717	14	0.1 mM CaCl2	260.0	21.0	90.0	1	Heating	718	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+718	15	0.1 mM CaCl2	260.0	90.0	21.0	2	Cooling	719	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+719	16	0.1 mM CaCl2	260.0	21.0	90.0	2	Heating	720	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+720	17	50 mM MgCl2	400.0	90.0	21.0	1	Cooling	721	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+721	18	50 mM MgCl2	400.0	21.0	90.0	1	Heating	722	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+722	19	50 mM MgCl2	400.0	90.0	21.0	2	Cooling	723	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+723	20	50 mM MgCl2	400.0	21.0	90.0	2	Heating	724	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+724	21	10 mM CaCl2	400.0	90.0	21.0	1	Cooling	725	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+725	22	10 mM CaCl2	400.0	21.0	90.0	1	Heating	726	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+726	23	10 mM CaCl2	400.0	90.0	21.0	2	Cooling	727	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+727	24	10 mM CaCl2	400.0	21.0	90.0	2	Heating	728	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+728	25	1 mM CaCl2	400.0	90.0	21.0	1	Cooling	729	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+729	26	1 mM CaCl2	400.0	21.0	90.0	1	Heating	730	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+730	27	1 mM CaCl2	400.0	90.0	21.0	2	Cooling	731	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+731	28	1 mM CaCl2	400.0	21.0	90.0	2	Heating	732	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+732	29	0.1 mM CaCl2	400.0	90.0	21.0	1	Cooling	733	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+733	30	0.1 mM CaCl2	400.0	21.0	90.0	1	Heating	734	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+734	31	0.1 mM CaCl2	400.0	90.0	21.0	2	Cooling	735	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+735	32	0.1 mM CaCl2	400.0	21.0	90.0	2	Heating	736	2023-11-23_RNA_melting_CaCl2_KCl.csv																							
+736	1	500 mM CaCl2	260.0	90.0	21.0	1	Cooling	737	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+737	2	500 mM CaCl2	260.0	21.0	90.0	1	Heating	738	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+738	3	500 mM CaCl2	260.0	90.0	21.0	2	Cooling	739	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+739	4	500 mM CaCl2	260.0	21.0	90.0	2	Heating	740	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+740	5	100 mM CaCl2	260.0	90.0	21.0	1	Cooling	741	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+741	6	100 mM CaCl2	260.0	21.0	90.0	1	Heating	742	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+742	7	100 mM CaCl2	260.0	90.0	21.0	2	Cooling	743	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+743	8	100 mM CaCl2	260.0	21.0	90.0	2	Heating	744	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+744	9	50 mM CaCl2	260.0	90.0	21.0	1	Cooling	745	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+745	10	50 mM CaCl2	260.0	21.0	90.0	1	Heating	746	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+746	11	50 mM CaCl2	260.0	90.0	21.0	2	Cooling	747	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+747	12	50 mM CaCl2	260.0	21.0	90.0	2	Heating	748	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+748	13	25 mM CaCl2	260.0	90.0	21.0	1	Cooling	749	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+749	14	25 mM CaCl2	260.0	21.0	90.0	1	Heating	750	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+750	15	25 mM CaCl2	260.0	90.0	21.0	2	Cooling	751	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+751	16	25 mM CaCl2	260.0	21.0	90.0	2	Heating	752	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+752	17	500 mM CaCl2	400.0	90.0	21.0	1	Cooling	753	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+753	18	500 mM CaCl2	400.0	21.0	90.0	1	Heating	754	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+754	19	500 mM CaCl2	400.0	90.0	21.0	2	Cooling	755	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+755	20	500 mM CaCl2	400.0	21.0	90.0	2	Heating	756	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+756	21	100 mM CaCl2	400.0	90.0	21.0	1	Cooling	757	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+757	22	100 mM CaCl2	400.0	21.0	90.0	1	Heating	758	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+758	23	100 mM CaCl2	400.0	90.0	21.0	2	Cooling	759	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+759	24	100 mM CaCl2	400.0	21.0	90.0	2	Heating	760	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+760	25	50 mM CaCl2	400.0	90.0	21.0	1	Cooling	761	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+761	26	50 mM CaCl2	400.0	21.0	90.0	1	Heating	762	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+762	27	50 mM CaCl2	400.0	90.0	21.0	2	Cooling	763	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+763	28	50 mM CaCl2	400.0	21.0	90.0	2	Heating	764	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+764	29	25 mM CaCl2	400.0	90.0	21.0	1	Cooling	765	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+765	30	25 mM CaCl2	400.0	21.0	90.0	1	Heating	766	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+766	31	25 mM CaCl2	400.0	90.0	21.0	2	Cooling	767	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+767	32	25 mM CaCl2	400.0	21.0	90.0	2	Heating	768	2023-11-24_RNA_melting_CaCl2_KCl.csv																							
+768	1	4.15 mM KCl	260.0	90.0	21.0	1	Cooling	769	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+769	2	4.15 mM KCl	260.0	21.0	90.0	1	Heating	770	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+770	3	4.15 mM KCl	260.0	90.0	21.0	2	Cooling	771	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+771	4	4.15 mM KCl	260.0	21.0	90.0	2	Heating	772	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+772	5	1.66 mM KCl	260.0	90.0	21.0	1	Cooling	773	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+773	6	1.66 mM KCl	260.0	21.0	90.0	1	Heating	774	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+774	7	1.66 mM KCl	260.0	90.0	21.0	2	Cooling	775	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+775	8	1.66 mM KCl	260.0	21.0	90.0	2	Heating	776	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+776	9	0.8 mM KCl	260.0	90.0	21.0	1	Cooling	777	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+777	10	0.8 mM KCl	260.0	21.0	90.0	1	Heating	778	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+778	11	0.8 mM KCl	260.0	90.0	21.0	2	Cooling	779	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+779	12	0.8 mM KCl	260.0	21.0	90.0	2	Heating	780	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+780	13	0.08 mM KCl	260.0	90.0	21.0	1	Cooling	781	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+781	14	0.08 mM KCl	260.0	21.0	90.0	1	Heating	782	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+782	15	0.08 mM KCl	260.0	90.0	21.0	2	Cooling	783	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+783	16	0.08 mM KCl	260.0	21.0	90.0	2	Heating	784	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+784	17	4.15 mM KCl	400.0	90.0	21.0	1	Cooling	785	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+785	18	4.15 mM KCl	400.0	21.0	90.0	1	Heating	786	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+786	19	4.15 mM KCl	400.0	90.0	21.0	2	Cooling	787	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+787	20	4.15 mM KCl	400.0	21.0	90.0	2	Heating	788	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	4.15	mM																	
+788	21	1.66 mM KCl	400.0	90.0	21.0	1	Cooling	789	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+789	22	1.66 mM KCl	400.0	21.0	90.0	1	Heating	790	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+790	23	1.66 mM KCl	400.0	90.0	21.0	2	Cooling	791	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+791	24	1.66 mM KCl	400.0	21.0	90.0	2	Heating	792	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	1.66	mM																	
+792	25	0.8 mM KCl	400.0	90.0	21.0	1	Cooling	793	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+793	26	0.8 mM KCl	400.0	21.0	90.0	1	Heating	794	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+794	27	0.8 mM KCl	400.0	90.0	21.0	2	Cooling	795	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+795	28	0.8 mM KCl	400.0	21.0	90.0	2	Heating	796	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.8	mM																	
+796	29	0.08 mM KCl	400.0	90.0	21.0	1	Cooling	797	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+797	30	0.08 mM KCl	400.0	21.0	90.0	1	Heating	798	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+798	31	0.08 mM KCl	400.0	90.0	21.0	2	Cooling	799	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+799	32	0.08 mM KCl	400.0	21.0	90.0	2	Heating	800	2024-01-22_RNA_melting_HEPES_KCl.csv	RNA	0.0	0.0	K(I)	0.08	mM																	
+800	1	26 mM KCl	260.0	90.0	21.0	1	Cooling	801	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	26.0	mM																	
+801	2	26 mM KCl	260.0	21.0	90.0	1	Heating	802	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	26.0	mM																	
+802	3	26 mM KCl	260.0	90.0	21.0	2	Cooling	803	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	26.0	mM																	
+803	4	26 mM KCl	260.0	21.0	90.0	2	Heating	804	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	26.0	mM																	
+804	5	21 mM KCl	260.0	90.0	21.0	1	Cooling	805	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	21.0	mM																	
+805	6	21 mM KCl	260.0	21.0	90.0	1	Heating	806	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	21.0	mM																	
+806	7	21 mM KCl	260.0	90.0	21.0	2	Cooling	807	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	21.0	mM																	
+807	8	21 mM KCl	260.0	21.0	90.0	2	Heating	808	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	21.0	mM																	
+808	9	17 mM KCl	260.0	90.0	21.0	1	Cooling	809	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	17.0	mM																	
+809	10	17 mM KCl	260.0	21.0	90.0	1	Heating	810	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	17.0	mM																	
+810	11	17 mM KCl	260.0	90.0	21.0	2	Cooling	811	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	17.0	mM																	
+811	12	17 mM KCl	260.0	21.0	90.0	2	Heating	812	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	17.0	mM																	
+812	13	8.3 mM KCl	260.0	90.0	21.0	1	Cooling	813	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	8.3	mM																	
+813	14	8.3 mM KCl	260.0	21.0	90.0	1	Heating	814	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	8.3	mM																	
+814	15	8.3 mM KCl	260.0	90.0	21.0	2	Cooling	815	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	8.3	mM																	
+815	16	8.3 mM KCl	260.0	21.0	90.0	2	Heating	816	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	8.3	mM																	
+816	17	26 mM KCl	400.0	90.0	21.0	1	Cooling	817	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	26.0	mM																	
+817	18	26 mM KCl	400.0	21.0	90.0	1	Heating	818	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	26.0	mM																	
+818	19	26 mM KCl	400.0	90.0	21.0	2	Cooling	819	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	26.0	mM																	
+819	20	26 mM KCl	400.0	21.0	90.0	2	Heating	820	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	26.0	mM																	
+820	21	21 mM KCl	400.0	90.0	21.0	1	Cooling	821	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	21.0	mM																	
+821	22	21 mM KCl	400.0	21.0	90.0	1	Heating	822	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	21.0	mM																	
+822	23	21 mM KCl	400.0	90.0	21.0	2	Cooling	823	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	21.0	mM																	
+823	24	21 mM KCl	400.0	21.0	90.0	2	Heating	824	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	21.0	mM																	
+824	25	17 mM KCl	400.0	90.0	21.0	1	Cooling	825	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	17.0	mM																	
+825	26	17 mM KCl	400.0	21.0	90.0	1	Heating	826	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	17.0	mM																	
+826	27	17 mM KCl	400.0	90.0	21.0	2	Cooling	827	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	17.0	mM																	
+827	28	17 mM KCl	400.0	21.0	90.0	2	Heating	828	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	17.0	mM																	
+828	29	8.3 mM KCl	400.0	90.0	21.0	1	Cooling	829	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	8.3	mM																	
+829	30	8.3 mM KCl	400.0	21.0	90.0	1	Heating	830	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	8.3	mM																	
+830	31	8.3 mM KCl	400.0	90.0	21.0	2	Cooling	831	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	8.3	mM																	
+831	32	8.3 mM KCl	400.0	21.0	90.0	2	Heating	832	2024-01-25_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	8.3	mM																	
+832	1	516 mM KCl	260.0	90.0	21.0	1	Cooling	833	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	516.0	mM																	
+833	2	516 mM KCl	260.0	21.0	90.0	1	Heating	834	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	516.0	mM																	
+834	3	516 mM KCl	260.0	90.0	21.0	2	Cooling	835	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	516.0	mM																	
+835	4	516 mM KCl	260.0	21.0	90.0	2	Heating	836	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	516.0	mM																	
+836	5	116 mM KCl	260.0	90.0	21.0	1	Cooling	837	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	116.0	mM																	
+837	6	116 mM KCl	260.0	21.0	90.0	1	Heating	838	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	116.0	mM																	
+838	7	116 mM KCl	260.0	90.0	21.0	2	Cooling	839	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	116.0	mM																	
+839	8	116 mM KCl	260.0	21.0	90.0	2	Heating	840	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	116.0	mM																	
+840	9	66 mM KCl	260.0	90.0	21.0	1	Cooling	841	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	66.0	mM																	
+841	10	66 mM KCl	260.0	21.0	90.0	1	Heating	842	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	66.0	mM																	
+842	11	66 mM KCl	260.0	90.0	21.0	2	Cooling	843	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	66.0	mM																	
+843	12	66 mM KCl	260.0	21.0	90.0	2	Heating	844	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	66.0	mM																	
+844	13	31 mM KCl	260.0	90.0	21.0	1	Cooling	845	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	31.0	mM																	
+845	14	31 mM KCl	260.0	21.0	90.0	1	Heating	846	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	31.0	mM																	
+846	15	31 mM KCl	260.0	90.0	21.0	2	Cooling	847	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	31.0	mM																	
+847	16	31 mM KCl	260.0	21.0	90.0	2	Heating	848	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	31.0	mM																	
+848	17	516 mM KCl	400.0	90.0	21.0	1	Cooling	849	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	516.0	mM																	
+849	18	516 mM KCl	400.0	21.0	90.0	1	Heating	850	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	516.0	mM																	
+850	19	516 mM KCl	400.0	90.0	21.0	2	Cooling	851	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	516.0	mM																	
+851	20	516 mM KCl	400.0	21.0	90.0	2	Heating	852	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	516.0	mM																	
+852	21	116 mM KCl	400.0	90.0	21.0	1	Cooling	853	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	116.0	mM																	
+853	22	116 mM KCl	400.0	21.0	90.0	1	Heating	854	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	116.0	mM																	
+854	23	116 mM KCl	400.0	90.0	21.0	2	Cooling	855	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	116.0	mM																	
+855	24	116 mM KCl	400.0	21.0	90.0	2	Heating	856	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	116.0	mM																	
+856	25	66 mM KCl	400.0	90.0	21.0	1	Cooling	857	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	66.0	mM																	
+857	26	66 mM KCl	400.0	21.0	90.0	1	Heating	858	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	66.0	mM																	
+858	27	66 mM KCl	400.0	90.0	21.0	2	Cooling	859	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	66.0	mM																	
+859	28	66 mM KCl	400.0	21.0	90.0	2	Heating	860	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	66.0	mM																	
+860	29	31 mM KCl	400.0	90.0	21.0	1	Cooling	861	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	31.0	mM																	
+861	30	31 mM KCl	400.0	21.0	90.0	1	Heating	862	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	31.0	mM																	
+862	31	31 mM KCl	400.0	90.0	21.0	2	Cooling	863	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	31.0	mM																	
+863	32	31 mM KCl	400.0	21.0	90.0	2	Heating	864	2024-01-26_RNA_melting_KCl.csv	RNA	16.0	20.0	K(I)	31.0	mM																	
+864	1	4.15 mM NaCl	260.0	90.0	21.0	1	Cooling	865	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	4.15	mM	323.9099992370337	0.003742080089276317	0.05999999999994543	319.4857339576746	0.25272203649102754	-220550.9858718433	11343.88911650249	0.0029467795055784247	2.0613380489746546e-05	-0.4849576402537478	0.006256945102026436	0.00332473435335433	1.1134994219719463e-05	-0.5951170304231622	0.003831174613897887	-690.3312493479344	36.05278674889767
+865	2	4.15 mM NaCl	260.0	21.0	90.0	1	Heating	866	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	4.15	mM	325.94999999997106	0.003955777944897982	0.08999999999991815	319.75451996449704	0.36421967190197085	-219120.60135067298	15520.060184898384	0.0029498635990653746	2.0309966384410898e-05	-0.4935902031164501	0.006198352897995197	0.0036270427863867444	1.635538087629079e-05	-0.7019590949975055	0.005640605428849411	-685.2775728549587	49.31799481488591
+866	3	4.15 mM NaCl	260.0	90.0	21.0	2	Cooling	867	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	4.15	mM	323.2999992370342	0.003938316186826914	0.03999999999996362	319.16884514238893	0.2598835047088985	-213721.8889896187	11034.416904027423	0.0030388001537104666	2.1488906834433806e-05	-0.4998005727399647	0.006520326175849251	0.00348056561815893	1.157433257593837e-05	-0.6301202013730975	0.003986207991010221	-669.6201469609986	35.11758840259919
+867	4	4.15 mM NaCl	260.0	21.0	90.0	2	Heating	868	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	4.15	mM	325.5599999999714	0.004126392422046738	0.029999999999972715	319.1687082561503	0.4963150036263725	-233045.64985065477	23533.41039181552	0.00305398512957239	2.5511450225913297e-05	-0.5124227123373395	0.007799525551434675	0.003769927594116739	1.955266581087073e-05	-0.7340155395506825	0.006726387675348055	-730.1644673249826	74.86887452915992
+868	5	1.66 mM NaCl	260.0	90.0	21.0	1	Cooling	869	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	1.66	mM	313.5599992370431	0.0018008399594853463	0.049999999999954525	322.5840992967775	1.4902228805283801	-135016.6397521731	13373.141183163289	0.0015143746289847048	5.865264996671514e-05	-0.08721068132821483	0.017274553118557624	0.0007783711107102496	3.4208869214073793e-05	0.1582172664916923	0.011835949650018038	-418.5471015047079	43.389831305749865
+869	6	1.66 mM NaCl	260.0	21.0	90.0	1	Heating	870	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	1.66	mM	315.2199999999808	0.0018536963765819721	0.009999999999990905	319.0714996680483	0.3089320145918198	-367868.342414346	37012.03657045881	0.0015699768860018258	1.2743340562879965e-05	-0.10748254091464153	0.0038488055248270814	0.0011562646663905377	6.321242320723861e-06	0.02933588768283958	0.0021345342686192696	-1152.933880954784	117.11548914857649
+870	7	1.66 mM NaCl	260.0	90.0	21.0	2	Cooling	871	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	1.66	mM	313.94999923704273	0.0017948678418612883	0.01999999999998181	321.3300222394204	0.8376863841200076	-179645.69850552524	13554.930911436395	0.001542246415698088	2.443720501798813e-05	-0.0977151604312514	0.00727137563319294	0.0009453723165663556	1.1257208343658144e-05	0.09876369893029792	0.00384599770978734	-559.0691378711969	43.64128635812372
+871	8	1.66 mM NaCl	260.0	21.0	90.0	2	Heating	872	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	1.66	mM	316.29999999997983	0.0018126506641712313	0.009999999999990905	321.16252495723904	0.7501302760727587	-427032.42640934186	119339.19822149222	0.0016226450882791343	1.4724355722622037e-05	-0.12528307674443692	0.004468144941398298	0.0012374662632306905	9.095368874690227e-06	0.0007432397627576344	0.003068545393500605	-1329.6458746741973	374.6906830570058
+872	9	0.8 mM NaCl	260.0	90.0	21.0	1	Cooling	873	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.8	mM	305.91999923705004	0.0013545076370700682	0.0	286.14079194466694	11.357298059643114	-81648.06898517483	5108.7579840296485	-0.008564762231545772	0.012380284789107635	2.79480799936838	3.5279461286693707	8.714793811948411e-05	3.5393181467480736e-05	0.3665628276194529	0.012689647643245977	-285.3422905216663	29.179605500358328
+873	10	0.8 mM NaCl	260.0	21.0	90.0	1	Heating	874	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.8	mM	309.4299999999861	0.001399555192544468	0.0	310.2454596943741	0.5788198900482082	-232215.3288026514	19569.790008613178	0.0008018923495485094	5.3822086385284214e-05	0.12052365596424493	0.015930473700252985	0.0006581370081857966	1.0929335281263202e-05	0.1739180559822985	0.00363318482730876	-748.4890480956885	64.47485283697429
+874	11	0.8 mM NaCl	260.0	90.0	21.0	2	Cooling	875	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.8	mM	306.0899992370499	0.0013984390876705536	0.0	306.8183565038839	0.8087649250542241	-146958.21260521113	5700.6948581655115	0.0005155675196126537	0.00010570569055827046	0.21554758182157766	0.030809581028281872	0.0004254300346177753	1.0934186826413032e-05	0.2617786737364269	0.003689745721888404	-478.9746424554323	19.842596180834395
+875	12	0.8 mM NaCl	260.0	21.0	90.0	2	Heating	876	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.8	mM	309.22999999998626	0.0014242112195553295	0.0	306.9473717214377	2.2081590531148882	-135171.7071878401	18261.116329271947	0.00037341097032644985	0.0002921613880198985	0.25561733001057296	0.08509221877143537	0.0006142375397337155	4.010361516194122e-05	0.20104848986736046	0.013629403011291145	-440.37421278365514	62.6606852051609
+876	13	0.08 mM NaCl	260.0	90.0	21.0	1	Cooling	877	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.08	mM	302.5799992370531	0.0012063943187975122	6.649999999993952	292.995095664933	3.5351412925873955	-96047.36585703513	3046.6052934082777	-0.0022644013245820254	0.001571530697980201	1.030350857146667	0.44883860084517696	0.00020299407705122677	1.618232768018591e-05	0.3549644054134276	0.0056100197965305906	-327.81219644329536	14.353372419851299
+877	14	0.08 mM NaCl	260.0	21.0	90.0	1	Heating	878	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.08	mM	306.5799999999887	0.0011660106970988518	0.01999999999998181	399.99999999998175	2.7896560633026666	-58582.6046407084	8574.427237026615	0.0013417644932077542	0.00015021990698319812	-0.005023199307150934	0.042852885153841974	0.011827856701352477	0.090901436562954	-4.1734564774046055	35.4579970463519	-146.4565116017777	22.457476331567705
+878	15	0.08 mM NaCl	260.0	90.0	21.0	2	Cooling	879	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.08	mM	304.6299992370512	0.0011900004873557541	0.049999999999954525	286.8557585293914	7.03423199855994	-77514.86527681293	2178.9209619515714	-0.006469071087747919	0.0058604792595884836	2.2238239905542043	1.6640681058321805	3.6756945870929485e-05	1.3641514179229842e-05	0.418724830739473	0.004989781640147743	-270.22244794458504	14.222229223941337
+879	16	0.08 mM NaCl	260.0	21.0	90.0	2	Heating	880	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.08	mM	307.5199999999878	0.0011794371258093334	1.369999999998754	374.5353849985627	43.46300354854548	-77667.28950609626	4963.056762390606	0.0011742976803794578	3.707425045951347e-05	0.047873349340503905	0.010852950605426476	0.0045874829865351395	0.013117745036863035	-1.3058235709443562	4.990501878353663	-207.36969754244802	37.315477314893656
+880	17	4.15 mM NaCl	400.0	90.0	21.0	1	Cooling	881	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	4.15	mM																	
+881	18	4.15 mM NaCl	400.0	21.0	90.0	1	Heating	882	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	4.15	mM																	
+882	19	4.15 mM NaCl	400.0	90.0	21.0	2	Cooling	883	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	4.15	mM																	
+883	20	4.15 mM NaCl	400.0	21.0	90.0	2	Heating	884	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	4.15	mM																	
+884	21	1.66 mM NaCl	400.0	90.0	21.0	1	Cooling	885	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	1.66	mM																	
+885	22	1.66 mM NaCl	400.0	21.0	90.0	1	Heating	886	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	1.66	mM																	
+886	23	1.66 mM NaCl	400.0	90.0	21.0	2	Cooling	887	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	1.66	mM																	
+887	24	1.66 mM NaCl	400.0	21.0	90.0	2	Heating	888	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	1.66	mM																	
+888	25	0.8 mM NaCl	400.0	90.0	21.0	1	Cooling	889	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.8	mM																	
+889	26	0.8 mM NaCl	400.0	21.0	90.0	1	Heating	890	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.8	mM																	
+890	27	0.8 mM NaCl	400.0	90.0	21.0	2	Cooling	891	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.8	mM																	
+891	28	0.8 mM NaCl	400.0	21.0	90.0	2	Heating	892	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.8	mM																	
+892	29	0.08 mM NaCl	400.0	90.0	21.0	1	Cooling	893	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.08	mM																	
+893	30	0.08 mM NaCl	400.0	21.0	90.0	1	Heating	894	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.08	mM																	
+894	31	0.08 mM NaCl	400.0	90.0	21.0	2	Cooling	895	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.08	mM																	
+895	32	0.08 mM NaCl	400.0	21.0	90.0	2	Heating	896	2024-01-29_RNA_melting_NaCl_HEPES.csv	RNA	0.0	0.0	Na(I)	0.08	mM																	
+896	1	26 mM NaCl	260.0	90.0	21.0	1	Cooling	897	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM	332.9099992370255	0.006480015882832056	0.009999999999990905	319.0421421406804	1.9764750940387072	-114015.73160745601	10315.586302999252	0.004687026959866047	0.00013951514347911967	-1.0022439748954792	0.041727135454953185	0.0062995115194408105	7.666549582144395e-05	-1.5156339971808872	0.027541093058646934	-357.36887560509547	34.54690001472366
+897	2	26 mM NaCl	260.0	21.0	90.0	1	Heating	898	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM	337.27999999996075	0.006782444053407866	0.6199999999994361	386.5499832675345	136.7666715267444	-43747.43325350726	8760.434225821306	0.001748829403932089	0.001142346283730869	-0.17208403488287516	0.306571225756956	-0.015916097050778177	0.10786422926930235	7.258415565303131	42.69801234813882	-113.17406583155714	62.70566695633796
+898	3	26 mM NaCl	260.0	90.0	21.0	2	Cooling	899	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM	334.3099992370242	0.00680575789259097	0.01999999999998181	321.74991909440894	4.120898880973698	-72324.06148686561	7529.208220357949	0.004039715561422241	0.000283457500969096	-0.7928759709636074	0.08166393273303724	0.0062637040039481545	0.0003204922250789207	-1.4655789817798497	0.11986894558336329	-224.7834644074737	26.279783289751357
+899	4	26 mM NaCl	260.0	21.0	90.0	2	Heating	900	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM	332.19999999996537	0.007003485084925094	0.0	399.99999721396387	120.99628703549284	-44830.956242829554	7746.457333475819	0.0018773779330986862	0.0009834166375808462	-0.19516833837165257	0.2648460679598348	-0.03257469362889707	0.2531607487273561	13.78819953909315	99.59797329538993	-112.07739138770305	53.26851425104904
+900	5	21 mM NaCl	260.0	90.0	21.0	1	Cooling	901	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM	331.5999992370267	0.006517116314916241	0.08999999999991815	319.1729810741096	4.552119254986794	-75062.795995226	9814.92447045914	0.0040583943038278855	0.00031647198621058246	-0.8291804171974129	0.09145636311976707	0.006058324178440558	0.0002734932945343629	-1.443031361897495	0.10174140708384086	-235.17904223163856	34.10529137002234
+901	6	21 mM NaCl	260.0	21.0	90.0	1	Heating	902	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM	334.3899999999634	0.0067518912132175325	0.009999999999990905	352.2248389055448	28.09300043090447	-52485.6872509762	7882.136241664129	0.0025516846059027588	0.0006390020560290412	-0.40974191404953225	0.1762970730164175	0.0004259255414959011	0.009428081428051868	0.7174155405870638	3.6349218958884904	-149.01188517556864	34.26313497256676
+902	7	21 mM NaCl	260.0	90.0	21.0	2	Cooling	903	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM	330.08999923702805	0.0065940276364463	0.03999999999996362	316.44162647464015	12.428776399290497	-58265.219247903515	5270.5213409909875	0.00431448179132392	0.0011373137258779494	-0.8933066001955026	0.31653123036755165	0.006922607837379838	0.0005926179525802895	-1.734616641219181	0.224067503290502	-184.12627914037387	23.887456836421684
+903	8	21 mM NaCl	260.0	21.0	90.0	2	Heating	904	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM	333.87999999996384	0.006685046402081361	0.049999999999954525	287.3571136166211	103.72234464959591	-87634.18819448819	9693.817345216708	0.04261427645980982	0.5129187928685569	-12.090284429149396	149.62137959918851	0.007237580990401661	0.00014422178349530955	-1.8718007487158066	0.05235871842077727	-304.9661346174494	143.8127608756456
+904	9	17 mM NaCl	260.0	90.0	21.0	1	Cooling	905	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM	331.06999923702716	0.0062128898184940235	0.06999999999993634	314.6908232268038	2.296021215578467	-168415.47352961326	22531.50234141625	0.005123682663902084	0.0003205433038392967	-1.1494167006879714	0.09720672861439028	0.006124842853603392	2.4213851624178407e-05	-1.4779619451021917	0.008464959740740314	-535.177580975194	75.50357261073597
+905	10	17 mM NaCl	260.0	21.0	90.0	1	Heating	906	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM	333.8099999999639	0.0065476221782534835	0.03999999999996362	298.95152925211806	19.53297461119693	-71293.17804422145	9339.80042364984	0.008777693212764556	0.010697232278118597	-2.172112154619541	3.0481249273637716	0.007061164034508323	0.00012182607306257416	-1.8126586044804731	0.045246256621054796	-238.4773820109714	46.82355399496817
+906	11	17 mM NaCl	260.0	90.0	21.0	2	Cooling	907	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM	329.2799992370288	0.00620119796703205	0.05999999999994543	319.643613195294	1.7880973883395253	-121782.44036222644	11446.968467471745	0.00438371831286129	0.00011026997681734653	-0.9276014669095742	0.03304990790596481	0.005860953027180558	9.506326178479005e-05	-1.3910016896732424	0.0337326639919234	-380.9944429824115	37.94295626526545
+907	12	17 mM NaCl	260.0	21.0	90.0	2	Heating	908	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM	333.8199999999639	0.006428797585119914	0.05999999999994543	317.1636134132466	4.065873424225293	-97316.52332731448	10274.152107385004	0.004552894106864271	0.0003981458225298957	-0.984545940678346	0.11736840091397596	0.00636188080075803	0.00012916667449225472	-1.5725479482942333	0.04683344590698612	-306.8338208157455	36.327305837826714
+908	13	8.3 mM NaCl	260.0	90.0	21.0	1	Cooling	909	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM	323.38999923703415	0.0037753018775808136	0.0	320.1267135656481	0.20643996849905094	-229263.2795816975	9398.73131317031	0.002856781348627715	1.6185331440029178e-05	-0.4659887077873655	0.004922871904844119	0.00322725638536199	6.757743910501809e-06	-0.5740443178362223	0.002341684731784122	-716.1641620847823	29.82124207598668
+909	14	8.3 mM NaCl	260.0	21.0	90.0	1	Heating	910	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM	326.51999999997054	0.0038841102507182557	0.03999999999996362	318.5041981632432	0.8730447852040755	-280575.6339345367	56992.294855065455	0.002916241255206907	2.9117583861427463e-05	-0.4911252140485564	0.008955725300721492	0.003625346251705739	1.6530778111365796e-05	-0.7133700163763583	0.005697575846924391	-880.91659561339	181.35200360988952
+910	15	8.3 mM NaCl	260.0	90.0	21.0	2	Cooling	911	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM	324.25999923703336	0.0038931604654683137	0.07999999999992724	320.34511111215596	0.2560026228361271	-196099.4958527803	8797.28693564938	0.0029476726649781608	2.1542957523214744e-05	-0.4795925978152318	0.006534671561427863	0.0033682942732887666	9.747763194811116e-06	-0.6019200410761584	0.0033974639379480576	-612.1507369723022	27.9511027928579
+911	16	8.3 mM NaCl	260.0	21.0	90.0	2	Heating	912	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM	326.61999999997045	0.004032942537116902	0.029999999999972715	317.39106130790947	1.184756393479246	-275251.9621451395	69325.73667488422	0.0030363894190778536	3.247648393206188e-05	-0.5138782643951356	0.00999240484182476	0.0037915281785866383	1.7911207106793956e-05	-0.7514518808585007	0.006168134827722939	-867.232873575196	221.6609254103609
+912	17	26 mM NaCl	400.0	90.0	21.0	1	Cooling	913	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM																	
+913	18	26 mM NaCl	400.0	21.0	90.0	1	Heating	914	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM																	
+914	19	26 mM NaCl	400.0	90.0	21.0	2	Cooling	915	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM																	
+915	20	26 mM NaCl	400.0	21.0	90.0	2	Heating	916	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	26.0	mM																	
+916	21	21 mM NaCl	400.0	90.0	21.0	1	Cooling	917	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM																	
+917	22	21 mM NaCl	400.0	21.0	90.0	1	Heating	918	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM																	
+918	23	21 mM NaCl	400.0	90.0	21.0	2	Cooling	919	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM																	
+919	24	21 mM NaCl	400.0	21.0	90.0	2	Heating	920	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	21.0	mM																	
+920	25	17 mM NaCl	400.0	90.0	21.0	1	Cooling	921	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM																	
+921	26	17 mM NaCl	400.0	21.0	90.0	1	Heating	922	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM																	
+922	27	17 mM NaCl	400.0	90.0	21.0	2	Cooling	923	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM																	
+923	28	17 mM NaCl	400.0	21.0	90.0	2	Heating	924	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	17.0	mM																	
+924	29	8.3 mM NaCl	400.0	90.0	21.0	1	Cooling	925	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM																	
+925	30	8.3 mM NaCl	400.0	21.0	90.0	1	Heating	926	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM																	
+926	31	8.3 mM NaCl	400.0	90.0	21.0	2	Cooling	927	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM																	
+927	32	8.3 mM NaCl	400.0	21.0	90.0	2	Heating	928	2024-01-31_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	8.3	mM																	
+928	1	516 mM NaCl	260.0	90.0	21.0	1	Cooling	929	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM	353.30999923700693	0.0061551982851910745	1.5999999999985448	399.9999999973013	36.47853884753378	-75393.41913748953	8377.140991218736	0.0030321413252135496	0.00021251831716509836	-0.5520649993188197	0.06197811676944577	-0.08755669806531444	0.4261413380144238	33.678058832321604	160.52837299434347	-188.48354784499548	38.13186353376575
+929	2	516 mM NaCl	260.0	21.0	90.0	1	Heating	930	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM	348.82999999995025	0.007089138458839045	0.049999999999954525	399.9999998291916	154.28471814253962	-31186.3395042274	23983.02902518489	0.0007651170631799968	0.0034554995567733426	0.07058090548364461	0.8976720622591643	0.00016895078883546634	0.12999593040759427	1.5255533689811702	59.13730045777346	-77.96584879386155	90.02992011616885
+930	3	516 mM NaCl	260.0	90.0	21.0	2	Cooling	931	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM	343.84999923701554	0.006106831354502436	0.0	399.9999999810892	141.71807620529856	-53841.01906556558	4722.958377104082	0.0023657119145054084	0.0002878814583121561	-0.3522410616560304	0.08075423459074829	-0.028520004396847418	0.08326784432031184	12.074484265303036	32.78292159783119	-134.60254767027754	59.49643121598234
+931	4	516 mM NaCl	260.0	21.0	90.0	2	Heating	932	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM	355.1599999999445	0.0074135475091183164	0.0	399.9999999967892	17.859989372631347	-33491.46975704653	20891.92584996633	0.0011905266254278232	0.0020060373025763056	-0.03651292813317358	0.530542589910952	-2.608957162150701e-05	0.10065924039889637	1.6050880390615243	45.04768487836488	-83.72867439328841	55.96829771248669
+932	5	116 mM NaCl	260.0	90.0	21.0	1	Cooling	933	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM	345.49999923701404	0.006647351310142587	0.0	356.69823387476515	19.53941212121306	-53376.01549706391	8325.570628493557	0.0028870735853521634	0.0005381064899958647	-0.5263879206103393	0.15141005020009154	0.0012570445433483406	0.005240725798052453	0.3842947664425612	2.069450519694474	-149.6391359083767	31.53767051848974
+933	6	116 mM NaCl	260.0	21.0	90.0	1	Heating	934	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM	353.32999999994615	0.007564293063733769	0.0	399.9999998599064	38.590770955436525	-45130.526060474185	2968.941800187413	0.002317974993224696	0.0004980994565459648	-0.37445646155145135	0.13759644620658384	-0.012683695809773198	0.08377691638438828	6.314329881948641	34.4160720136331	-112.82631519070108	18.307490725056024
+934	7	116 mM NaCl	260.0	90.0	21.0	2	Cooling	935	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM	340.09999923701895	0.006766861927728439	0.08999999999991815	343.72523442758984	10.615640771101779	-60397.83215212027	8041.095165904144	0.003453684864057138	0.0003922398837586147	-0.6761745994448907	0.11231163250128495	0.0043576015530079224	0.0017629968376847622	-0.8035519042880147	0.6868332978207224	-175.7154439146767	28.82077370005824
+935	8	116 mM NaCl	260.0	21.0	90.0	2	Heating	936	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM	332.22999999996534	0.0064396586506293005	0.8699999999992087	275.8705771753709	98.38582725370016	-59473.52840289072	3959.271274987567	0.08504576333956708	0.7543204775549509	-23.874588752297797	214.38640118922194	0.008425046193404083	0.00023264982365712368	-2.3350582959158417	0.08971436862436558	-215.58489133505313	91.23759920357655
+936	9	66 mM NaCl	260.0	90.0	21.0	1	Cooling	937	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM	337.23999923702155	0.006536155106740144	0.03999999999996362	326.01063874657666	1.1708378957766692	-128950.910427521	10557.952742953179	0.004715789793457384	7.509403337590128e-05	-1.0450743303898895	0.023046906373392736	0.006186606907401401	6.469055247282811e-05	-1.5129673670316823	0.023470014657973666	-395.5420317671307	33.80585488096855
+937	10	66 mM NaCl	260.0	21.0	90.0	1	Heating	938	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM	340.02999999995825	0.006980150044154565	0.08999999999991815	330.8018953809257	4.247717682130076	-80243.6326530925	5852.28137803629	0.004413943578083548	0.0002702211758939915	-0.9622341537344815	0.08023039894978014	0.006741833092055414	0.0003158831013472673	-1.7016547216965858	0.1193207406487645	-242.57307401667146	20.805997214193752
+938	11	66 mM NaCl	260.0	90.0	21.0	2	Cooling	939	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM	338.11999923702075	0.006884526620557694	0.05999999999994543	325.0828855815238	1.5601713013522662	-116819.52285943188	7808.767175992541	0.0049830558230565805	0.00010555252850932723	-1.1119744373569742	0.03209260323501632	0.006669614639643101	6.702928135559157e-05	-1.6570522993397794	0.02444244292681803	-359.35303899637637	25.745493982301753
+939	12	66 mM NaCl	260.0	21.0	90.0	2	Heating	940	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM	341.99999999995646	0.007340922704898553	0.13999999999987267	330.51177612559707	4.641573696555631	-84519.47899920985	7885.887188661506	0.004587664184559567	0.0003063348383888304	-1.0021148783779925	0.09137182012627305	0.006921547341899059	0.00036209545217376517	-1.7428193514487889	0.13608255985261436	-255.7230486307749	27.450896519164797
+940	13	41 mM NaCl	260.0	90.0	21.0	1	Cooling	941	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM	332.8699992370255	0.006402192605676843	29.82999999997287	320.76183565366625	1.299778991953986	-152796.96381426137	12288.29454652165	0.004968964398081735	9.437929428197213e-05	-1.093383962108896	0.028830528140340827	0.006266801828860502	2.6314239156597977e-05	-1.5155588727635472	0.00938928989818498	-476.35643281216187	40.23998866408006
+941	14	41 mM NaCl	260.0	21.0	90.0	1	Heating	942	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM	338.48999999995965	0.006812562558545401	0.06999999999993634	290.25348568990563	72.37198295816698	-41586.368023263494	7030.90564348123	0.012532530912974543	0.04651727729639281	-3.0670284596379713	12.506465679554648	0.00844758630222426	0.0007807772798301851	-2.3142706550334977	0.3192977079269897	-143.2760331005726	59.94786325473842
+942	15	41 mM NaCl	260.0	90.0	21.0	2	Cooling	943	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM	336.3299992370224	0.006760050556764611	0.08999999999991815	318.1203924200912	3.984069989771025	-84418.29465417868	10082.729793087918	0.0047440723745636754	0.00038088602626774025	-1.0014791675061654	0.11214938769066313	0.0066610614741410175	0.00013879626572292902	-1.620969710720089	0.05158874056987149	-265.3658698581662	35.01808201213499
+943	16	41 mM NaCl	260.0	21.0	90.0	2	Heating	944	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM	339.02999999995916	0.007047078300681746	0.13999999999987267	326.6092670576232	21.969216254640603	-50965.622525835955	6495.188807754404	0.003953536940374185	0.0016509272571454507	-0.7720530009241368	0.46004233419315155	0.007209980766455383	0.0015313735055535124	-1.7955236353296016	0.6044828569601917	-156.0446308978862	30.382992922166153
+944	17	516 mM NaCl	400.0	90.0	21.0	1	Cooling	945	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM																	
+945	18	516 mM NaCl	400.0	21.0	90.0	1	Heating	946	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM																	
+946	19	516 mM NaCl	400.0	90.0	21.0	2	Cooling	947	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM																	
+947	20	516 mM NaCl	400.0	21.0	90.0	2	Heating	948	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	516.0	mM																	
+948	21	116 mM NaCl	400.0	90.0	21.0	1	Cooling	949	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM																	
+949	22	116 mM NaCl	400.0	21.0	90.0	1	Heating	950	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM																	
+950	23	116 mM NaCl	400.0	90.0	21.0	2	Cooling	951	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM																	
+951	24	116 mM NaCl	400.0	21.0	90.0	2	Heating	952	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	116.0	mM																	
+952	25	66 mM NaCl	400.0	90.0	21.0	1	Cooling	953	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM																	
+953	26	66 mM NaCl	400.0	21.0	90.0	1	Heating	954	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM																	
+954	27	66 mM NaCl	400.0	90.0	21.0	2	Cooling	955	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM																	
+955	28	66 mM NaCl	400.0	21.0	90.0	2	Heating	956	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	66.0	mM																	
+956	29	41 mM NaCl	400.0	90.0	21.0	1	Cooling	957	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM																	
+957	30	41 mM NaCl	400.0	21.0	90.0	1	Heating	958	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM																	
+958	31	41 mM NaCl	400.0	90.0	21.0	2	Cooling	959	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM																	
+959	32	41 mM NaCl	400.0	21.0	90.0	2	Heating	960	2024-02-01_RNA_melting_NaCl.csv	RNA	16.0	20.0	Na(I)	41.0	mM																	
+960	1	5 mM MgCl2	260.0	90.0	21.0	1	Cooling	961	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+961	2	5 mM MgCl2	260.0	21.0	90.0	1	Heating	962	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+962	3	5 mM MgCl2	260.0	90.0	21.0	2	Cooling	963	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+963	4	5 mM MgCl2	260.0	21.0	90.0	2	Heating	964	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+964	5	1 mM MgCl2	260.0	90.0	21.0	1	Cooling	965	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+965	6	1 mM MgCl2	260.0	21.0	90.0	1	Heating	966	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+966	7	1 mM MgCl2	260.0	90.0	21.0	2	Cooling	967	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+967	8	1 mM MgCl2	260.0	21.0	90.0	2	Heating	968	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+968	9	0.1 mM MgCl2	260.0	90.0	21.0	1	Cooling	969	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+969	10	0.1 mM MgCl2	260.0	21.0	90.0	1	Heating	970	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+970	11	0.1 mM MgCl2	260.0	90.0	21.0	2	Cooling	971	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+971	12	0.1 mM MgCl2	260.0	21.0	90.0	2	Heating	972	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+972	13	0 mM MgCl2	260.0	90.0	21.0	1	Cooling	973	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+973	14	0 mM MgCl2	260.0	21.0	90.0	1	Heating	974	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+974	15	0 mM MgCl2	260.0	90.0	21.0	2	Cooling	975	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+975	16	0 mM MgCl2	260.0	21.0	90.0	2	Heating	976	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+976	17	5 mM MgCl2	400.0	90.0	21.0	1	Cooling	977	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+977	18	5 mM MgCl2	400.0	21.0	90.0	1	Heating	978	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+978	19	5 mM MgCl2	400.0	90.0	21.0	2	Cooling	979	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+979	20	5 mM MgCl2	400.0	21.0	90.0	2	Heating	980	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+980	21	1 mM MgCl2	400.0	90.0	21.0	1	Cooling	981	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+981	22	1 mM MgCl2	400.0	21.0	90.0	1	Heating	982	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+982	23	1 mM MgCl2	400.0	90.0	21.0	2	Cooling	983	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+983	24	1 mM MgCl2	400.0	21.0	90.0	2	Heating	984	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+984	25	0.1 mM MgCl2	400.0	90.0	21.0	1	Cooling	985	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+985	26	0.1 mM MgCl2	400.0	21.0	90.0	1	Heating	986	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+986	27	0.1 mM MgCl2	400.0	90.0	21.0	2	Cooling	987	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+987	28	0.1 mM MgCl2	400.0	21.0	90.0	2	Heating	988	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+988	29	0 mM MgCl2	400.0	90.0	21.0	1	Cooling	989	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+989	30	0 mM MgCl2	400.0	21.0	90.0	1	Heating	990	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+990	31	0 mM MgCl2	400.0	90.0	21.0	2	Cooling	991	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+991	32	0 mM MgCl2	400.0	21.0	90.0	2	Heating	992	2024-02-14_RNA_melting_MgCl2_only_HEPES.csv																							
+992	1	100 mM MgCl2	260.0	90.0	21.0	1	Cooling	993	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+993	2	100 mM MgCl2	260.0	21.0	90.0	1	Heating	994	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+994	3	100 mM MgCl2	260.0	90.0	21.0	2	Cooling	995	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+995	4	100 mM MgCl2	260.0	21.0	90.0	2	Heating	996	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+996	5	50 mM MgCl2	260.0	90.0	21.0	1	Cooling	997	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+997	6	50 mM MgCl2	260.0	21.0	90.0	1	Heating	998	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+998	7	50 mM MgCl2	260.0	90.0	21.0	2	Cooling	999	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+999	8	50 mM MgCl2	260.0	21.0	90.0	2	Heating	1000	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1000	9	25 mM MgCl2	260.0	90.0	21.0	1	Cooling	1001	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1001	10	25 mM MgCl2	260.0	21.0	90.0	1	Heating	1002	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1002	11	25 mM MgCl2	260.0	90.0	21.0	2	Cooling	1003	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1003	12	25 mM MgCl2	260.0	21.0	90.0	2	Heating	1004	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1004	13	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	1005	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1005	14	10 mM MgCl2	260.0	21.0	90.0	1	Heating	1006	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1006	15	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	1007	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1007	16	10 mM MgCl2	260.0	21.0	90.0	2	Heating	1008	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1008	17	100 mM MgCl2	400.0	90.0	21.0	1	Cooling	1009	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1009	18	100 mM MgCl2	400.0	21.0	90.0	1	Heating	1010	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1010	19	100 mM MgCl2	400.0	90.0	21.0	2	Cooling	1011	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1011	20	100 mM MgCl2	400.0	21.0	90.0	2	Heating	1012	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1012	21	50 mM MgCl2	400.0	90.0	21.0	1	Cooling	1013	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1013	22	50 mM MgCl2	400.0	21.0	90.0	1	Heating	1014	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1014	23	50 mM MgCl2	400.0	90.0	21.0	2	Cooling	1015	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1015	24	50 mM MgCl2	400.0	21.0	90.0	2	Heating	1016	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1016	25	25 mM MgCl2	400.0	90.0	21.0	1	Cooling	1017	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1017	26	25 mM MgCl2	400.0	21.0	90.0	1	Heating	1018	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1018	27	25 mM MgCl2	400.0	90.0	21.0	2	Cooling	1019	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1019	28	25 mM MgCl2	400.0	21.0	90.0	2	Heating	1020	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1020	29	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	1021	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1021	30	10 mM MgCl2	400.0	21.0	90.0	1	Heating	1022	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1022	31	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	1023	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1023	32	10 mM MgCl2	400.0	21.0	90.0	2	Heating	1024	2024-02-15_RNA_melting_MgCl2_only_HEPES.csv																							
+1024	1	10 mM CaCl2	260.0	90.0	21.0	1	Cooling	1025	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1025	2	10 mM CaCl2	260.0	21.0	90.0	1	Heating	1026	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1026	3	10 mM CaCl2	260.0	90.0	21.0	2	Cooling	1027	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1027	4	10 mM CaCl2	260.0	21.0	90.0	2	Heating	1028	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1028	5	5 mM CaCl2	260.0	90.0	21.0	1	Cooling	1029	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1029	6	5 mM CaCl2	260.0	21.0	90.0	1	Heating	1030	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1030	7	5 mM CaCl2	260.0	90.0	21.0	2	Cooling	1031	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1031	8	5 mM CaCl2	260.0	21.0	90.0	2	Heating	1032	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1032	9	1 mM CaCl2	260.0	90.0	21.0	1	Cooling	1033	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1033	10	1 mM CaCl2	260.0	21.0	90.0	1	Heating	1034	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1034	11	1 mM CaCl2	260.0	90.0	21.0	2	Cooling	1035	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1035	12	1 mM CaCl2	260.0	21.0	90.0	2	Heating	1036	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1036	13	0.1 mM CaCl2	260.0	90.0	21.0	1	Cooling	1037	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1037	14	0.1 mM CaCl2	260.0	21.0	90.0	1	Heating	1038	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1038	15	0.1 mM CaCl2	260.0	90.0	21.0	2	Cooling	1039	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1039	16	0.1 mM CaCl2	260.0	21.0	90.0	2	Heating	1040	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1040	17	10 mM CaCl2	400.0	90.0	21.0	1	Cooling	1041	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1041	18	10 mM CaCl2	400.0	21.0	90.0	1	Heating	1042	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1042	19	10 mM CaCl2	400.0	90.0	21.0	2	Cooling	1043	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1043	20	10 mM CaCl2	400.0	21.0	90.0	2	Heating	1044	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1044	21	5 mM CaCl2	400.0	90.0	21.0	1	Cooling	1045	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1045	22	5 mM CaCl2	400.0	21.0	90.0	1	Heating	1046	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1046	23	5 mM CaCl2	400.0	90.0	21.0	2	Cooling	1047	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1047	24	5 mM CaCl2	400.0	21.0	90.0	2	Heating	1048	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1048	25	1 mM CaCl2	400.0	90.0	21.0	1	Cooling	1049	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1049	26	1 mM CaCl2	400.0	21.0	90.0	1	Heating	1050	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1050	27	1 mM CaCl2	400.0	90.0	21.0	2	Cooling	1051	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1051	28	1 mM CaCl2	400.0	21.0	90.0	2	Heating	1052	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1052	29	0.1 mM CaCl2	400.0	90.0	21.0	1	Cooling	1053	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1053	30	0.1 mM CaCl2	400.0	21.0	90.0	1	Heating	1054	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1054	31	0.1 mM CaCl2	400.0	90.0	21.0	2	Cooling	1055	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1055	32	0.1 mM CaCl2	400.0	21.0	90.0	2	Heating	1056	2024-02-16_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1056	1	500 mM CaCl2	260.0	90.0	21.0	1	Cooling	1057	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1057	2	500 mM CaCl2	260.0	21.0	90.0	1	Heating	1058	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1058	3	500 mM CaCl2	260.0	90.0	21.0	2	Cooling	1059	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1059	4	500 mM CaCl2	260.0	21.0	90.0	2	Heating	1060	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1060	5	100 mM CaCl2	260.0	90.0	21.0	1	Cooling	1061	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1061	6	100 mM CaCl2	260.0	21.0	90.0	1	Heating	1062	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1062	7	100 mM CaCl2	260.0	90.0	21.0	2	Cooling	1063	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1063	8	100 mM CaCl2	260.0	21.0	90.0	2	Heating	1064	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1064	9	50 mM CaCl2	260.0	90.0	21.0	1	Cooling	1065	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1065	10	50 mM CaCl2	260.0	21.0	90.0	1	Heating	1066	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1066	11	50 mM CaCl2	260.0	90.0	21.0	2	Cooling	1067	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1067	12	50 mM CaCl2	260.0	21.0	90.0	2	Heating	1068	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1068	13	25 mM CaCl2	260.0	90.0	21.0	1	Cooling	1069	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1069	14	25 mM CaCl2	260.0	21.0	90.0	1	Heating	1070	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1070	15	25 mM CaCl2	260.0	90.0	21.0	2	Cooling	1071	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1071	16	25 mM CaCl2	260.0	21.0	90.0	2	Heating	1072	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1072	17	500 mM CaCl2	400.0	90.0	21.0	1	Cooling	1073	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1073	18	500 mM CaCl2	400.0	21.0	90.0	1	Heating	1074	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1074	19	500 mM CaCl2	400.0	90.0	21.0	2	Cooling	1075	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1075	20	500 mM CaCl2	400.0	21.0	90.0	2	Heating	1076	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1076	21	100 mM CaCl2	400.0	90.0	21.0	1	Cooling	1077	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1077	22	100 mM CaCl2	400.0	21.0	90.0	1	Heating	1078	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1078	23	100 mM CaCl2	400.0	90.0	21.0	2	Cooling	1079	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1079	24	100 mM CaCl2	400.0	21.0	90.0	2	Heating	1080	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1080	25	50 mM CaCl2	400.0	90.0	21.0	1	Cooling	1081	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1081	26	50 mM CaCl2	400.0	21.0	90.0	1	Heating	1082	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1082	27	50 mM CaCl2	400.0	90.0	21.0	2	Cooling	1083	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1083	28	50 mM CaCl2	400.0	21.0	90.0	2	Heating	1084	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1084	29	25 mM CaCl2	400.0	90.0	21.0	1	Cooling	1085	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1085	30	25 mM CaCl2	400.0	21.0	90.0	1	Heating	1086	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1086	31	25 mM CaCl2	400.0	90.0	21.0	2	Cooling	1087	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1087	32	25 mM CaCl2	400.0	21.0	90.0	2	Heating	1088	2024-02-19_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1088	1	10 mM MgCl2	260.0	90.0	21.0	1	Cooling	1089	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1089	2	10 mM MgCl2	260.0	21.0	90.0	1	Heating	1090	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1090	3	10 mM MgCl2	260.0	90.0	21.0	2	Cooling	1091	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1091	4	10 mM MgCl2	260.0	21.0	90.0	2	Heating	1092	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1092	5	5 mM MgCl2	260.0	90.0	21.0	1	Cooling	1093	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1093	6	5 mM MgCl2	260.0	21.0	90.0	1	Heating	1094	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1094	7	5 mM MgCl2	260.0	90.0	21.0	2	Cooling	1095	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1095	8	5 mM MgCl2	260.0	21.0	90.0	2	Heating	1096	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1096	9	1 mM MgCl2	260.0	90.0	21.0	1	Cooling	1097	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1097	10	1 mM MgCl2	260.0	21.0	90.0	1	Heating	1098	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1098	11	1 mM MgCl2	260.0	90.0	21.0	2	Cooling	1099	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1099	12	1 mM MgCl2	260.0	21.0	90.0	2	Heating	1100	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1100	13	0.1 mM MgCl2	260.0	90.0	21.0	1	Cooling	1101	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1101	14	0.1 mM MgCl2	260.0	21.0	90.0	1	Heating	1102	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1102	15	0.1 mM MgCl2	260.0	90.0	21.0	2	Cooling	1103	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1103	16	0.1 mM MgCl2	260.0	21.0	90.0	2	Heating	1104	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1104	17	10 mM MgCl2	400.0	90.0	21.0	1	Cooling	1105	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1105	18	10 mM MgCl2	400.0	21.0	90.0	1	Heating	1106	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1106	19	10 mM MgCl2	400.0	90.0	21.0	2	Cooling	1107	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1107	20	10 mM MgCl2	400.0	21.0	90.0	2	Heating	1108	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1108	21	5 mM MgCl2	400.0	90.0	21.0	1	Cooling	1109	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1109	22	5 mM MgCl2	400.0	21.0	90.0	1	Heating	1110	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1110	23	5 mM MgCl2	400.0	90.0	21.0	2	Cooling	1111	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1111	24	5 mM MgCl2	400.0	21.0	90.0	2	Heating	1112	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1112	25	1 mM MgCl2	400.0	90.0	21.0	1	Cooling	1113	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1113	26	1 mM MgCl2	400.0	21.0	90.0	1	Heating	1114	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1114	27	1 mM MgCl2	400.0	90.0	21.0	2	Cooling	1115	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1115	28	1 mM MgCl2	400.0	21.0	90.0	2	Heating	1116	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1116	29	0.1 mM MgCl2	400.0	90.0	21.0	1	Cooling	1117	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1117	30	0.1 mM MgCl2	400.0	21.0	90.0	1	Heating	1118	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1118	31	0.1 mM MgCl2	400.0	90.0	21.0	2	Cooling	1119	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1119	32	0.1 mM MgCl2	400.0	21.0	90.0	2	Heating	1120	2024-02-20_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1120	1	500 mM MgCl2	260.0	90.0	21.0	1	Cooling	1121	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1121	2	500 mM MgCl2	260.0	21.0	90.0	1	Heating	1122	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1122	3	500 mM MgCl2	260.0	90.0	21.0	2	Cooling	1123	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1123	4	500 mM MgCl2	260.0	21.0	90.0	2	Heating	1124	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1124	5	100 mM MgCl2	260.0	90.0	21.0	1	Cooling	1125	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1125	6	100 mM MgCl2	260.0	21.0	90.0	1	Heating	1126	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1126	7	100 mM MgCl2	260.0	90.0	21.0	2	Cooling	1127	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1127	8	100 mM MgCl2	260.0	21.0	90.0	2	Heating	1128	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1128	9	50 mM MgCl2	260.0	90.0	21.0	1	Cooling	1129	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1129	10	50 mM MgCl2	260.0	21.0	90.0	1	Heating	1130	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1130	11	50 mM MgCl2	260.0	90.0	21.0	2	Cooling	1131	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1131	12	50 mM MgCl2	260.0	21.0	90.0	2	Heating	1132	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1132	13	25 mM MgCl2	260.0	90.0	21.0	1	Cooling	1133	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1133	14	25 mM MgCl2	260.0	21.0	90.0	1	Heating	1134	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1134	15	25 mM MgCl2	260.0	90.0	21.0	2	Cooling	1135	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1135	16	25 mM MgCl2	260.0	21.0	90.0	2	Heating	1136	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1136	17	500 mM MgCl2	400.0	90.0	21.0	1	Cooling	1137	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1137	18	500 mM MgCl2	400.0	21.0	90.0	1	Heating	1138	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1138	19	500 mM MgCl2	400.0	90.0	21.0	2	Cooling	1139	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1139	20	500 mM MgCl2	400.0	21.0	90.0	2	Heating	1140	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1140	21	100 mM MgCl2	400.0	90.0	21.0	1	Cooling	1141	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1141	22	100 mM MgCl2	400.0	21.0	90.0	1	Heating	1142	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1142	23	100 mM MgCl2	400.0	90.0	21.0	2	Cooling	1143	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1143	24	100 mM MgCl2	400.0	21.0	90.0	2	Heating	1144	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1144	25	50 mM MgCl2	400.0	90.0	21.0	1	Cooling	1145	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1145	26	50 mM MgCl2	400.0	21.0	90.0	1	Heating	1146	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1146	27	50 mM MgCl2	400.0	90.0	21.0	2	Cooling	1147	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1147	28	50 mM MgCl2	400.0	21.0	90.0	2	Heating	1148	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1148	29	25 mM MgCl2	400.0	90.0	21.0	1	Cooling	1149	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1149	30	25 mM MgCl2	400.0	21.0	90.0	1	Heating	1150	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1150	31	25 mM MgCl2	400.0	90.0	21.0	2	Cooling	1151	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1151	32	25 mM MgCl2	400.0	21.0	90.0	2	Heating	1152	2024-02-21_RNA_melting_MgCl2_Na_only_HEPES.csv																							
+1152	1	500 mM MgCl2	260.0	90.0	21.0	1	Cooling	1153	2024-02-22_RNA_melting_only_HEPES.csv																							
+1153	2	500 mM MgCl2	260.0	21.0	90.0	1	Heating	1154	2024-02-22_RNA_melting_only_HEPES.csv																							
+1154	3	500 mM MgCl2	260.0	90.0	21.0	2	Cooling	1155	2024-02-22_RNA_melting_only_HEPES.csv																							
+1155	4	500 mM MgCl2	260.0	21.0	90.0	2	Heating	1156	2024-02-22_RNA_melting_only_HEPES.csv																							
+1156	5	0 mM NaCl	260.0	90.0	21.0	1	Cooling	1157	2024-02-22_RNA_melting_only_HEPES.csv																							
+1157	6	0 mM NaCl	260.0	21.0	90.0	1	Heating	1158	2024-02-22_RNA_melting_only_HEPES.csv																							
+1158	7	0 mM NaCl	260.0	90.0	21.0	2	Cooling	1159	2024-02-22_RNA_melting_only_HEPES.csv																							
+1159	8	0 mM NaCl	260.0	21.0	90.0	2	Heating	1160	2024-02-22_RNA_melting_only_HEPES.csv																							
+1160	9	0 mM NaCl_EDTA	260.0	90.0	21.0	1	Cooling	1161	2024-02-22_RNA_melting_only_HEPES.csv																							
+1161	10	0 mM NaCl_EDTA	260.0	21.0	90.0	1	Heating	1162	2024-02-22_RNA_melting_only_HEPES.csv																							
+1162	11	0 mM NaCl_EDTA	260.0	90.0	21.0	2	Cooling	1163	2024-02-22_RNA_melting_only_HEPES.csv																							
+1163	12	0 mM NaCl_EDTA	260.0	21.0	90.0	2	Heating	1164	2024-02-22_RNA_melting_only_HEPES.csv																							
+1164	13	0 mM KCl_EDTA	260.0	90.0	21.0	1	Cooling	1165	2024-02-22_RNA_melting_only_HEPES.csv																							
+1165	14	0 mM KCl_EDTA	260.0	21.0	90.0	1	Heating	1166	2024-02-22_RNA_melting_only_HEPES.csv																							
+1166	15	0 mM KCl_EDTA	260.0	90.0	21.0	2	Cooling	1167	2024-02-22_RNA_melting_only_HEPES.csv																							
+1167	16	0 mM KCl_EDTA	260.0	21.0	90.0	2	Heating	1168	2024-02-22_RNA_melting_only_HEPES.csv																							
+1168	17	500 mM MgCl2	400.0	90.0	21.0	1	Cooling	1169	2024-02-22_RNA_melting_only_HEPES.csv																							
+1169	18	500 mM MgCl2	400.0	21.0	90.0	1	Heating	1170	2024-02-22_RNA_melting_only_HEPES.csv																							
+1170	19	500 mM MgCl2	400.0	90.0	21.0	2	Cooling	1171	2024-02-22_RNA_melting_only_HEPES.csv																							
+1171	20	500 mM MgCl2	400.0	21.0	90.0	2	Heating	1172	2024-02-22_RNA_melting_only_HEPES.csv																							
+1172	21	0 mM NaCl	400.0	90.0	21.0	1	Cooling	1173	2024-02-22_RNA_melting_only_HEPES.csv																							
+1173	22	0 mM NaCl	400.0	21.0	90.0	1	Heating	1174	2024-02-22_RNA_melting_only_HEPES.csv																							
+1174	23	0 mM NaCl	400.0	90.0	21.0	2	Cooling	1175	2024-02-22_RNA_melting_only_HEPES.csv																							
+1175	24	0 mM NaCl	400.0	21.0	90.0	2	Heating	1176	2024-02-22_RNA_melting_only_HEPES.csv																							
+1176	25	0 mM NaCl_EDTA	400.0	90.0	21.0	1	Cooling	1177	2024-02-22_RNA_melting_only_HEPES.csv																							
+1177	26	0 mM NaCl_EDTA	400.0	21.0	90.0	1	Heating	1178	2024-02-22_RNA_melting_only_HEPES.csv																							
+1178	27	0 mM NaCl_EDTA	400.0	90.0	21.0	2	Cooling	1179	2024-02-22_RNA_melting_only_HEPES.csv																							
+1179	28	0 mM NaCl_EDTA	400.0	21.0	90.0	2	Heating	1180	2024-02-22_RNA_melting_only_HEPES.csv																							
+1180	29	0 mM KCl_EDTA	400.0	90.0	21.0	1	Cooling	1181	2024-02-22_RNA_melting_only_HEPES.csv																							
+1181	30	0 mM KCl_EDTA	400.0	21.0	90.0	1	Heating	1182	2024-02-22_RNA_melting_only_HEPES.csv																							
+1182	31	0 mM KCl_EDTA	400.0	90.0	21.0	2	Cooling	1183	2024-02-22_RNA_melting_only_HEPES.csv																							
+1183	32	0 mM KCl_EDTA	400.0	21.0	90.0	2	Heating	1184	2024-02-22_RNA_melting_only_HEPES.csv																							
+1184	1	50 mM CaCl2	260.0	90.0	21.0	1	Cooling	1185	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1185	2	50 mM CaCl2	260.0	21.0	90.0	1	Heating	1186	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1186	3	50 mM CaCl2	260.0	90.0	21.0	2	Cooling	1187	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1187	4	50 mM CaCl2	260.0	21.0	90.0	2	Heating	1188	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1188	5	25 mM CaCl2	260.0	90.0	21.0	1	Cooling	1189	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1189	6	25 mM CaCl2	260.0	21.0	90.0	1	Heating	1190	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1190	7	25 mM CaCl2	260.0	90.0	21.0	2	Cooling	1191	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1191	8	25 mM CaCl2	260.0	21.0	90.0	2	Heating	1192	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1192	9	10 mM CaCl2	260.0	90.0	21.0	1	Cooling	1193	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1193	10	10 mM CaCl2	260.0	21.0	90.0	1	Heating	1194	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1194	11	10 mM CaCl2	260.0	90.0	21.0	2	Cooling	1195	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1195	12	10 mM CaCl2	260.0	21.0	90.0	2	Heating	1196	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1196	13	5 mM CaCl2	260.0	90.0	21.0	1	Cooling	1197	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1197	14	5 mM CaCl2	260.0	21.0	90.0	1	Heating	1198	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1198	15	5 mM CaCl2	260.0	90.0	21.0	2	Cooling	1199	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1199	16	5 mM CaCl2	260.0	21.0	90.0	2	Heating	1200	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1200	17	50 mM CaCl2	400.0	90.0	21.0	1	Cooling	1201	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1201	18	50 mM CaCl2	400.0	21.0	90.0	1	Heating	1202	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1202	19	50 mM CaCl2	400.0	90.0	21.0	2	Cooling	1203	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1203	20	50 mM CaCl2	400.0	21.0	90.0	2	Heating	1204	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1204	21	25 mM CaCl2	400.0	90.0	21.0	1	Cooling	1205	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1205	22	25 mM CaCl2	400.0	21.0	90.0	1	Heating	1206	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1206	23	25 mM CaCl2	400.0	90.0	21.0	2	Cooling	1207	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1207	24	25 mM CaCl2	400.0	21.0	90.0	2	Heating	1208	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1208	25	10 mM CaCl2	400.0	90.0	21.0	1	Cooling	1209	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1209	26	10 mM CaCl2	400.0	21.0	90.0	1	Heating	1210	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1210	27	10 mM CaCl2	400.0	90.0	21.0	2	Cooling	1211	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1211	28	10 mM CaCl2	400.0	21.0	90.0	2	Heating	1212	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1212	29	5 mM CaCl2	400.0	90.0	21.0	1	Cooling	1213	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1213	30	5 mM CaCl2	400.0	21.0	90.0	1	Heating	1214	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1214	31	5 mM CaCl2	400.0	90.0	21.0	2	Cooling	1215	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
+1215	32	5 mM CaCl2	400.0	21.0	90.0	2	Heating	1216	2024-02-23_RNA_melting_CaCl2_KCl_only_HEPES.csv																							
