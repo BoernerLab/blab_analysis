@@ -9,7 +9,7 @@ Created on Tue May 14 12:43:46 2024
 from main import  *
 
 #Meta
-EXTRA_META = {'2023_08_01_DNA_K_MOPS_pH65_PL.csv': {'Buffer': 'MOPS', 'pH': 6.5, 'bg (mM)': 2.29, '[Buffer] in mM': 10},  # 10
+EXTRA_META = {'2023_08_01_DNA_K_MOPS_pH65_PL.csv': {'Buffer': 'MOPS', 'pH': 6.5, 'bg (mM)': 2.29, '[Buffer] in mM': 10, "Divalent": "Mg"},  # 10
               '2023_08_01_DNA_MOPS_65_K_2.csv': {'Buffer': 'MOPS', 'pH': 6.5, 'bg (mM)': 2.29, '[Buffer] in mM': 10},  # 10
               '2023_08_02_DNA_MOPS_65_Na.csv': {'Buffer': 'MOPS', 'pH': 6.5, 'bg (mM)': 2.29, '[Buffer] in mM': 10},  # 10
               # 10
