@@ -24,3 +24,12 @@ class InvalidHyperparameterHeaderError(Exception):
 
     def __str__(self):
         return f"{self.message}"
+
+
+class NoJsonExtraInformationError(Exception):
+    def __init__(self):
+        self.message: str = "The Json doesn't contain the files you want to analyse. This is currently not supported. "\
+                            "Please make sure to add the correct path to the json file."
+
+    def __str__(self):
+        return f"{self.message}"

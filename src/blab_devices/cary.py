@@ -1,4 +1,5 @@
 from enum import Enum, unique
+import json
 from pathlib import Path
 import re
 
@@ -7,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 from src.blab_devices.exceptions import InvalidCaryFormatError, InvalidHyperparameterError, \
-    InvalidHyperparameterHeaderError
+    InvalidHyperparameterHeaderError, NoJsonExtraInformationError
 
 
 STAGE = 'Stage'
@@ -44,31 +45,61 @@ class CaryMeasurement(EnumToList):
 @unique
 class CaryDataframe(EnumToList):
     Temperature = 'Temperature (°C)'
+    Temperature_K = 'Temperature (K)'
     Wavelength = 'Wavelength (nm)'
     Absorbance = 'Absorbance'
+    NormalizedAbsorbance = 'Normalized_Absorbance'
     Measurement = 'Measurement'
     Meta = 'Meta'
     Date = 'Date'
     Cell_Number = 'Cell_Number'
+    FirstDerivative = 'dAbs/dT'
 
 
 class Cary:
-    def __init__(self, file_path: str):
-        self.hyperparameters: dict = {}
-        self.extra_information: dict = {}
-        self.data: pd.DataFrame = pd.DataFrame()
-        self.data_meta: pd.DataFrame = pd.DataFrame()
+    def __init__(self, file_path: str, extra_json: str):
+        self.list_hyperparameters: list = list()
+        self.list_extra_information: list = list()
+        self.list_data: list = list()
+        self.list_data_meta: list = list()
+        self.file_names: list = list()
+        self.extra_json: Path = Path(extra_json)
 
-        self.file_path: Path = Path(file_path)
-        self.file_content: list = self._read_data()
+        if Path(file_path).is_file():
+            self.hyperparameters: dict = {}
+            self.extra_information: dict = {}
+            self.data: pd.DataFrame = pd.DataFrame()
+            self.data_meta: pd.DataFrame = pd.DataFrame()
+
+            file_path: Path = Path(file_path)
+            self.file_names.append(file_path.stem)
+            self._collect_data_for_file(file_path, extra_json)
+        else:
+            file_paths = [file_paths for file_paths in Path(file_path).iterdir()
+                          if file_paths.is_file() and Path(file_paths).suffix != '.json']
+            for file_path in file_paths:
+                self.hyperparameters: dict = {}
+                self.extra_information: dict = {}
+                self.data: pd.DataFrame = pd.DataFrame()
+                self.data_meta: pd.DataFrame = pd.DataFrame()
+                self.file_names.append(file_path.stem)
+                self._collect_data_for_file(file_path, extra_json)
+
+
+    def _collect_data_for_file(self, file_path, extra_json):
+        self.file_content: list = self._read_data(file_path)
         self.raw_data, self.raw_hyperparameters, self.raw_measurements, self.device_measurement = \
             self._split_data_to_chunks()
         self._parse_hyperparameters()
         self._define_cary_case()
-        self._add_extra_information()
+        self._add_extra_information(file_path, extra_json)
+        self.list_hyperparameters.append(self.hyperparameters)
+        self.list_data_meta.append(self.data_meta)
+        self.list_data.append(self.data)
+        self.list_extra_information.append(self.extra_information)
 
-    def _read_data(self):
-        with open(self.file_path, 'r', encoding='UTF-8') as file:
+    def _read_data(self, file_path):
+        with open(file_path, 'r', encoding='UTF-8') as file:
             file_content = file.readlines()
         return file_content
 
@@ -179,16 +210,80 @@ class Cary:
             else:
                 raise InvalidHyperparameterHeaderError()
 
-    def _add_extra_information(self):
-        # ordentliche json machen aus vanessa extra infos
-        # klassen funktion zum laden der json und in self.extra_information ... Path.stem https://docs.python.org/3/library/pathlib.html
-        try:
-            self.extra_information = json[self.file_path]
-        except CustomError
+    def _add_extra_information(self, file_path, extra_json):
+        with open(f'{extra_json}', 'r') as f:
+            extra_information = json.load(f)
+        list_of_supported_files = list(extra_information['files'].keys())
+        if file_path.stem in list_of_supported_files:
+            self.extra_information[file_path.stem] = extra_information['files'][file_path.stem]
+        else:
+            raise NoJsonExtraInformationError
+
 
 class CaryAnalysis:
     def __init__(self, cary_object: Cary):
+        self.cary_object = cary_object
+        for i, (data, data_meta, extra_information, hyperparameter, filename) in enumerate(zip(
+                self.cary_object.list_data,
+                self.cary_object.list_data_meta,
+                self.cary_object.list_extra_information,
+                self.cary_object.hyperparameters,
+                self.cary_object.file_names)):
+            self._add_extra_information_to_data_meta(data, data_meta, extra_information, filename)
+            self._normalize_absorbance_for_each_measurement(data)
+            self._calculate_and_normalize_first_derivative(data)
+
+    def _add_extra_information_to_data_meta(self, data, data_meta, extra_information, filename):
+        for k, v in extra_information[filename].items():
+            data_meta[k] = v
+        data[CaryDataframe.Temperature_K.value] = data[CaryDataframe.Temperature.value] + 273.15
+
+    def _normalize_absorbance_for_each_measurement(self, data):
+        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
+            mask = data[CaryDataframe.Measurement.value] == unique_value
+            min_value = data.loc[mask, CaryDataframe.Absorbance.value].min()
+            max_value = data.loc[mask, CaryDataframe.Absorbance.value].max()
+            data.loc[mask, CaryDataframe.NormalizedAbsorbance.value] = (
+                    (data.loc[mask, CaryDataframe.Absorbance.value] - min_value) / (max_value - min_value))
+
+    def set_normalized_absorbance_for_measurement(self, file_name: str, measurement_id: int,
+                                                  min_temp: float, max_temp: float):
+        file_id = [i for i, file in enumerate(self.cary_object.file_names) if file_name == file][0]
+        mask = self.cary_object.list_data[file_id][CaryDataframe.Measurement.value] == measurement_id
+        min_absorbance = self.cary_object.list_data[file_id] \
+            [(self.cary_object.list_data[file_id].loc[:, CaryDataframe.Temperature.value] == min_temp) &
+             (self.cary_object.list_data[file_id].loc[:, CaryDataframe.Measurement.value] == measurement_id)] \
+            [CaryDataframe.Absorbance.value].iloc[0]
+        max_absorbance = self.cary_object.list_data[file_id] \
+            [(self.cary_object.list_data[file_id].loc[:, CaryDataframe.Temperature.value] == max_temp) &
+             (self.cary_object.list_data[file_id].loc[:, CaryDataframe.Measurement.value] == measurement_id)] \
+            [CaryDataframe.Absorbance.value].iloc[0]
+        self.cary_object.list_data[file_id].loc[mask, CaryDataframe.NormalizedAbsorbance.value] = (
+                (self.cary_object.list_data[file_id].loc[mask, CaryDataframe.Absorbance.value] - min_absorbance)
+                / (max_absorbance - min_absorbance))
+
+    def _calculate_and_normalize_first_derivative(self, data):
+        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
+            mask = data[CaryDataframe.Measurement.value] == unique_value
+            absorbance = data.loc[mask, CaryDataframe.Absorbance.value]
+            temperature = data.loc[mask, CaryDataframe.Temperature_K.value]
+            data.loc[mask, CaryDataframe.FirstDerivative.value] = np.gradient(absorbance, temperature)
+            data.loc[mask, CaryDataframe.FirstDerivative.value] = (
+                (data.loc[mask, CaryDataframe.FirstDerivative.value] - data.loc[mask, CaryDataframe.FirstDerivative.value].min())
+                / (data.loc[mask, CaryDataframe.FirstDerivative.value].max() - data.loc[mask, CaryDataframe.FirstDerivative.value].min()))
+
+        # done until calculation of first derivative + normalization
+        # same for second derivative without normalization
+        # then peak finder for first derivative -> extract Tm guess
+        # fit gauss in first derivative -> Tm or dH --> dS or dG
+        # fit baselines for both transitions
+        # global fit of complete curve -> baselines as input
+        # calculate errors over all calculations
+        # standard deviation and mean over triplets
+        # functions to filter after specific data
+        # write plot functions for desired analysis
+
+
+
+    def _calculate_second_derivative(self):
         pass
-
-
-

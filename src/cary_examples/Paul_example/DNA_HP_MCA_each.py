@@ -6,7 +6,7 @@ Created on Tue May 14 12:43:46 2024
 """
 
 #Import everything from main
-from main import  *
+from main import *
 
 #Meta
 EXTRA_META = {'2023_08_01_DNA_K_MOPS_pH65_PL.csv': {'Buffer': 'MOPS', 'pH': 6.5, 'bg (mM)': 2.29, '[Buffer] in mM': 10, "Divalent": "Mg"},  # 10
