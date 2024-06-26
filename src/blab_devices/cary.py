@@ -4,8 +4,10 @@ from pathlib import Path
 import re
 
 from more_itertools import split_at
+from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy.signal import find_peaks, savgol_filter
 
 from src.blab_devices.exceptions import InvalidCaryFormatError, InvalidHyperparameterError, \
     InvalidHyperparameterHeaderError, NoJsonExtraInformationError
@@ -48,12 +50,16 @@ class CaryDataframe(EnumToList):
     Temperature_K = 'Temperature (K)'
     Wavelength = 'Wavelength (nm)'
     Absorbance = 'Absorbance'
-    NormalizedAbsorbance = 'Normalized_Absorbance'
+    NormalizedAbsorbance = 'normalized_Abs'
     Measurement = 'Measurement'
     Meta = 'Meta'
     Date = 'Date'
-    Cell_Number = 'Cell_Number'
+    CellNumber = 'Cell_Number'
     FirstDerivative = 'dAbs/dT'
+    FirstDerivativeNormalized = 'normalized_dAbs/dT'
+    SecondDerivative = 'd2Abs/dT2'
+    SecondDerivativeNormalized = 'normalized_d2Abs/dT2'
+    FirstDerivativeSavgolPeaks = 'savgol_peaks'
 
 
 class Cary:
@@ -152,7 +158,7 @@ class Cary:
                        CaryDataframe.Measurement.value]].apply(pd.to_numeric)
         for new_column, column_name in zip(information, [CaryDataframe.Meta.value,
                                                          CaryDataframe.Date.value,
-                                                         CaryDataframe.Cell_Number.value]):
+                                                         CaryDataframe.CellNumber.value]):
             new_column = np.repeat(np.array(new_column), (self.data.shape[0])/len(information[0]))
             self.data[column_name] = new_column
         self.data.dropna(inplace=True)
@@ -221,6 +227,7 @@ class Cary:
 
 
 class CaryAnalysis:
+    # Todo: fit gauss in first derivative -> Tm or dH --> dS or dG to extract exact Tm and dH to possibly calculate dG
     def __init__(self, cary_object: Cary):
         self.cary_object = cary_object
         for i, (data, data_meta, extra_information, hyperparameter, filename) in enumerate(zip(
@@ -231,7 +238,11 @@ class CaryAnalysis:
                 self.cary_object.file_names)):
             self._add_extra_information_to_data_meta(data, data_meta, extra_information, filename)
             self._normalize_absorbance_for_each_measurement(data)
-            self._calculate_and_normalize_first_derivative(data)
+            self._calculate_first_derivative(data)
+            self._normalize_first_derivative(data)
+            self._calculate_second_derivative(data)
+            self._normalize_second_derivative(data)
+            self._find_peak_for_measurement(data, data_meta)
 
     def _add_extra_information_to_data_meta(self, data, data_meta, extra_information, filename):
         for k, v in extra_information[filename].items():
@@ -262,20 +273,101 @@ class CaryAnalysis:
                 (self.cary_object.list_data[file_id].loc[mask, CaryDataframe.Absorbance.value] - min_absorbance)
                 / (max_absorbance - min_absorbance))
 
-    def _calculate_and_normalize_first_derivative(self, data):
+    def set_normalized_first_derivative_for_measurement(self, file_name: str, measurement_id: int,
+                                                        min_temp: float, max_temp: float):
+        file_id = [i for i, file in enumerate(self.cary_object.file_names) if file_name == file][0]
+        mask = self.cary_object.list_data[file_id][CaryDataframe.Measurement.value] == measurement_id
+        min_first_derivative = self.cary_object.list_data[file_id] \
+            [(self.cary_object.list_data[file_id].loc[:, CaryDataframe.Temperature.value] == min_temp) &
+             (self.cary_object.list_data[file_id].loc[:, CaryDataframe.Measurement.value] == measurement_id)] \
+            [CaryDataframe.FirstDerivative.value].iloc[0]
+        max_first_derivative = self.cary_object.list_data[file_id] \
+            [(self.cary_object.list_data[file_id].loc[:, CaryDataframe.Temperature.value] == max_temp) &
+             (self.cary_object.list_data[file_id].loc[:, CaryDataframe.Measurement.value] == measurement_id)] \
+            [CaryDataframe.FirstDerivative.value].iloc[0]
+        self.cary_object.list_data[file_id].loc[mask, CaryDataframe.FirstDerivativeNormalized.value] = (
+                (self.cary_object.list_data[file_id].loc[mask, CaryDataframe.FirstDerivative.value] -
+                 min_first_derivative) / (max_first_derivative - min_first_derivative))
+
+    def set_normalized_first_derivative_for_measurement_only_min_temp(self, file_name: str, measurement_id: int,
+                                                                      min_temp: float):
+        file_id = [i for i, file in enumerate(self.cary_object.file_names) if file_name == file][0]
+        mask = self.cary_object.list_data[file_id][CaryDataframe.Measurement.value] == measurement_id
+        min_first_derivative = self.cary_object.list_data[file_id] \
+            [(self.cary_object.list_data[file_id].loc[:, CaryDataframe.Temperature.value] == min_temp) &
+             (self.cary_object.list_data[file_id].loc[:, CaryDataframe.Measurement.value] == measurement_id)] \
+            [CaryDataframe.FirstDerivative.value].iloc[0]
+        max_first_derivative = self.cary_object.list_data[file_id].loc[mask, CaryDataframe.FirstDerivative.value].max()
+        self.cary_object.list_data[file_id].loc[mask, CaryDataframe.FirstDerivativeNormalized.value] = (
+                (self.cary_object.list_data[file_id].loc[mask, CaryDataframe.FirstDerivative.value] -
+                 min_first_derivative) / (max_first_derivative - min_first_derivative))
+
+    def set_normalized_second_derivative_for_measurement(self, file_name: str, measurement_id: int,
+                                                         min_temp: float, max_temp: float):
+        file_id = [i for i, file in enumerate(self.cary_object.file_names) if file_name == file][0]
+        mask = self.cary_object.list_data[file_id][CaryDataframe.Measurement.value] == measurement_id
+        min_second_derivative = self.cary_object.list_data[file_id] \
+            [(self.cary_object.list_data[file_id].loc[:, CaryDataframe.Temperature.value] == min_temp) &
+             (self.cary_object.list_data[file_id].loc[:, CaryDataframe.Measurement.value] == measurement_id)] \
+            [CaryDataframe.Absorbance.value].iloc[0]
+        max_second_derivative = self.cary_object.list_data[file_id] \
+            [(self.cary_object.list_data[file_id].loc[:, CaryDataframe.Temperature.value] == max_temp) &
+             (self.cary_object.list_data[file_id].loc[:, CaryDataframe.Measurement.value] == measurement_id)] \
+            [CaryDataframe.Absorbance.value].iloc[0]
+        self.cary_object.list_data[file_id].loc[mask, CaryDataframe.SecondDerivativeNormalized.value] = (
+                (self.cary_object.list_data[file_id].loc[mask, CaryDataframe.SecondDerivative.value] - min_second_derivative)
+                / (max_second_derivative - min_second_derivative))
+
+    def _calculate_first_derivative(self, data):
         for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
             mask = data[CaryDataframe.Measurement.value] == unique_value
             absorbance = data.loc[mask, CaryDataframe.Absorbance.value]
             temperature = data.loc[mask, CaryDataframe.Temperature_K.value]
             data.loc[mask, CaryDataframe.FirstDerivative.value] = np.gradient(absorbance, temperature)
-            data.loc[mask, CaryDataframe.FirstDerivative.value] = (
-                (data.loc[mask, CaryDataframe.FirstDerivative.value] - data.loc[mask, CaryDataframe.FirstDerivative.value].min())
-                / (data.loc[mask, CaryDataframe.FirstDerivative.value].max() - data.loc[mask, CaryDataframe.FirstDerivative.value].min()))
 
-        # done until calculation of first derivative + normalization
-        # same for second derivative without normalization
-        # then peak finder for first derivative -> extract Tm guess
-        # fit gauss in first derivative -> Tm or dH --> dS or dG
+    def _normalize_first_derivative(self, data):
+        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
+            mask = data[CaryDataframe.Measurement.value] == unique_value
+            data.loc[mask, CaryDataframe.FirstDerivativeNormalized.value] = (
+                    (data.loc[mask, CaryDataframe.FirstDerivative.value] - data.loc[
+                        mask, CaryDataframe.FirstDerivative.value].min())
+                    / (data.loc[mask, CaryDataframe.FirstDerivative.value].max() - data.loc[
+                mask, CaryDataframe.FirstDerivative.value].min()))
+
+    def _calculate_second_derivative(self, data):
+        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
+            mask = data[CaryDataframe.Measurement.value] == unique_value
+            first_derivative = data.loc[mask, CaryDataframe.FirstDerivative.value]
+            temperature = data.loc[mask, CaryDataframe.Temperature_K.value]
+            data.loc[mask, CaryDataframe.SecondDerivative.value] = np.gradient(first_derivative, temperature)
+
+    def _normalize_second_derivative(self, data):
+        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
+            mask = data[CaryDataframe.Measurement.value] == unique_value
+            data.loc[mask, CaryDataframe.SecondDerivativeNormalized.value] = (
+                    (data.loc[mask, CaryDataframe.SecondDerivative.value] - data.loc[
+                        mask, CaryDataframe.SecondDerivative.value].min())
+                    / (data.loc[mask, CaryDataframe.SecondDerivative.value].max() - data.loc[
+                mask, CaryDataframe.SecondDerivative.value].min()))
+
+    def _find_peak_for_measurement(self, data, data_meta):
+        data_meta[CaryDataframe.FirstDerivativeSavgolPeaks.value] = None
+        data_meta[CaryDataframe.TmBasedSavgol.value] = None
+        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
+            mask = data[CaryDataframe.Measurement.value] == unique_value
+            measurement_data = data[mask]
+            measurement_data.reset_index(drop=True, inplace=True)
+            savgol = savgol_filter(measurement_data[CaryDataframe.FirstDerivative.value], 12, 3)
+            savgol_peaks, _ = find_peaks(savgol, height=0, width=5, distance=10)
+            savgol_T = measurement_data[CaryDataframe.Temperature_K.value][savgol_peaks]
+            savgol_dAbsdT = savgol[savgol_peaks]
+            peaks = np.array([(savgol_x, savgol_y) for savgol_x, savgol_y in zip(savgol_T, savgol_dAbsdT)])
+            for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
+                data_meta.at[index, CaryDataframe.FirstDerivativeSavgolPeaks.value] = peaks
+
+    def _fit_baselines(self):
+        pass
+
         # fit baselines for both transitions
         # global fit of complete curve -> baselines as input
         # calculate errors over all calculations
@@ -285,5 +377,4 @@ class CaryAnalysis:
 
 
 
-    def _calculate_second_derivative(self):
-        pass
+
