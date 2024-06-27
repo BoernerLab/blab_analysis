@@ -4,14 +4,16 @@
             "bg in mM": 116,
             "[Buffer] in mM": 20,
             "Divalent Ion": "Mg(II)",
-            "Monovalent Ion": "K(I)"
+            "Monovalent Ion": "K(I)",
+            "Expected Transitions": 2
         },
         "file_2": {
             "Sample": "RNA",
             "bg in mM": 116,
             "[Buffer] in mM": 20,
             "Divalent Ion": "Ca(II)",
-            "Monovalent Ion": "K(I)"
+            "Monovalent Ion": "K(I)",
+            "Expected Transitions": 2
         }
     }
 }

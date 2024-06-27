@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import re
 
+import lmfit
 from more_itertools import split_at
 from matplotlib import pyplot as plt
 import numpy as np
@@ -60,6 +61,15 @@ class CaryDataframe(EnumToList):
     SecondDerivative = 'd2Abs/dT2'
     SecondDerivativeNormalized = 'normalized_d2Abs/dT2'
     FirstDerivativeSavgolPeaks = 'savgol_peaks'
+    ExpectedTransitions = 'Expected Transitions'
+    BaseLines = 'Baselines'
+
+
+@unique
+class Bounds(EnumToList):
+    Lower = 'lower'
+    Upper = 'upper'
+    Middle = 'middle'
 
 
 class Cary:
@@ -242,7 +252,8 @@ class CaryAnalysis:
             self._normalize_first_derivative(data)
             self._calculate_second_derivative(data)
             self._normalize_second_derivative(data)
-            self._find_peak_for_measurement(data, data_meta)
+            self._find_peak_for_measurement(data, data_meta, filename)
+            self._fit_baselines(data, data_meta)
 
     def _add_extra_information_to_data_meta(self, data, data_meta, extra_information, filename):
         for k, v in extra_information[filename].items():
@@ -350,25 +361,78 @@ class CaryAnalysis:
                     / (data.loc[mask, CaryDataframe.SecondDerivative.value].max() - data.loc[
                 mask, CaryDataframe.SecondDerivative.value].min()))
 
-    def _find_peak_for_measurement(self, data, data_meta):
+    def _find_peak_for_measurement(self, data, data_meta, filename):
         data_meta[CaryDataframe.FirstDerivativeSavgolPeaks.value] = None
-        data_meta[CaryDataframe.TmBasedSavgol.value] = None
         for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
             mask = data[CaryDataframe.Measurement.value] == unique_value
+            mask_meta = data_meta[CaryDataframe.Measurement.value] == unique_value
             measurement_data = data[mask]
+            meta = data_meta[mask_meta]
             measurement_data.reset_index(drop=True, inplace=True)
             savgol = savgol_filter(measurement_data[CaryDataframe.FirstDerivative.value], 12, 3)
             savgol_peaks, _ = find_peaks(savgol, height=0, width=5, distance=10)
             savgol_T = measurement_data[CaryDataframe.Temperature_K.value][savgol_peaks]
             savgol_dAbsdT = savgol[savgol_peaks]
             peaks = np.array([(savgol_x, savgol_y) for savgol_x, savgol_y in zip(savgol_T, savgol_dAbsdT)])
+            if int(meta[CaryDataframe.ExpectedTransitions.value][unique_value-1]) != int(len(peaks)):
+                print(f"WARNING: Number of found peaks doesn't match the expected transitions\n File: {filename}, Measurement: {unique_value}")
             for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
                 data_meta.at[index, CaryDataframe.FirstDerivativeSavgolPeaks.value] = peaks
 
-    def _fit_baselines(self):
-        pass
+    def _fit_baselines(self, data, data_meta):
+        data_meta[CaryDataframe.BaseLines.value] = None
+        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
+            mask = data[CaryDataframe.Measurement.value] == unique_value
+            mask_meta = data_meta[CaryDataframe.Measurement.value] == unique_value
+            measurement_data = data[mask]
+            meta = data_meta[mask_meta]
+            measurement_data.reset_index(drop=True, inplace=True)
+            peaks = meta[CaryDataframe.FirstDerivativeSavgolPeaks.value].to_list()[0]
+            if len(peaks) == 1:
+                tm = peaks[:, 0]
+                slope_low, intercept_low = self._get_fit_for_baseline(measurement_data, tm, Bounds.Lower.value)
+                slope_high, intercept_high = self._get_fit_for_baseline(measurement_data, tm, Bounds.Upper.value)
+                for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
+                    data_meta.at[index, CaryDataframe.BaseLines.value] = np.array([[slope_low, intercept_low], [slope_high, intercept_high]])
+            elif len(peaks) == 2:
+                tm = sorted(peaks[:, 0])
+                slope_low, intercept_low = self._get_fit_for_baseline(measurement_data, tm, Bounds.Lower.value)
+                slope_middle, intercept_middle = self._get_fit_for_baseline(measurement_data, tm, Bounds.Middle.value)
+                slope_high, intercept_high = self._get_fit_for_baseline(measurement_data, tm, Bounds.Upper.value)
+                for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
+                    data_meta.at[index, CaryDataframe.BaseLines.value] = np.array([[slope_low, intercept_low], [slope_middle, intercept_middle], [slope_high, intercept_high]])
+            else:
+                for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
+                    data_meta.at[index, CaryDataframe.BaseLines.value] = []
 
-        # fit baselines for both transitions
+    def _get_fit_for_baseline(self, measurement_data, tm, baseline):
+        if baseline == Bounds.Lower.value:
+            if len(tm) == 1:
+                tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] < float(tm)]
+            else:
+                tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] < float(tm[0])]
+            tm_index = tm[CaryDataframe.FirstDerivative.value].idxmin()
+        elif baseline == Bounds.Middle.value:
+            tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] > float(tm[0])) & (
+                 measurement_data[CaryDataframe.Temperature_K.value] < float(tm[1]))]
+            tm_index = tm[CaryDataframe.FirstDerivative.value].idxmin()
+        elif baseline == Bounds.Upper.value:
+            if len(tm) == 1:
+                tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] > float(tm)]
+            else:
+                tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] > float(tm[1])]
+            tm_index = tm[CaryDataframe.FirstDerivative.value].idxmin()
+        else:
+            raise ValueError(f"Baseline {baseline} not supported")
+        start_index = max(tm_index - 3, 0)
+        end_index = min(tm_index + 3, len(measurement_data) - 1)
+        area_y = measurement_data.iloc[start_index:end_index + 1][CaryDataframe.FirstDerivative.value].to_list()
+        area_x = measurement_data.iloc[start_index:end_index + 1][CaryDataframe.Temperature_K.value].to_list()
+        mod = lmfit.models.LinearModel()
+        fit_function = mod.fit(area_y, x=area_x)
+        return fit_function.values["slope"], fit_function.values["intercept"]
+
+        # fit baselines for both transitions #TODO: BASELINES ANGUCKEN
         # global fit of complete curve -> baselines as input
         # calculate errors over all calculations
         # standard deviation and mean over triplets
