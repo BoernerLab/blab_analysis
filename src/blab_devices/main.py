@@ -1,5 +1,6 @@
 from src.blab_devices.cary import Cary, CaryAnalysis, CaryDataframe
 from matplotlib import pyplot as plt
+import numpy as np
 
 
 cary_data = Cary("test", "test/extra.json")
@@ -12,20 +13,25 @@ cary_analysis.set_normalized_absorbance_for_measurement('file_1', 32, 33, 52)
 cary_analysis.set_normalized_absorbance_for_measurement('file_2', 32, 23, 70)
 
 data = (cary_analysis.cary_object.list_data[0])[cary_analysis.cary_object.list_data[0]['Measurement'] == 5]
+meta_data = cary_analysis.cary_object.list_data_meta[0]
 
-fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+for i in range(1, 33):
+    data = (cary_analysis.cary_object.list_data[0])[cary_analysis.cary_object.list_data[0]['Measurement'] == i]
+    meta_data = (cary_analysis.cary_object.list_data_meta[0])[cary_analysis.cary_object.list_data_meta[0]['Measurement'] == i]
 
-abs_columns = [CaryDataframe.Absorbance.value, CaryDataframe.FirstDerivative.value, CaryDataframe.SecondDerivative.value,
-               CaryDataframe.NormalizedAbsorbance.value, CaryDataframe.FirstDerivativeNormalized.value,
-               CaryDataframe.SecondDerivativeNormalized.value]
+    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
 
-for i, ax in enumerate(axes.flat):
-    ax.scatter(data[CaryDataframe.Temperature_K.value], data[abs_columns[i]], alpha=0.7)
-    ax.set_title(f'Temperature vs {abs_columns[i]}')
+    ax.scatter(data[CaryDataframe.Temperature_K.value], data[CaryDataframe.Absorbance.value], alpha=0.7)
+    baselines = meta_data[CaryDataframe.BaseLines.value].to_list()[0]
+    x = np.array([280, 380])
+    for baseline in baselines:
+        y = baseline[0]*x + baseline[1]
+        ax.plot(x, y)
+    ax.set_title(f'Temperature vs Absorbance')
     ax.set_xlabel('Temperature')
-    ax.set_ylabel(abs_columns[i])
+    ax.set_ylabel('Absorbance')
 
-plt.tight_layout()
-plt.show()
+    plt.tight_layout()
+    plt.show()
 
 print(data)

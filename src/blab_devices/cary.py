@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import re
 
-import lmfit
+from lmfit import models, Parameters
 from more_itertools import split_at
 from matplotlib import pyplot as plt
 import numpy as np
@@ -410,7 +410,9 @@ class CaryAnalysis:
             if len(tm) == 1:
                 tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] < float(tm)]
             else:
-                tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] < float(tm[0])]
+                tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] < float(tm[0])) &\
+                                      (measurement_data[CaryDataframe.FirstDerivative.value] >= 0)]
+
             tm_index = tm[CaryDataframe.FirstDerivative.value].idxmin()
         elif baseline == Bounds.Middle.value:
             tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] > float(tm[0])) & (
@@ -420,15 +422,17 @@ class CaryAnalysis:
             if len(tm) == 1:
                 tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] > float(tm)]
             else:
-                tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] > float(tm[1])]
+                tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] > float(tm[1])) &\
+                                      (measurement_data[CaryDataframe.FirstDerivative.value] >= 0)]
             tm_index = tm[CaryDataframe.FirstDerivative.value].idxmin()
         else:
             raise ValueError(f"Baseline {baseline} not supported")
-        start_index = max(tm_index - 3, 0)
-        end_index = min(tm_index + 3, len(measurement_data) - 1)
-        area_y = measurement_data.iloc[start_index:end_index + 1][CaryDataframe.FirstDerivative.value].to_list()
-        area_x = measurement_data.iloc[start_index:end_index + 1][CaryDataframe.Temperature_K.value].to_list()
-        mod = lmfit.models.LinearModel()
+
+        start_index = max(tm_index - 5, 0)
+        end_index = min(tm_index + 5, len(measurement_data) - 1)
+        area_y = tm.loc[start_index:end_index + 1][CaryDataframe.Absorbance.value].to_list()
+        area_x = tm.loc[start_index:end_index + 1][CaryDataframe.Temperature_K.value].to_list()
+        mod = models.LinearModel()
         fit_function = mod.fit(area_y, x=area_x)
         return fit_function.values["slope"], fit_function.values["intercept"]
 
