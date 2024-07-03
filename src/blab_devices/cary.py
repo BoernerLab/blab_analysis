@@ -1,8 +1,10 @@
 from enum import Enum, unique
+import inspect
 import json
 from pathlib import Path
 import re
 
+import lmfit
 from lmfit import models, Parameters
 from more_itertools import split_at
 from matplotlib import pyplot as plt
@@ -63,6 +65,10 @@ class CaryDataframe(EnumToList):
     FirstDerivativeSavgolPeaks = 'savgol_peaks'
     ExpectedTransitions = 'Expected Transitions'
     BaseLines = 'Baselines'
+    BaseLinesError = 'Baselines Std'
+    ControlWavelength = 'Control Wavelength'
+    DirectMeltingCurve = 'Direct Melting Curve Object'
+    Molecularity = 'Molecularity'
 
 
 @unique
@@ -240,6 +246,7 @@ class CaryAnalysis:
     # Todo: fit gauss in first derivative -> Tm or dH --> dS or dG to extract exact Tm and dH to possibly calculate dG
     def __init__(self, cary_object: Cary):
         self.cary_object = cary_object
+        self.dmf = DirectMeltFit()
         for i, (data, data_meta, extra_information, hyperparameter, filename) in enumerate(zip(
                 self.cary_object.list_data,
                 self.cary_object.list_data_meta,
@@ -253,7 +260,8 @@ class CaryAnalysis:
             self._calculate_second_derivative(data)
             self._normalize_second_derivative(data)
             self._find_peak_for_measurement(data, data_meta, filename)
-            self._fit_baselines(data, data_meta)
+            self._fit_baselines(data, data_meta, filename, extra_information)
+            self._global_fit(data, data_meta, filename, extra_information)
 
     def _add_extra_information_to_data_meta(self, data, data_meta, extra_information, filename):
         for k, v in extra_information[filename].items():
@@ -379,38 +387,45 @@ class CaryAnalysis:
             for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
                 data_meta.at[index, CaryDataframe.FirstDerivativeSavgolPeaks.value] = peaks
 
-    def _fit_baselines(self, data, data_meta):
+    def _fit_baselines(self, data, data_meta, filename, extra_information):
         data_meta[CaryDataframe.BaseLines.value] = None
+        data_meta[CaryDataframe.BaseLinesError.value] = None
         for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
-            mask = data[CaryDataframe.Measurement.value] == unique_value
-            mask_meta = data_meta[CaryDataframe.Measurement.value] == unique_value
-            measurement_data = data[mask]
-            meta = data_meta[mask_meta]
-            measurement_data.reset_index(drop=True, inplace=True)
-            peaks = meta[CaryDataframe.FirstDerivativeSavgolPeaks.value].to_list()[0]
-            if len(peaks) == 1:
-                tm = peaks[:, 0]
-                slope_low, intercept_low = self._get_fit_for_baseline(measurement_data, tm, Bounds.Lower.value)
-                slope_high, intercept_high = self._get_fit_for_baseline(measurement_data, tm, Bounds.Upper.value)
-                for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
-                    data_meta.at[index, CaryDataframe.BaseLines.value] = np.array([[slope_low, intercept_low], [slope_high, intercept_high]])
-            elif len(peaks) == 2:
-                tm = sorted(peaks[:, 0])
-                slope_low, intercept_low = self._get_fit_for_baseline(measurement_data, tm, Bounds.Lower.value)
-                slope_middle, intercept_middle = self._get_fit_for_baseline(measurement_data, tm, Bounds.Middle.value)
-                slope_high, intercept_high = self._get_fit_for_baseline(measurement_data, tm, Bounds.Upper.value)
-                for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
-                    data_meta.at[index, CaryDataframe.BaseLines.value] = np.array([[slope_low, intercept_low], [slope_middle, intercept_middle], [slope_high, intercept_high]])
-            else:
-                for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
-                    data_meta.at[index, CaryDataframe.BaseLines.value] = []
+            if float(data_meta.loc[data_meta['Measurement'] == unique_value, CaryDataframe.Wavelength.value]) != float(extra_information[filename][CaryDataframe.ControlWavelength.value]):
+                mask = data[CaryDataframe.Measurement.value] == unique_value
+                mask_meta = data_meta[CaryDataframe.Measurement.value] == unique_value
+                measurement_data = data[mask]
+                meta = data_meta[mask_meta]
+                measurement_data.reset_index(drop=True, inplace=True)
+                peaks = meta[CaryDataframe.FirstDerivativeSavgolPeaks.value].to_list()[0]
+                if len(peaks) == 1:
+                    tm = peaks[:, 0]
+                    slope_low, slope_low_err, intercept_low, intercept_low_err = self._get_fit_for_baseline(measurement_data, tm, Bounds.Lower.value)
+                    slope_high, slope_high_err, intercept_high, intercept_high_err = self._get_fit_for_baseline(measurement_data, tm, Bounds.Upper.value)
+                    for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
+                        data_meta.at[index, CaryDataframe.BaseLines.value] = np.array([[slope_low, intercept_low], [slope_high, intercept_high]])
+                        data_meta.at[index, CaryDataframe.BaseLines.value] = np.array([[slope_low_err, intercept_low_err], [slope_high_err, intercept_high_err]])
+                elif len(peaks) == 2:
+                    tm = sorted(peaks[:, 0])
+                    slope_low, slope_low_err, intercept_low, intercept_low_err = self._get_fit_for_baseline(measurement_data, tm, Bounds.Lower.value)
+                    slope_middle, slope_middle_err, intercept_middle, intercept_middle_err = self._get_fit_for_baseline(measurement_data, tm, Bounds.Middle.value)
+                    slope_high, slope_high_err, intercept_high, intercept_high_err = self._get_fit_for_baseline(measurement_data, tm, Bounds.Upper.value)
+                    for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
+                        data_meta.at[index, CaryDataframe.BaseLines.value] = np.array([[slope_low, intercept_low], [slope_middle, intercept_middle], [slope_high, intercept_high]])
+                        data_meta.at[index, CaryDataframe.BaseLinesError.value] = np.array([[slope_low_err, intercept_low_err], [slope_middle_err, intercept_middle_err], [slope_high_err, intercept_high_err]])
+
+                else:
+                    for index in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
+                        data_meta.at[index, CaryDataframe.BaseLines.value] = []
 
     def _get_fit_for_baseline(self, measurement_data, tm, baseline):
         if baseline == Bounds.Lower.value:
             if len(tm) == 1:
-                tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] < float(tm)]
+                # Non-Melting Curves are vulnerable --> will fail
+                tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] < float(tm)) &
+                                      (measurement_data[CaryDataframe.FirstDerivative.value] >= 0)]
             else:
-                tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] < float(tm[0])) &\
+                tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] < float(tm[0])) &
                                       (measurement_data[CaryDataframe.FirstDerivative.value] >= 0)]
 
             tm_index = tm[CaryDataframe.FirstDerivative.value].idxmin()
@@ -420,9 +435,10 @@ class CaryAnalysis:
             tm_index = tm[CaryDataframe.FirstDerivative.value].idxmin()
         elif baseline == Bounds.Upper.value:
             if len(tm) == 1:
-                tm = measurement_data[measurement_data[CaryDataframe.Temperature_K.value] > float(tm)]
+                tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] > float(tm)) &
+                                      (measurement_data[CaryDataframe.FirstDerivative.value] >= 0)]
             else:
-                tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] > float(tm[1])) &\
+                tm = measurement_data[(measurement_data[CaryDataframe.Temperature_K.value] > float(tm[1])) &
                                       (measurement_data[CaryDataframe.FirstDerivative.value] >= 0)]
             tm_index = tm[CaryDataframe.FirstDerivative.value].idxmin()
         else:
@@ -434,9 +450,51 @@ class CaryAnalysis:
         area_x = tm.loc[start_index:end_index + 1][CaryDataframe.Temperature_K.value].to_list()
         mod = models.LinearModel()
         fit_function = mod.fit(area_y, x=area_x)
-        return fit_function.values["slope"], fit_function.values["intercept"]
+        return (fit_function.values["slope"], fit_function.params["slope"].stderr,
+                fit_function.values["intercept"], fit_function.params["intercept"].stderr)
 
-        # fit baselines for both transitions #TODO: BASELINES ANGUCKEN
+    def _global_fit(self, data, data_meta, filename, extra_information):
+        data_meta[CaryDataframe.DirectMeltingCurve.value] = None
+        methods = [attr for attr in dir(self.dmf) if callable(getattr(self.dmf, attr)) and not attr.startswith("__")]
+        desired_global_fit = [method for method in methods if f'{CaryDataframe.Molecularity.value.lower()}_{extra_information[filename][CaryDataframe.Molecularity.value]}' in method][0]
+        method = getattr(self.dmf, desired_global_fit, None)
+        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
+            # TODO: We have to implement two different variants. One for the single molecularities and one for the double molecularities. Possible solution is to search after 1 or 2 numbers in the method name
+            model = lmfit.Model(method)
+            mask = data[CaryDataframe.Measurement.value] == unique_value
+            mask_meta = data_meta[CaryDataframe.Measurement.value] == unique_value
+            measurement_data = data[mask]
+            meta = data_meta[mask_meta]
+            # TODO: weird behaviour with pandas
+            parse = model.make_params(DH1=dict(value=-250000, max=0),
+                                      DH2=dict(value=-250000, max=0),
+                                      Tm1=dict(value=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][0][0][0],
+                                               min=min(measurement_data[CaryDataframe.Temperature_K.value]),
+                                               max=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][0][1][0]),
+                                      Tm2=dict(value=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][0][1][0],
+                                               min=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][0][0][0],
+                                               max=max(measurement_data[CaryDataframe.Temperature_K.value])),
+                                      m1=dict(value=meta[CaryDataframe.BaseLines.value][0][0][0],
+                                              min=meta[CaryDataframe.BaseLines.value][0][0][0]-meta[CaryDataframe.BaseLinesError.value][0][0][0],
+                                              max=meta[CaryDataframe.BaseLines.value][0][0][0]+meta[CaryDataframe.BaseLinesError.value][0][0][0]),
+                                      n1=dict(value=meta[CaryDataframe.BaseLines.value][0][0][1],
+                                              min=meta[CaryDataframe.BaseLines.value][0][0][1]-meta[CaryDataframe.BaseLinesError.value][0][0][1],
+                                              max=meta[CaryDataframe.BaseLines.value][0][0][1]+meta[CaryDataframe.BaseLinesError.value][0][0][1]),
+                                      m2=dict(value=meta[CaryDataframe.BaseLines.value][0][1][0],
+                                              min=meta[CaryDataframe.BaseLines.value][0][1][0]-meta[CaryDataframe.BaseLinesError.value][0][1][0],
+                                              max=meta[CaryDataframe.BaseLines.value][0][1][0]+meta[CaryDataframe.BaseLinesError.value][0][1][0]),
+                                      n2=dict(value=meta[CaryDataframe.BaseLines.value][0][1][1],
+                                              min=meta[CaryDataframe.BaseLines.value][0][1][1]-meta[CaryDataframe.BaseLinesError.value][0][1][1],
+                                              max=meta[CaryDataframe.BaseLines.value][0][1][1]+meta[CaryDataframe.BaseLinesError.value][0][1][1]),
+                                      m3=dict(value=meta[CaryDataframe.BaseLines.value][0][2][0],
+                                              min=meta[CaryDataframe.BaseLines.value][0][2][0]-meta[CaryDataframe.BaseLinesError.value][0][2][0],
+                                              max=meta[CaryDataframe.BaseLines.value][0][2][0]+meta[CaryDataframe.BaseLinesError.value][0][2][0]),
+                                      n3=dict(value=meta[CaryDataframe.BaseLines.value][0][2][1],
+                                              min=meta[CaryDataframe.BaseLines.value][0][2][1]-meta[CaryDataframe.BaseLinesError.value][0][2][1],
+                                              max=meta[CaryDataframe.BaseLines.value][0][2][1]+meta[CaryDataframe.BaseLinesError.value][0][2][1])
+                                      )
+            out = model.fit(data[CaryDataframe.Absorbance.value], params=parse, T=data[CaryDataframe.Temperature_K.value])
+            print('dreck')
         # global fit of complete curve -> baselines as input
         # calculate errors over all calculations
         # standard deviation and mean over triplets
@@ -444,5 +502,216 @@ class CaryAnalysis:
         # write plot functions for desired analysis
 
 
+class DirectMeltFit:
+    def __init__(self):
+        self.r = 8.31446261815324
 
+    def molecularity_1(self, T, DH, Tm, m1, n1, m2, n2):
+        """
+        Analytical melting curve function for intramolecular reactions. Böttcher et. al., ...
 
+        Parameters
+        ----------
+        T : TYPE
+            Temperature in K.
+        DH : TYPE
+            Molar Enthalpy change in .
+        Tm : TYPE
+            Melting temeprature in K.
+        m1 : TYPE
+            Lower baseline inclination in K^-1.
+        n1 : TYPE
+            Lowerr baseline y-intersect.
+        m2 : TYPE
+            Upper baseline incliantion in K^-1.
+        n2 : TYPE
+            Upper baseline y-intersect.
+
+        Returns
+        -------
+        TYPE
+            Decadic Absorption E_d(T) for the given parameters.
+
+        """
+        x = DH / self.r * (1 / T - 1 / Tm)
+        theta = 1 / (1 + np.exp(x))
+        return (m1 * T + n1) * theta + (m2 * T + n2) * (1 - theta)
+
+    def molecularity_2(self, T, DH, Tm, m1, n1, m2, n2):
+        """
+        Analytical melting curve function for bimolecular reactions. Böttcher et. al., ...
+
+       Parameters
+       ----------
+       T : TYPE
+           Temperature in K.
+       DH : TYPE
+           Molar Enthalpy change in .
+       Tm : TYPE
+           Melting temeprature in K.
+       m1 : TYPE
+           Lower baseline inclination in K^-1.
+       n1 : TYPE
+           Lowerr baseline y-intersect.
+       m2 : TYPE
+           Upper baseline incliantion in K^-1.
+       n2 : TYPE
+           Upper baseline y-intersect.
+
+        Returns
+        -------
+        TYPE
+            Decadic Absorption E_d(T) for the given parameters.
+
+        """
+        x = DH / self.r * (1 / T - 1 / Tm)
+        theta = 1 - 2 / (1 + np.sqrt(1 + 8 * np.exp(-x)))
+        return (m1 * T + n1) * theta + (m2 * T + n2) * (1 - theta)
+
+    def molecularity_1_1(self, T, DH1, DH2, Tm1, Tm2, m1, n1, m2, n2, m3, n3):
+        """
+        Analytical melting curve function for bimolecular reactions. Böttcher et. al., ...
+
+       Parameters
+       ----------
+       T : TYPE
+           Temperature in K.
+       DH : TYPE
+           Molar Enthalpy change in .
+       Tm : TYPE
+           Melting temeprature in K.
+       m1 : TYPE
+           Lower baseline inclination in K^-1.
+       n1 : TYPE
+           Lower baseline y-intersect.
+       m2 : TYPE
+           Mid baseline incliantion in K^-1.
+       n2 : TYPE
+           Mid baseline y-intersect.
+       m3 : TYPE
+           Upper baseline incliantion in K^-1.
+       n3 : TYPE
+           Upper baseline y-intersect.
+
+        Returns
+        -------
+        TYPE
+            Decadic Absorption E_d(T) for the given parameters.
+
+        """
+        x1 = DH1 / self.r * (1 / T - 1 / Tm1)
+        x2 = DH2 / self.r * (1 / T - 1 / Tm2)
+        theta11 = 1 / (1 + np.exp(x1))
+        theta12 = 1 / (1 + np.exp(x2))
+        return (m1 * T + n1) * theta11 + (m2 * T + n2) * (theta12 - theta11) + (m3 * T + n3) * (1 - theta12)
+
+    def molecularity_2_2(self, T, DH1, DH2, Tm1, Tm2, m1, n1, m2, n2, m3, n3):
+        """
+        Analytical melting curve function for bimolecular reactions. Böttcher et. al., ...
+
+       Parameters
+       ----------
+       T : TYPE
+           Temperature in K.
+       DH : TYPE
+           Molar Enthalpy change in .
+       Tm : TYPE
+           Melting temeprature in K.
+       m1 : TYPE
+           Lower baseline inclination in K^-1.
+       n1 : TYPE
+           Lower baseline y-intersect.
+       m2 : TYPE
+           Mid baseline incliantion in K^-1.
+       n2 : TYPE
+           Mid baseline y-intersect.
+       m3 : TYPE
+           Upper baseline incliantion in K^-1.
+       n3 : TYPE
+           Upper baseline y-intersect.
+
+        Returns
+        -------
+        TYPE
+            Decadic Absorption E_d(T) for the given parameters.
+
+        """
+        x1 = DH1 / self.r * (1 / T - 1 / Tm1)
+        x2 = DH2 / self.r * (1 / T - 1 / Tm2)
+        theta21 = 1 - 2 / (1 + np.sqrt(1 + 8 * np.exp(-x1)))
+        theta22 = 1 - 2 / (1 + np.sqrt(1 + 8 * np.exp(-x2)))
+        return (m1 * T + n1) * theta21 + (m2 * T + n2) * (theta22 - theta21) + (m3 * T + n3) * (1 - theta22)
+
+    def molecularity_1_2(self, T, DH1, DH2, Tm1, Tm2, m1, n1, m2, n2, m3, n3):
+        """
+        Analytical melting curve function for bimolecular reactions. Böttcher et. al., ...
+
+       Parameters
+       ----------
+       T : TYPE
+           Temperature in K.
+       DH : TYPE
+           Molar Enthalpy change in .
+       Tm : TYPE
+           Melting temeprature in K.
+       m1 : TYPE
+           Lower baseline inclination in K^-1.
+       n1 : TYPE
+           Lower baseline y-intersect.
+       m2 : TYPE
+           Mid baseline incliantion in K^-1.
+       n2 : TYPE
+           Mid baseline y-intersect.
+       m3 : TYPE
+           Upper baseline incliantion in K^-1.
+       n3 : TYPE
+           Upper baseline y-intersect.
+
+        Returns
+        -------
+        TYPE
+            Decadic Absorption E_d(T) for the given parameters.
+
+        """
+        x1 = DH1 / self.r * (1 / T - 1 / Tm1)
+        x2 = DH2 / self.r * (1 / T - 1 / Tm2)
+        theta11 = 1 / (1 + np.exp(x1))
+        theta22 = 1 - 2 / (1 + np.sqrt(1 + 8 * np.exp(-x2)))
+        return (m1 * T + n1) * theta11 + (m2 * T + n2) * (theta22 - theta11) + (m3 * T + n3) * (1 - theta22)
+
+    def molecularity_2_1(self, T, DH1, DH2, Tm1, Tm2, m1, n1, m2, n2, m3, n3):
+        """
+        Analytical melting curve function for bimolecular reactions. Böttcher et. al., ...
+
+       Parameters
+       ----------
+       T : TYPE
+           Temperature in K.
+       DH : TYPE
+           Molar Enthalpy change in .
+       Tm : TYPE
+           Melting temeprature in K.
+       m1 : TYPE
+           Lower baseline inclination in K^-1.
+       n1 : TYPE
+           Lower baseline y-intersect.
+       m2 : TYPE
+           Mid baseline incliantion in K^-1.
+       n2 : TYPE
+           Mid baseline y-intersect.
+       m3 : TYPE
+           Upper baseline incliantion in K^-1.
+       n3 : TYPE
+           Upper baseline y-intersect.
+
+        Returns
+        -------
+        TYPE
+            Decadic Absorption E_d(T) for the given parameters.
+
+        """
+        x1 = DH1 / self.r * (1 / T - 1 / Tm1)
+        x2 = DH2 / self.r * (1 / T - 1 / Tm2)
+        theta12 = 1 - 2 / (1 + np.sqrt(1 + 8 * np.exp(-x2)))
+        theta21 = 1 / (1 + np.exp(x1))
+        return (m1 * T + n1) * theta12 + (m2 * T + n2) * (theta21 - theta12) + (m3 * T + n3) * (1 - theta21)

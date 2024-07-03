@@ -5,7 +5,9 @@
             "[Buffer] in mM": 20,
             "Divalent Ion": "Mg(II)",
             "Monovalent Ion": "K(I)",
-            "Expected Transitions": 2
+            "Expected Transitions": 2,
+            "Molecularity": "2_2",
+            "Control Wavelength": 400
         },
         "file_2": {
             "Sample": "RNA",
@@ -13,7 +15,9 @@
             "[Buffer] in mM": 20,
             "Divalent Ion": "Ca(II)",
             "Monovalent Ion": "K(I)",
-            "Expected Transitions": 2
+            "Expected Transitions": 2,
+            "Molecularity": "2_2",
+            "Control Wavelength": 400
         }
     }
 }

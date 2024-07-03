@@ -15,7 +15,7 @@ cary_analysis.set_normalized_absorbance_for_measurement('file_2', 32, 23, 70)
 data = (cary_analysis.cary_object.list_data[0])[cary_analysis.cary_object.list_data[0]['Measurement'] == 5]
 meta_data = cary_analysis.cary_object.list_data_meta[0]
 
-for i in range(1, 33):
+for i in range(1, 17):
     data = (cary_analysis.cary_object.list_data[0])[cary_analysis.cary_object.list_data[0]['Measurement'] == i]
     meta_data = (cary_analysis.cary_object.list_data_meta[0])[cary_analysis.cary_object.list_data_meta[0]['Measurement'] == i]
 
