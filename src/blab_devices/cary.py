@@ -13,12 +13,12 @@ import pandas as pd
 from scipy.signal import find_peaks, savgol_filter
 
 from src.blab_devices.exceptions import InvalidCaryFormatError, InvalidHyperparameterError, \
-    InvalidHyperparameterHeaderError, NoJsonExtraInformationError
+    InvalidHyperparameterHeaderError, NoJsonExtraInformationError, MolecularityRegexError, ExpectedTransitionsError
 
 
 STAGE = 'Stage'
 NO_STAGES_REGEX = re.compile('Number of stages,[0-9]+')
-METADATA_REGEX = re.compile('.*_(\d+[.]\d+){1}nm_(\d+[.]\d+){1}-(\d+[.]\d+){1}C.*')
+METADATA_REGEX = re.compile('(.*)_(\d+[.]\d+){1}nm_(\d+[.]\d+){1}-(\d+[.]\d+){1}C.*')
 
 
 class EnumToList(Enum):
@@ -49,6 +49,8 @@ class CaryMeasurement(EnumToList):
 
 @unique
 class CaryDataframe(EnumToList):
+    RampType = 'Ramp Type'
+    Name = 'Name'
     Temperature = 'Temperature (°C)'
     Temperature_K = 'Temperature (K)'
     Wavelength = 'Wavelength (nm)'
@@ -70,6 +72,19 @@ class CaryDataframe(EnumToList):
     DirectMeltingCurve = 'Direct Melting Curve Object'
     Molecularity = 'Molecularity'
 
+
+@unique
+class CaryResults(EnumToList):
+    Filename = 'Filename'
+    SampleName = 'SampleName'
+    Measurements = 'Measurements'
+    RampType = 'Ramp Type'
+    DeltaS = 'deltaS'
+    DeltaSError = 'deltaSerr'
+    DeltaH = 'deltaH'
+    DeltaHError = 'deltaHerr'
+    Tm = 'Tm'
+    TmError = 'TmErr'
 
 @unique
 class Bounds(EnumToList):
@@ -184,13 +199,15 @@ class Cary:
         for measurement_string, measurement_index in zip(self.data['Meta'].tolist(), self.data['Measurement'].tolist()):
             match = re.match(METADATA_REGEX, measurement_string)
             if match:
-                procedure = 'Cooling' if float(match.group(2)) >= float(match.group(3)) else 'Heating'
+                procedure = 'Cooling' if float(match.group(3)) >= float(match.group(4)) else 'Heating'
                 meta_collection.append([measurement_index,
-                                        float(match.group(1)),
+                                        str(match.group(1)),
                                         float(match.group(2)),
                                         float(match.group(3)),
+                                        float(match.group(4)),
                                         procedure])
         self.data_meta = pd.DataFrame(meta_collection, columns=['Measurement',
+                                                                'Name',
                                                                 'Wavelength (nm)',
                                                                 'Temperature Start (°C)',
                                                                 'Temperature End (°C)',
@@ -247,6 +264,9 @@ class CaryAnalysis:
     def __init__(self, cary_object: Cary):
         self.cary_object = cary_object
         self.dmf = DirectMeltFit()
+        self.molecularity_one_digit_regex = re.compile(r'\d{1}')
+        self.molecularity_two_digit_regex = re.compile(r'\d{2}')
+        self.results = pd.DataFrame(columns=CaryResults.list())
         for i, (data, data_meta, extra_information, hyperparameter, filename) in enumerate(zip(
                 self.cary_object.list_data,
                 self.cary_object.list_data_meta,
@@ -254,6 +274,7 @@ class CaryAnalysis:
                 self.cary_object.hyperparameters,
                 self.cary_object.file_names)):
             self._add_extra_information_to_data_meta(data, data_meta, extra_information, filename)
+            self._add_cell_numbers_to_meta(data, data_meta)
             self._normalize_absorbance_for_each_measurement(data)
             self._calculate_first_derivative(data)
             self._normalize_first_derivative(data)
@@ -262,11 +283,19 @@ class CaryAnalysis:
             self._find_peak_for_measurement(data, data_meta, filename)
             self._fit_baselines(data, data_meta, filename, extra_information)
             self._global_fit(data, data_meta, filename, extra_information)
+            self._fill_results(data, data_meta, extra_information, filename)
 
     def _add_extra_information_to_data_meta(self, data, data_meta, extra_information, filename):
         for k, v in extra_information[filename].items():
             data_meta[k] = v
         data[CaryDataframe.Temperature_K.value] = data[CaryDataframe.Temperature.value] + 273.15
+
+
+    def _add_cell_numbers_to_meta(self, data, data_meta):
+        df_unique = data.drop_duplicates(subset=CaryDataframe.Measurement.value, keep='first')
+        df_result = df_unique[[CaryDataframe.Measurement.value, CaryDataframe.CellNumber.value]]
+        data_meta = pd.merge(data_meta, df_result, on=CaryDataframe.Measurement.value)
+
 
     def _normalize_absorbance_for_each_measurement(self, data):
         for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
@@ -458,44 +487,101 @@ class CaryAnalysis:
         methods = [attr for attr in dir(self.dmf) if callable(getattr(self.dmf, attr)) and not attr.startswith("__")]
         desired_global_fit = [method for method in methods if f'{CaryDataframe.Molecularity.value.lower()}_{extra_information[filename][CaryDataframe.Molecularity.value]}' in method][0]
         method = getattr(self.dmf, desired_global_fit, None)
-        for unique_value in set(data[CaryDataframe.Measurement.value].tolist()):
-            # TODO: We have to implement two different variants. One for the single molecularities and one for the double molecularities. Possible solution is to search after 1 or 2 numbers in the method name
-            model = lmfit.Model(method)
-            mask = data[CaryDataframe.Measurement.value] == unique_value
-            mask_meta = data_meta[CaryDataframe.Measurement.value] == unique_value
-            measurement_data = data[mask]
-            meta = data_meta[mask_meta]
-            # TODO: weird behaviour with pandas
-            parse = model.make_params(DH1=dict(value=-250000, max=0),
-                                      DH2=dict(value=-250000, max=0),
-                                      Tm1=dict(value=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][0][0][0],
-                                               min=min(measurement_data[CaryDataframe.Temperature_K.value]),
-                                               max=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][0][1][0]),
-                                      Tm2=dict(value=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][0][1][0],
-                                               min=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][0][0][0],
-                                               max=max(measurement_data[CaryDataframe.Temperature_K.value])),
-                                      m1=dict(value=meta[CaryDataframe.BaseLines.value][0][0][0],
-                                              min=meta[CaryDataframe.BaseLines.value][0][0][0]-meta[CaryDataframe.BaseLinesError.value][0][0][0],
-                                              max=meta[CaryDataframe.BaseLines.value][0][0][0]+meta[CaryDataframe.BaseLinesError.value][0][0][0]),
-                                      n1=dict(value=meta[CaryDataframe.BaseLines.value][0][0][1],
-                                              min=meta[CaryDataframe.BaseLines.value][0][0][1]-meta[CaryDataframe.BaseLinesError.value][0][0][1],
-                                              max=meta[CaryDataframe.BaseLines.value][0][0][1]+meta[CaryDataframe.BaseLinesError.value][0][0][1]),
-                                      m2=dict(value=meta[CaryDataframe.BaseLines.value][0][1][0],
-                                              min=meta[CaryDataframe.BaseLines.value][0][1][0]-meta[CaryDataframe.BaseLinesError.value][0][1][0],
-                                              max=meta[CaryDataframe.BaseLines.value][0][1][0]+meta[CaryDataframe.BaseLinesError.value][0][1][0]),
-                                      n2=dict(value=meta[CaryDataframe.BaseLines.value][0][1][1],
-                                              min=meta[CaryDataframe.BaseLines.value][0][1][1]-meta[CaryDataframe.BaseLinesError.value][0][1][1],
-                                              max=meta[CaryDataframe.BaseLines.value][0][1][1]+meta[CaryDataframe.BaseLinesError.value][0][1][1]),
-                                      m3=dict(value=meta[CaryDataframe.BaseLines.value][0][2][0],
-                                              min=meta[CaryDataframe.BaseLines.value][0][2][0]-meta[CaryDataframe.BaseLinesError.value][0][2][0],
-                                              max=meta[CaryDataframe.BaseLines.value][0][2][0]+meta[CaryDataframe.BaseLinesError.value][0][2][0]),
-                                      n3=dict(value=meta[CaryDataframe.BaseLines.value][0][2][1],
-                                              min=meta[CaryDataframe.BaseLines.value][0][2][1]-meta[CaryDataframe.BaseLinesError.value][0][2][1],
-                                              max=meta[CaryDataframe.BaseLines.value][0][2][1]+meta[CaryDataframe.BaseLinesError.value][0][2][1])
-                                      )
-            out = model.fit(data[CaryDataframe.Absorbance.value], params=parse, T=data[CaryDataframe.Temperature_K.value])
-            print('dreck')
-        # global fit of complete curve -> baselines as input
+        for unique_value in list(set(data[CaryDataframe.Measurement.value].tolist())):
+            if float(data_meta.loc[data_meta['Measurement'] == unique_value, CaryDataframe.Wavelength.value]) != float(
+                    extra_information[filename][CaryDataframe.ControlWavelength.value]):
+                model = lmfit.Model(method)
+                mask = data[CaryDataframe.Measurement.value] == unique_value
+                mask_meta = data_meta[CaryDataframe.Measurement.value] == unique_value
+                measurement_data = data[mask]
+                meta = data_meta[mask_meta]
+                if self.molecularity_one_digit_regex.search(desired_global_fit):
+                    parse = model.make_params(DH1=dict(value=-250000, max=0),
+                                              DH2=dict(value=-250000, max=0),
+                                              Tm1=dict(value=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][unique_value-1][0][0],
+                                                       min=min(measurement_data[CaryDataframe.Temperature_K.value]),
+                                                       max=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][unique_value-1][1][0]),
+                                              Tm2=dict(value=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][unique_value-1][1][0],
+                                                       min=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][unique_value-1][0][0],
+                                                       max=max(measurement_data[CaryDataframe.Temperature_K.value])),
+                                              m1=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][0][0],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][0][0]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][0][0],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][0][0]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][0][0]),
+                                              n1=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][0][1],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][0][1]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][0][1],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][0][1]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][0][1]),
+                                              m2=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][1][0],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][1][0]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][1][0],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][1][0]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][1][0]),
+                                              n2=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][1][1],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][1][1]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][1][1],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][1][1]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][1][1]),
+                                              m3=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][2][0],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][2][0]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][2][0],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][2][0]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][2][0]),
+                                              n3=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][2][1],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][2][1]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][2][1],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][2][1]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][2][1])
+                                              )
+                #TODO: this cant be tested with our test files yet
+                elif self.molecularity_two_digit_regex.search(desired_global_fit):
+                    parse = model.make_params(DH=dict(value=-250000, max=0),
+                                              Tm=dict(value=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][unique_value-1][0][0],
+                                                       min=min(measurement_data[CaryDataframe.Temperature_K.value]),
+                                                       max=meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][unique_value-1][1][0]),
+                                              m1=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][0][0],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][0][0]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][0][0],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][0][0]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][0][0]),
+                                              n1=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][0][1],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][0][1]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][0][1],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][0][1]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][0][1]),
+                                              m2=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][1][0],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][1][0]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][1][0],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][1][0]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][1][0]),
+                                              n2=dict(value=meta[CaryDataframe.BaseLines.value][unique_value-1][1][1],
+                                                      min=meta[CaryDataframe.BaseLines.value][unique_value-1][1][1]-meta[CaryDataframe.BaseLinesError.value][unique_value-1][1][1],
+                                                      max=meta[CaryDataframe.BaseLines.value][unique_value-1][1][1]+meta[CaryDataframe.BaseLinesError.value][unique_value-1][1][1])
+                                              )
+                else:
+                    raise MolecularityRegexError
+                out = model.fit(data[CaryDataframe.Absorbance.value], params=parse, T=data[CaryDataframe.Temperature_K.value])
+                data_meta.at[unique_value-1, CaryDataframe.DirectMeltingCurve.value] = out
+
+    def _fill_results(self, data, data_meta, extra_information, filename):
+        data_meta_filtered = data_meta[data_meta[CaryDataframe.Wavelength.value] != extra_information[filename][CaryDataframe.ControlWavelength.value]]
+        data_meta_grouped = data_meta_filtered.groupby([CaryDataframe.RampType.value, CaryDataframe.Name.value])
+        for group, data_meta_filtered_group in data_meta_grouped:
+            row: dict = {}
+            row[CaryResults.Filename.value] = filename
+            row[CaryResults.Measurements.value] = data_meta_filtered_group[CaryDataframe.Measurement.value].to_list()
+            row[CaryResults.RampType.value] = group[0]
+            row[CaryResults.SampleName.value] = group[1]
+            grouped_melting_curves = data_meta_filtered_group[CaryDataframe.DirectMeltingCurve.value].to_list()
+            if extra_information[filename][CaryDataframe.ExpectedTransitions.value] == 1:
+                row[CaryResults.Tm.value] = [melting_curve.params['Tm'].value for melting_curve in grouped_melting_curves]
+                row[CaryResults.TmError.value] = [melting_curve.params['Tm'].stderr for melting_curve in
+                                                  grouped_melting_curves]
+                row[CaryResults.DeltaH.value] = [melting_curve.params['DH'].value for melting_curve in
+                                                 grouped_melting_curves]
+                row[CaryResults.DeltaHError.value] = [melting_curve.params['DH'].stderr for melting_curve in
+                                                      grouped_melting_curves]
+                # TODO: means are missing
+
+            elif extra_information[filename][CaryDataframe.ExpectedTransitions.value] == 2:
+                row[CaryResults.Tm.value] = [[melting_curve.params['Tm1'].value, melting_curve.params['Tm2'].value]
+                                             for melting_curve in grouped_melting_curves]
+                row[CaryResults.TmError.value] = [[melting_curve.params['Tm1'].stderr, melting_curve.params['Tm2'].stderr]
+                                                  for melting_curve in grouped_melting_curves]
+                row[CaryResults.DeltaH.value] = [[melting_curve.params['DH1'].value, melting_curve.params['DH2'].value]
+                                                 for melting_curve in grouped_melting_curves]
+                row[CaryResults.DeltaHError.value] = [[melting_curve.params['DH1'].stderr, melting_curve.params['DH2'].stderr]
+                                                      for melting_curve in grouped_melting_curves]
+                # TODO: means are missing
+
+            else:
+                raise ExpectedTransitionsError
+            self.results.loc[len(self.results)] = row
+        # TODO: Errors sind gottlos ... sometimes zero ... check fits individually for curves
         # calculate errors over all calculations
         # standard deviation and mean over triplets
         # functions to filter after specific data

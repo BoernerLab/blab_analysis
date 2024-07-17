@@ -33,3 +33,19 @@ class NoJsonExtraInformationError(Exception):
 
     def __str__(self):
         return f"{self.message}"
+
+
+class MolecularityRegexError(Exception):
+    def __init__(self):
+        self.message: str = "The desired molecularity is not implemented. Check your Json for the correct spelling."
+
+    def __str__(self):
+        return f"{self.message}"
+
+
+class ExpectedTransitionsError(Exception):
+    def __init__(self):
+        self.message: str = "The desired expected transisions are not supported. Currently only one or two are supported."
+
+    def __str__(self):
+        return f"{self.message}"
