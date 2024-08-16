@@ -49,3 +49,11 @@ class ExpectedTransitionsError(Exception):
 
     def __str__(self):
         return f"{self.message}"
+
+
+class FillResultsError(Exception):
+    def __init__(self):
+        self.message: str = "Something weird happens when writing results to the final results dataframe. Ask Mirko!"
+
+    def __str__(self):
+        return f"{self.message}"
