@@ -1,0 +1,24 @@
+{"files":
+    {
+        "2023_08_31_DNA_TRIS-HCl_85_K": {
+            "Sample": "DNA",
+            "bg in mM": 2.75,
+            "[Buffer] in mM": 1,
+            "pH": 8.5,
+            "Monovalent Ion": "K(I)",
+            "Expected Transitions": 1,
+            "Molecularity": "1",
+            "Control Wavelength": 400
+        },
+        "2024_07_09_KCl_polyU_LS": {
+            "Sample": "RNA",
+            "bg in mM": 116,
+            "[Buffer] in mM": 20,
+            "Divalent Ion": "Mg(II)",
+            "Monovalent Ion": "Na(I)",
+            "Expected Transitions": 2,
+            "Molecularity": "2_1",
+            "Control Wavelength": 400
+        }
+    }
+}
