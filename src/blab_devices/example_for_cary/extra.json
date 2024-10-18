@@ -1,0 +1,12 @@
+{"files":
+    {"2023_08_31_DNA_TRIS-HCl_85_K": {
+            "Sample": "DNA",
+            "bg in mM": 2.75,
+            "[Buffer] in mM": 1,
+            "pH": 8.5,
+            "Monovalent Ion": "K(I)",
+            "Expected Transitions": 1,
+            "Molecularity": "1",
+            "Control Wavelength": 400}
+    }
+}

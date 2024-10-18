@@ -1,1 +1,0 @@
-alle Messdaten in den Ordner data_raw ablegen, dann kann script die Daten automatisch einladen.

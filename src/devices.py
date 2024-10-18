@@ -652,7 +652,7 @@ class ID5:
             self.measurements[measurement_name].FRET_df = new_df
 
         # Fret Berechnen
-        # spalten = temp, wn, DD, AD, AA, 2xI', 2xI'', FRET (wenn vorher drangeklatscht: conzis + sample/construct -> test damit: doppelte raus)
+        # spalten = temp, wn, DD, AD, AA, 2xI', 2xI'', FRET (wenn vorher drangeklatscht: conzis + sample/construct -> example_for_cary damit: doppelte raus)
 
     def calculate_bt_correction(self, measurement_name_list: list, bt_variable: int):
         """
