@@ -10,7 +10,7 @@ cary_analysis = CaryAnalysis(cary_data)
 
 cary_analysis.set_new_peak_for_measurement("2023_08_31_DNA_TRIS-HCl_85_K", 3, min_temp=30, max_temp=70)
 cary_analysis.set_baselines("2023_08_31_DNA_TRIS-HCl_85_K", 3, melting_temp=np.array([340.15]), min_temp=30, max_temp=70)
-cary_analysis.redo_single_curve_fit("2023_08_31_DNA_TRIS-HCl_85_K", 1, melting_temp=np.array([335.15]), min_temp=30, max_temp=70)
+cary_analysis.redo_single_curve_fit("2023_08_31_DNA_TRIS-HCl_85_K", 1, melting_temp=np.array([335.15]), min_temp=30, max_temp=70, min_absorbance=30, max_absorbance=70)
 cary_analysis.redo_single_curve_fit("2023_08_31_DNA_TRIS-HCl_85_K", 3, melting_temp=np.array([340.15]), min_temp=30, max_temp=70)
 cary_analysis.redo_single_curve_fit("2023_08_31_DNA_TRIS-HCl_85_K", 5, melting_temp=np.array([345.15]), min_temp=30, max_temp=70)
 cary_analysis.redo_multi_curve_fit(filename="2023_08_31_DNA_TRIS-HCl_85_K",

@@ -426,7 +426,7 @@ class CaryAnalysis:
             for position in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
                 data_meta.at[position, CaryDataframe.FirstDerivativeSavgolPeaks.value] = peaks
 
-    def set_new_peak_for_measurement(self, filename, measurement, savgol_window_length=5, savgol_polyorder=3, peak_window_width=5, minimal_peak_distance=10, min_temp=0, max_temp=0):
+    def set_new_peak_for_measurement(self, filename, measurement, savgol_window_length=5, savgol_polyorder=3, peak_window_width=5, minimal_peak_distance=10, min_temp=0, max_temp=0, min_absorbance=0, max_absorbance=0):
         index = self.cary_object.file_names.index(filename)
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.FirstDerivativeSavgolPeaks.value] = None
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.BaseLines.value] = None
@@ -439,18 +439,27 @@ class CaryAnalysis:
         mask_meta = data_meta[CaryDataframe.Measurement.value] == measurement
         measurement_data = data[mask]
 
-        ### start cutting of curves in desired temperature area
-        column_min = measurement_data[CaryDataframe.Temperature.value].min()
-        column_max = measurement_data[CaryDataframe.Temperature.value].max()
-        if min_temp == 0 and max_temp == 0:
-            min_temp, max_temp = column_min, column_max
-        if min_temp < column_min or max_temp > column_max or min_temp > max_temp:
+        ### start cutting of curves in desired temperature and absorbance area
+        temp_min, temp_max = measurement_data[CaryDataframe.Temperature.value].min(), measurement_data[CaryDataframe.Temperature.value].max()
+        absorbance_min, absorbance_max = measurement_data[CaryDataframe.Absorbance.value].min(), measurement_data[CaryDataframe.Absorbance.value].max()
+        min_temp = temp_min if min_temp == 0 else min_temp
+        max_temp = temp_max if max_temp == 0 else max_temp
+        min_absorbance = absorbance_min if min_absorbance == 0 else min_absorbance
+        max_absorbance = absorbance_max if max_absorbance == 0 else max_absorbance
+
+        if (min_temp < temp_min or max_temp > temp_max or min_temp > max_temp or
+                min_absorbance < absorbance_min or max_absorbance > absorbance_max or min_absorbance > max_absorbance):
             raise ValueError(
-                f"Invalid temperature range: min_temp ({min_temp}) must be >= {column_min}, "
-                f"max_temp ({max_temp}) must be <= {column_max}, and min_temp must be <= max_temp."
+                f"Invalid range: min_temp ({min_temp}) must be >= {temp_min}, max_temp ({max_temp}) <= {temp_max}, "
+                f"and min_temp <= max_temp. Similarly, min_absorbance ({min_absorbance}) must be >= {absorbance_min}, "
+                f"max_absorbance ({max_absorbance}) <= {absorbance_max}, and min_absorbance <= max_absorbance."
             )
-        measurement_data = measurement_data[(measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (measurement_data[CaryDataframe.Temperature.value] <= max_temp)]
-        ### end cutting of curves in desired temperature area
+
+        measurement_data = measurement_data[
+            (measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (measurement_data[CaryDataframe.Temperature.value] <= max_temp) &
+            (measurement_data[CaryDataframe.Absorbance.value] >= min_absorbance) & (measurement_data[CaryDataframe.Absorbance.value] <= max_absorbance)
+            ]
+        ### end cutting of curves in desired temperature and absorbance area
 
         meta = data_meta[mask_meta]
         measurement_data.reset_index(drop=True, inplace=True)
@@ -530,7 +539,7 @@ class CaryAnalysis:
         return (fit_function.values["slope"], fit_function.params["slope"].stderr,
                 fit_function.values["intercept"], fit_function.params["intercept"].stderr)
 
-    def set_baselines(self, filename, measurement, melting_temp=(), min_temp=0, max_temp=0):
+    def set_baselines(self, filename, measurement, melting_temp=(), min_temp=0, max_temp=0, min_absorbance=0, max_absorbance=0):
         index = self.cary_object.file_names.index(filename)
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.BaseLines.value] = None
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.BaseLinesError.value] = None
@@ -545,19 +554,31 @@ class CaryAnalysis:
             mask_meta = data_meta[CaryDataframe.Measurement.value] == measurement
             measurement_data = data[mask]
 
-            ### start cutting of curves in desired temperature area
-            column_min = measurement_data[CaryDataframe.Temperature.value].min()
-            column_max = measurement_data[CaryDataframe.Temperature.value].max()
-            if min_temp == 0 and max_temp == 0:
-                min_temp, max_temp = column_min, column_max
-            if min_temp < column_min or max_temp > column_max or min_temp > max_temp:
+            ### start cutting of curves in desired temperature and absorbance area
+            temp_min, temp_max = measurement_data[CaryDataframe.Temperature.value].min(), measurement_data[
+                CaryDataframe.Temperature.value].max()
+            absorbance_min, absorbance_max = measurement_data[CaryDataframe.Absorbance.value].min(), measurement_data[
+                CaryDataframe.Absorbance.value].max()
+            min_temp = temp_min if min_temp == 0 else min_temp
+            max_temp = temp_max if max_temp == 0 else max_temp
+            min_absorbance = absorbance_min if min_absorbance == 0 else min_absorbance
+            max_absorbance = absorbance_max if max_absorbance == 0 else max_absorbance
+
+            if (min_temp < temp_min or max_temp > temp_max or min_temp > max_temp or
+                    min_absorbance < absorbance_min or max_absorbance > absorbance_max or min_absorbance > max_absorbance):
                 raise ValueError(
-                    f"Invalid temperature range: min_temp ({min_temp}) must be >= {column_min}, "
-                    f"max_temp ({max_temp}) must be <= {column_max}, and min_temp must be <= max_temp."
+                    f"Invalid range: min_temp ({min_temp}) must be >= {temp_min}, max_temp ({max_temp}) <= {temp_max}, "
+                    f"and min_temp <= max_temp. Similarly, min_absorbance ({min_absorbance}) must be >= {absorbance_min}, "
+                    f"max_absorbance ({max_absorbance}) <= {absorbance_max}, and min_absorbance <= max_absorbance."
                 )
-            measurement_data = measurement_data[(measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (
-                        measurement_data[CaryDataframe.Temperature.value] <= max_temp)]
-            ### end cutting of curves in desired temperature area
+
+            measurement_data = measurement_data[
+                (measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (
+                            measurement_data[CaryDataframe.Temperature.value] <= max_temp) &
+                (measurement_data[CaryDataframe.Absorbance.value] >= min_absorbance) & (
+                            measurement_data[CaryDataframe.Absorbance.value] <= max_absorbance)
+                ]
+            ### end cutting of curves in desired temperature and absorbance area
 
             meta = data_meta[mask_meta]
             measurement_data.reset_index(drop=True, inplace=True)
@@ -692,7 +713,7 @@ class CaryAnalysis:
                 else:
                     pass
 
-    def redo_single_curve_fit(self, filename, measurement, melting_temp, min_temp=0, max_temp=0):
+    def redo_single_curve_fit(self, filename, measurement, melting_temp, min_temp=0, max_temp=0, min_absorbance=0, max_absorbance=0):
         index = self.cary_object.file_names.index(filename)
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.SingleMeltingCurve.value] = None
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.MultiMeltingCurve.value] = None
@@ -708,19 +729,31 @@ class CaryAnalysis:
             mask_meta = data_meta[CaryDataframe.Measurement.value] == measurement
             measurement_data = data[mask]
 
-            ### start cutting of curves in desired temperature area
-            column_min = measurement_data[CaryDataframe.Temperature.value].min()
-            column_max = measurement_data[CaryDataframe.Temperature.value].max()
-            if min_temp == 0 and max_temp == 0:
-                min_temp, max_temp = column_min, column_max
-            if min_temp < column_min or max_temp > column_max or min_temp > max_temp:
+            ### start cutting of curves in desired temperature and absorbance area
+            temp_min, temp_max = measurement_data[CaryDataframe.Temperature.value].min(), measurement_data[
+                CaryDataframe.Temperature.value].max()
+            absorbance_min, absorbance_max = measurement_data[CaryDataframe.Absorbance.value].min(), measurement_data[
+                CaryDataframe.Absorbance.value].max()
+            min_temp = temp_min if min_temp == 0 else min_temp
+            max_temp = temp_max if max_temp == 0 else max_temp
+            min_absorbance = absorbance_min if min_absorbance == 0 else min_absorbance
+            max_absorbance = absorbance_max if max_absorbance == 0 else max_absorbance
+
+            if (min_temp < temp_min or max_temp > temp_max or min_temp > max_temp or
+                    min_absorbance < absorbance_min or max_absorbance > absorbance_max or min_absorbance > max_absorbance):
                 raise ValueError(
-                    f"Invalid temperature range: min_temp ({min_temp}) must be >= {column_min}, "
-                    f"max_temp ({max_temp}) must be <= {column_max}, and min_temp must be <= max_temp."
+                    f"Invalid range: min_temp ({min_temp}) must be >= {temp_min}, max_temp ({max_temp}) <= {temp_max}, "
+                    f"and min_temp <= max_temp. Similarly, min_absorbance ({min_absorbance}) must be >= {absorbance_min}, "
+                    f"max_absorbance ({max_absorbance}) <= {absorbance_max}, and min_absorbance <= max_absorbance."
                 )
-            measurement_data = measurement_data[(measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (
-                    measurement_data[CaryDataframe.Temperature.value] <= max_temp)]
-            ### end cutting of curves in desired temperature area
+
+            measurement_data = measurement_data[
+                (measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (
+                            measurement_data[CaryDataframe.Temperature.value] <= max_temp) &
+                (measurement_data[CaryDataframe.Absorbance.value] >= min_absorbance) & (
+                            measurement_data[CaryDataframe.Absorbance.value] <= max_absorbance)
+                ]
+            ### end cutting of curves in desired temperature and absorbance area
 
             meta = data_meta[mask_meta]
             if len(melting_temp) == int(extra_information[filename][CaryDataframe.ExpectedTransitions.value]):
@@ -885,7 +918,7 @@ class CaryAnalysis:
 
         return np.array(residual)
 
-    def _multi_curve_fit(self, data, data_meta, filename, extra_information):
+    def _multi_curve_fit(self, data, data_meta, filename, extra_information, min_temp=0, max_temp=0, min_absorbance=0, max_absorbance=0):
         data_meta[CaryDataframe.MultiMeltingCurve.value] = None
         methods = [attr for attr in dir(self.dmf) if callable(getattr(self.dmf, attr)) and not attr.startswith("__")]
         desired_global_fit = [method for method in methods if
@@ -901,6 +934,36 @@ class CaryAnalysis:
             mask = data[CaryDataframe.Measurement.value].isin(data_meta_filtered_group[CaryDataframe.Measurement.value].tolist())
             mask_meta = data_meta[CaryDataframe.Measurement.value].isin(data_meta_filtered_group[CaryDataframe.Measurement.value].tolist())
             measurement_data = data[mask]
+
+            # TODO: measurement_data contains not a single measurement but multiple measurements so you have to take the min and max tempe/abs for each measurement and cut iterative (you can do it Paul)
+            ### start cutting of curves in desired temperature and absorbance area
+
+            # temp_min, temp_max = measurement_data[CaryDataframe.Temperature.value].min(), measurement_data[
+            #     CaryDataframe.Temperature.value].max()
+            # absorbance_min, absorbance_max = measurement_data[CaryDataframe.Absorbance.value].min(), measurement_data[
+            #     CaryDataframe.Absorbance.value].max()
+            # min_temp = temp_min if min_temp == 0 else min_temp
+            # max_temp = temp_max if max_temp == 0 else max_temp
+            # min_absorbance = absorbance_min if min_absorbance == 0 else min_absorbance
+            # max_absorbance = absorbance_max if max_absorbance == 0 else max_absorbance
+            #
+            # if (min_temp < temp_min or max_temp > temp_max or min_temp > max_temp or
+            #         min_absorbance < absorbance_min or max_absorbance > absorbance_max or min_absorbance > max_absorbance):
+            #     raise ValueError(
+            #         f"Invalid range: min_temp ({min_temp}) must be >= {temp_min}, max_temp ({max_temp}) <= {temp_max}, "
+            #         f"and min_temp <= max_temp. Similarly, min_absorbance ({min_absorbance}) must be >= {absorbance_min}, "
+            #         f"max_absorbance ({max_absorbance}) <= {absorbance_max}, and min_absorbance <= max_absorbance."
+            #     )
+            #
+            # measurement_data = measurement_data[
+            #     (measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (
+            #                 measurement_data[CaryDataframe.Temperature.value] <= max_temp) &
+            #     (measurement_data[CaryDataframe.Absorbance.value] >= min_absorbance) & (
+            #                 measurement_data[CaryDataframe.Absorbance.value] <= max_absorbance)
+            #     ]
+
+            ### end cutting of curves in desired temperature and absorbance area
+
             meta = data_meta[mask_meta]
             for measurement_index in data_meta_filtered_group[CaryDataframe.Measurement.value].tolist():
                 if len(meta[CaryDataframe.FirstDerivativeSavgolPeaks.value][measurement_index - 1]) == int(extra_information[filename][CaryDataframe.ExpectedTransitions.value]):
@@ -1040,6 +1103,9 @@ class CaryAnalysis:
         mask = data[CaryDataframe.Measurement.value].isin(data_meta_filtered_group[CaryDataframe.Measurement.value].tolist())
         mask_meta = data_meta[CaryDataframe.Measurement.value].isin(data_meta_filtered_group[CaryDataframe.Measurement.value].tolist())
         measurement_data = data[mask]
+
+
+
         meta = data_meta[mask_meta]
         if self.molecularity_one_digit_regex.search(desired_global_fit):
             Tm_mean = np.array(mean_melting_temps[0])
