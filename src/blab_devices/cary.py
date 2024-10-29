@@ -105,13 +105,14 @@ class FitType(EnumToList):
 
 
 class Cary:
-    def __init__(self, file_path: str, extra_json: str):
+    def __init__(self, extra_json: str):
+        self.extra_json: Path = Path(extra_json)
         self.list_hyperparameters: list = list()
         self.list_extra_information: list = list()
         self.list_data: list = list()
         self.list_data_meta: list = list()
         self.file_names: list = list()
-        self.extra_json: Path = Path(extra_json)
+        file_path: Path = self.extra_json.parent
 
         if Path(file_path).is_file():
             self.hyperparameters: dict = {}
@@ -425,7 +426,7 @@ class CaryAnalysis:
             for position in data_meta.index[data_meta[CaryDataframe.Measurement.value] == unique_value]:
                 data_meta.at[position, CaryDataframe.FirstDerivativeSavgolPeaks.value] = peaks
 
-    def set_new_peak_for_measurement(self, filename, measurement, savgol_window_length=5, savgol_polyorder=3, peak_window_width=5, minimal_peak_distance=10):
+    def set_new_peak_for_measurement(self, filename, measurement, savgol_window_length=5, savgol_polyorder=3, peak_window_width=5, minimal_peak_distance=10, min_temp=0, max_temp=0):
         index = self.cary_object.file_names.index(filename)
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.FirstDerivativeSavgolPeaks.value] = None
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.BaseLines.value] = None
@@ -437,6 +438,20 @@ class CaryAnalysis:
         mask = data[CaryDataframe.Measurement.value] == measurement
         mask_meta = data_meta[CaryDataframe.Measurement.value] == measurement
         measurement_data = data[mask]
+
+        ### start cutting of curves in desired temperature area
+        column_min = measurement_data[CaryDataframe.Temperature.value].min()
+        column_max = measurement_data[CaryDataframe.Temperature.value].max()
+        if min_temp == 0 and max_temp == 0:
+            min_temp, max_temp = column_min, column_max
+        if min_temp < column_min or max_temp > column_max or min_temp > max_temp:
+            raise ValueError(
+                f"Invalid temperature range: min_temp ({min_temp}) must be >= {column_min}, "
+                f"max_temp ({max_temp}) must be <= {column_max}, and min_temp must be <= max_temp."
+            )
+        measurement_data = measurement_data[(measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (measurement_data[CaryDataframe.Temperature.value] <= max_temp)]
+        ### end cutting of curves in desired temperature area
+
         meta = data_meta[mask_meta]
         measurement_data.reset_index(drop=True, inplace=True)
         savgol = savgol_filter(measurement_data[CaryDataframe.FirstDerivative.value], window_length=savgol_window_length, polyorder=savgol_polyorder)
@@ -515,7 +530,7 @@ class CaryAnalysis:
         return (fit_function.values["slope"], fit_function.params["slope"].stderr,
                 fit_function.values["intercept"], fit_function.params["intercept"].stderr)
 
-    def set_baselines(self, filename, measurement, melting_temp=()):
+    def set_baselines(self, filename, measurement, melting_temp=(), min_temp=0, max_temp=0):
         index = self.cary_object.file_names.index(filename)
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.BaseLines.value] = None
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.BaseLinesError.value] = None
@@ -529,6 +544,21 @@ class CaryAnalysis:
             mask = data[CaryDataframe.Measurement.value] == measurement
             mask_meta = data_meta[CaryDataframe.Measurement.value] == measurement
             measurement_data = data[mask]
+
+            ### start cutting of curves in desired temperature area
+            column_min = measurement_data[CaryDataframe.Temperature.value].min()
+            column_max = measurement_data[CaryDataframe.Temperature.value].max()
+            if min_temp == 0 and max_temp == 0:
+                min_temp, max_temp = column_min, column_max
+            if min_temp < column_min or max_temp > column_max or min_temp > max_temp:
+                raise ValueError(
+                    f"Invalid temperature range: min_temp ({min_temp}) must be >= {column_min}, "
+                    f"max_temp ({max_temp}) must be <= {column_max}, and min_temp must be <= max_temp."
+                )
+            measurement_data = measurement_data[(measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (
+                        measurement_data[CaryDataframe.Temperature.value] <= max_temp)]
+            ### end cutting of curves in desired temperature area
+
             meta = data_meta[mask_meta]
             measurement_data.reset_index(drop=True, inplace=True)
             peaks = meta[CaryDataframe.FirstDerivativeSavgolPeaks.value].to_list()[0]
@@ -662,7 +692,7 @@ class CaryAnalysis:
                 else:
                     pass
 
-    def redo_single_curve_fit(self, filename, measurement, melting_temp):
+    def redo_single_curve_fit(self, filename, measurement, melting_temp, min_temp=0, max_temp=0):
         index = self.cary_object.file_names.index(filename)
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.SingleMeltingCurve.value] = None
         self.cary_object.list_data_meta[index].loc[self.cary_object.list_data_meta[index][CaryDataframe.Measurement.value] == measurement, CaryDataframe.MultiMeltingCurve.value] = None
@@ -677,6 +707,21 @@ class CaryAnalysis:
             mask = data[CaryDataframe.Measurement.value] == measurement
             mask_meta = data_meta[CaryDataframe.Measurement.value] == measurement
             measurement_data = data[mask]
+
+            ### start cutting of curves in desired temperature area
+            column_min = measurement_data[CaryDataframe.Temperature.value].min()
+            column_max = measurement_data[CaryDataframe.Temperature.value].max()
+            if min_temp == 0 and max_temp == 0:
+                min_temp, max_temp = column_min, column_max
+            if min_temp < column_min or max_temp > column_max or min_temp > max_temp:
+                raise ValueError(
+                    f"Invalid temperature range: min_temp ({min_temp}) must be >= {column_min}, "
+                    f"max_temp ({max_temp}) must be <= {column_max}, and min_temp must be <= max_temp."
+                )
+            measurement_data = measurement_data[(measurement_data[CaryDataframe.Temperature.value] >= min_temp) & (
+                    measurement_data[CaryDataframe.Temperature.value] <= max_temp)]
+            ### end cutting of curves in desired temperature area
+
             meta = data_meta[mask_meta]
             if len(melting_temp) == int(extra_information[filename][CaryDataframe.ExpectedTransitions.value]):
                 if self.molecularity_two_digit_regex.search(desired_global_fit):
